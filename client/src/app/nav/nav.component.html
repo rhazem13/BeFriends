@@ -1,0 +1,49 @@
+<div style="background-color: #3F51B5;">
+  <div class="container">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>BeFriends</span>
+        <nav *ngIf="accountService.currentUser$ | async">
+          <a mat-button routerLink="/home">Matches</a>
+          <a mat-button routerLink="/about">Lists</a>
+          <a mat-button routerLink="/contact">Messages</a>
+        </nav>
+        <span class="toolbar-spacer"></span>
+        <div *ngIf="accountService.currentUser$ | async">
+          <button mat-button [matMenuTriggerFor]="menu">Welcome User</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Edit Profile</button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+        </div>
+        <form
+          *ngIf="(accountService.currentUser$ | async) === null"
+          #loginForm="ngForm"
+          class="login-form"
+          (ngSubmit)="login()"
+          autocomplete="off"
+        >
+          <mat-form-field>
+            <input
+              name="username"
+              [(ngModel)]="model.username"
+              matInput
+              type="text"
+              placeholder="Username"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              name="password"
+              [(ngModel)]="model.password"
+              matInput
+              type="password"
+              placeholder="Password"
+            />
+          </mat-form-field>
+          <button mat-button type="submit">Login</button>
+        </form>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+</div>
