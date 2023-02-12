@@ -1,16 +1,23 @@
-<div style="background-color: #3F51B5;">
+<div style="background-color: #3f51b5">
   <div class="container">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <span>BeFriends</span>
-        <nav *ngIf="accountService.currentUser$ | async">
-          <a mat-button routerLink="/home">Matches</a>
-          <a mat-button routerLink="/about">Lists</a>
-          <a mat-button routerLink="/contact">Messages</a>
+        <a routerLink="/" id="NavLogo" >BeFriends</a>
+        <nav >
+          <ng-container *ngIf="accountService.currentUser$ | async">
+              <a mat-button routerLink="/members" routerLinkActive="activebutton"
+            >Matches</a
+          >
+          <a mat-button routerLink="/lists" routerLinkActive="activebutton">Lists</a>
+          <a mat-button routerLink="/messages" routerLinkActive="activebutton"
+            >Messages</a
+          >
+          </ng-container>
+
         </nav>
         <span class="toolbar-spacer"></span>
-        <div *ngIf="accountService.currentUser$ | async">
-          <button mat-button [matMenuTriggerFor]="menu">Welcome User</button>
+        <div *ngIf="(accountService.currentUser$ | async) as user">
+          <button mat-button [matMenuTriggerFor]="menu">Welcome {{user.username | titlecase}}</button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item>Edit Profile</button>
             <button mat-menu-item (click)="logout()">Logout</button>

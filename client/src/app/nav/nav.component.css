@@ -17,3 +17,16 @@
   flex-direction: column;
   justify-content: center;
 }
+
+#NavLogo {
+  text-decoration: none;
+  color: white;
+  font: 900;
+  font-size: x-large;
+}
+
+.activebutton {
+  background-color: white;
+  color: black !important;
+  border-radius: 0.15em;
+}
