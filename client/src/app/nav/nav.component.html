@@ -2,22 +2,28 @@
   <div class="container">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
-        <a routerLink="/" id="NavLogo" >BeFriends</a>
-        <nav >
+        <a routerLink="/" id="NavLogo">BeFriends</a>
+        <nav>
           <ng-container *ngIf="accountService.currentUser$ | async">
-              <a mat-button routerLink="/members" routerLinkActive="activebutton"
-            >Matches</a
-          >
-          <a mat-button routerLink="/lists" routerLinkActive="activebutton">Lists</a>
-          <a mat-button routerLink="/messages" routerLinkActive="activebutton"
-            >Messages</a
-          >
+            <a mat-button routerLink="/members" routerLinkActive="activebutton"
+              >Matches</a
+            >
+            <a mat-button routerLink="/lists" routerLinkActive="activebutton"
+              >Lists</a
+            >
+            <a mat-button routerLink="/messages" routerLinkActive="activebutton"
+              >Messages</a
+            >
           </ng-container>
-
+          <a mat-button routerLink="/errors" routerLinkActive="activebutton"
+            >Errors</a
+          >
         </nav>
         <span class="toolbar-spacer"></span>
-        <div *ngIf="(accountService.currentUser$ | async) as user">
-          <button mat-button [matMenuTriggerFor]="menu">Welcome {{user.username | titlecase}}</button>
+        <div *ngIf="accountService.currentUser$ | async as user">
+          <button mat-button [matMenuTriggerFor]="menu">
+            Welcome {{ user.username | titlecase }}
+          </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item>Edit Profile</button>
             <button mat-menu-item (click)="logout()">Logout</button>
