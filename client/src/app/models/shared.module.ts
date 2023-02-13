@@ -43,6 +43,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
+import { GalleryModule } from 'ng-gallery';
+// import { AngularFontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -85,6 +88,12 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatInputModule,
     FormsModule,
+    GalleryModule.withConfig({
+      // autoPlay: true,
+      // thumbView: 'contain',
+      // thumb:true,
+    }),
+    // AngularFontAwesomeModule,
   ],
   exports: [
     MatAutocompleteModule,
@@ -125,6 +134,8 @@ import { FormsModule } from '@angular/forms';
     MatTableModule,
     MatInputModule,
     FormsModule,
+    GalleryModule,
+    // AngularFontAwesomeModule,
   ],
 })
 export class SharedModule {}
