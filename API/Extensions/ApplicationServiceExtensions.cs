@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Helpers;
 using API.Interfaces;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,8 +19,14 @@ namespace API.Extensions
             });
             services.AddCors();
             
-            // My Services
+            // Services
             services.AddScoped<ITokenService, TokenService>();
+
+            // repositories
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            // automappers
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             return services;
         }
     }
