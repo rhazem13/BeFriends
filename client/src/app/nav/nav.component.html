@@ -25,7 +25,9 @@
             Welcome {{ user.username | titlecase }}
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>Edit Profile</button>
+            <button mat-menu-item routerLink="/member/edit">
+              Edit Profile
+            </button>
             <button mat-menu-item (click)="logout()">Logout</button>
           </mat-menu>
         </div>
@@ -56,7 +58,13 @@
           </mat-form-field>
           <button mat-button type="submit">Login</button>
         </form>
+
       </mat-toolbar-row>
     </mat-toolbar>
   </div>
+</div>
+<div class="row" *ngIf="busyService.isLoading | async">
+          <div class="loader-container">
+            <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+          </div>
 </div>

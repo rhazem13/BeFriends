@@ -44,8 +44,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-// import { AngularFontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 @NgModule({
   declarations: [],
   imports: [

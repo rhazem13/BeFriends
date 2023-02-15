@@ -1,3 +1,4 @@
+import { BusyService } from './../services/busy.service';
 import { AccountService } from './../services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
@@ -13,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NavComponent implements OnInit {
   model: any = {};
   constructor(public accountService: AccountService, private router: Router,
-    private snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar, public busyService: BusyService) {}
 
   ngOnInit(): void {
   }

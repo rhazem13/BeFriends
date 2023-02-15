@@ -31,3 +31,9 @@
   color: black !important;
   border-radius: 0.15em;
 }
+
+.loader-container{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
