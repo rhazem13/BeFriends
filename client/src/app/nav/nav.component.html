@@ -20,7 +20,8 @@
           >
         </nav>
         <span class="toolbar-spacer"></span>
-        <div *ngIf="accountService.currentUser$ | async as user">
+        <div *ngIf="accountService.currentUser$ | async as user" class="loggedindiv">
+          <img src="{{user.photoUrl}}" alt="{{user.username}}">
           <button mat-button [matMenuTriggerFor]="menu">
             Welcome {{ user.username | titlecase }}
           </button>

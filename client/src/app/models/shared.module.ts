@@ -44,6 +44,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
   declarations: [],
   imports: [
@@ -87,6 +88,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     MatInputModule,
     FormsModule,
     NgxGalleryModule,
+    FileUploadModule,
   ],
   exports: [
     MatAutocompleteModule,
@@ -128,6 +130,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     MatInputModule,
     FormsModule,
     NgxGalleryModule,
+    FileUploadModule,
   ],
 })
 export class SharedModule {}

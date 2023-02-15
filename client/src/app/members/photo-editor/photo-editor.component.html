@@ -1,0 +1,97 @@
+<div class="row" style="width: 100%; margin-top: 2rem">
+  <div class="col-xs-3" *ngFor="let photo of member.photos" style="width: 100%">
+    <mat-card>
+      <img mat-card-image src="{{ photo.url }}" alt="{{ photo.url }}" />
+      <mat-card-content class="fab-buttons">
+        <button *ngIf="photo.isMain" mat-raised-button color="primary">Main</button>
+        <button *ngIf="!photo.isMain" mat-stroked-button color="primary" (click)="setMainPhoto(photo)">Main</button>
+        <button mat-mini-fab color="warn" style="border-radius: 3cm" [disabled]="photo.isMain" (click)="deletePhoto(photo.id)">
+          <mat-icon
+            fontSet="fa"
+            fontIcon="fa-trash"
+            style="font-size: 1.35rem"
+          ></mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div class="row" style="margin-top: 3px;margin-left: 0px;margin-right: 0px;">
+  <div class="col-xs-3">
+    <h2>Add Photos</h2>
+    <mat-card
+      ng2FileDrop
+      [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
+      (fileOver)="fileOverBase($event)"
+      [uploader]="uploader"
+      class="well my-drop-zone"
+    >
+      <mat-card-content>
+        <i class="fa fa-upload fa-3x"></i>
+        Drop photos
+      </mat-card-content>
+    </mat-card>
+    <h3>Multiple</h3>
+    <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+
+    <h3>Single</h3>
+    <input type="file" ng2FileSelect [uploader]="uploader" />
+  </div>
+  <div
+    class="col-xs-9"
+    style="margin-bottom: 40px;"
+  >
+    <h3>Upload queue</h3>
+    <p>Queue length: {{ uploader?.queue?.length }}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td>
+            <strong>{{ item?.file?.name }}</strong>
+          </td>
+          <td *ngIf="uploader.options.isHTML5" nowrap>
+            {{ item?.file?.size / 1024 / 1024 | number : ".2" }} MB
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        class="btn btn-success btn-s"
+        (click)="uploader.uploadAll()"
+        [disabled]="!uploader.getNotUploadedItems().length"
+      >
+        <span class="fa fa-upload"></span> Upload all
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        type="button"
+        class="btn btn-warning btn-s"
+        (click)="uploader.cancelAll()"
+        [disabled]="!uploader.isUploading"
+      >
+        <span class="fa fa-ban"></span> Cancel all
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        class="btn btn-danger btn-s"
+        (click)="uploader.clearQueue()"
+        [disabled]="!uploader.queue.length"
+      >
+        <span class="fa fa-trash"></span> Remove all
+      </button>
+    </div>
+  </div>
+</div>

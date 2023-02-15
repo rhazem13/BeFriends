@@ -1,0 +1,27 @@
+.fab-buttons {
+  justify-content: space-around;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+img.img-thumbnail {
+  height: 100px;
+  min-width: 100px !important;
+  margin-bottom: 2px;
+}
+
+.nv-file-over{
+  border: dotted 5px #3f51b5 !important;
+}
+
+input[type=file] {
+  color: transparent;
+}
+
+.my-drop-zone{
+  padding:10px;
+  border:solid 1px black;
+  margin-bottom: 30px;
+}

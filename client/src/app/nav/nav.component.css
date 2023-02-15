@@ -7,6 +7,11 @@
   align-items: center;
   height: 80%;
 }
+.loggedindiv{
+  display: flex;
+  align-items: center;
+  height: 80%;
+}
 
 .login-form mat-form-field {
   margin-right: 10px;
@@ -36,4 +41,10 @@
   position: fixed;
   width: 100%;
   z-index: 99;
+}
+
+img {
+  max-height: 46px !important;
+  border:2px solid #fff;
+  display: inline;
 }
