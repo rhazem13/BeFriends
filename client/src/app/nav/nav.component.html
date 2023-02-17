@@ -23,7 +23,7 @@
         <div *ngIf="accountService.currentUser$ | async as user" class="loggedindiv">
           <img src="{{user.photoUrl || './assets/user.png'}}" alt="{{user.username}}">
           <button mat-button [matMenuTriggerFor]="menu">
-            Welcome {{ user.username | titlecase }}
+            Welcome {{ user.knownAs | titlecase }}
           </button>
           <mat-menu #menu="matMenu">
             <button mat-menu-item routerLink="/member/edit">

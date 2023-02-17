@@ -45,6 +45,8 @@ import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeagoModule } from 'ngx-timeago';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -89,6 +91,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     NgxGalleryModule,
     FileUploadModule,
+    TimeagoModule.forRoot(),
   ],
   exports: [
     MatAutocompleteModule,
@@ -131,6 +134,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     FormsModule,
     NgxGalleryModule,
     FileUploadModule,
+    TimeagoModule,
   ],
 })
 export class SharedModule {}
