@@ -1,0 +1,17 @@
+        <div class="row">
+          <div class="row-xs-12">
+            <mat-form-field>
+              <input
+                [formControl]="ngControl.control"
+                matInput
+                placeholder={{label}}
+                type={{type}}
+                required
+              />
+            <mat-error *ngIf="ngControl.control.errors?.required">Please enter a {{label}}.</mat-error>
+            <mat-error *ngIf="ngControl.control.errors?.minlength">{{label}} must be at least {{ngControl.control.errors.minlength['requiredLength']}}.</mat-error>
+            <mat-error *ngIf="ngControl.control.errors?.maxlength">{{label}} must be at most {{ngControl.control.errors.maxlength['requiredLength']}}.</mat-error>
+            <mat-error *ngIf="ngControl.control.errors?.isMatching">Passwords do not match.</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
