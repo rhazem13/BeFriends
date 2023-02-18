@@ -65,4 +65,33 @@ export class MembersService {
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId, {});
   }
+
+  addFollow(username: string) {
+    return this.http.post(this.baseUrl + 'follows/' + username, {});
+  }
+
+  getFollows(predicate: string, pageNumber, pageSize){
+    let params = new HttpParams();
+    params = params.append('predicate', predicate);
+    if (pageNumber !== null && pageSize !== null) {
+      params = params.append('pageNumber', pageNumber.toString());
+      params = params.append('pageSize', pageSize.toString());
+    }
+    return this.http
+      .get<Partial<Member[]>>(this.baseUrl + 'follows', {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((response) => {
+          this.paginatedResult.result = response.body;
+          if (response.headers.get('Pagination') !== null) {
+            this.paginatedResult.pagination = JSON.parse(
+              response.headers.get('Pagination')
+            );
+          }
+          return this.paginatedResult;
+        })
+      );
+  }
 }

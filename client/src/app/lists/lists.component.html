@@ -1,1 +1,31 @@
-<p>lists works!</p>
+<div class="row">
+  <div class="col-xs-12">
+<div class="center-text">
+  <h2>{{predicate==='followed' ? 'Members I Follow' : 'Members who follow me'}}</h2>
+</div></div></div>
+
+<div class="container" >
+  <div class="row">
+    <mat-button-toggle-group [(ngModel)]="predicate" value="followed" name="predicate" aria-label="predicate">
+      <mat-button-toggle value="followed" class="my-toggle-button"  (click)="loadFollows()">Members I follow</mat-button-toggle>
+      <mat-button-toggle value="followedBy" class="my-toggle-button"  (click)="loadFollows()">Members who follow me</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div class="row" style="margin-top: 1.5rem;">
+    <div class="col-xs-2" *ngFor="let member of members">
+      <app-member-card [member]="member"></app-member-card>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="justify-content:center" *ngIf="pagination">
+<mat-paginator #paginator
+              (page)="handlePageEvent($event)"
+              [length]="pagination.totalItems"
+              [pageSize]="pagination.itemsPerPage"
+              [showFirstLastButtons]="true"
+              [pageSizeOptions]="pageSizeOptions ? pageSizeOptions : []"
+              aria-label="Select page">
+</mat-paginator>
+</div>
+

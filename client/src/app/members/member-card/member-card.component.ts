@@ -1,3 +1,5 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MembersService } from './../../services/members.service';
 import { Component, Input } from '@angular/core';
 import { Member } from 'src/app/models/member';
 
@@ -7,5 +9,12 @@ import { Member } from 'src/app/models/member';
   styleUrls: ['./member-card.component.css']
 })
 export class MemberCardComponent {
+  constructor(private memberService: MembersService,private snackBar: MatSnackBar){}
   @Input() member: Member;
+
+  addFollow(member: Member){
+    this.memberService.addFollow(member.username).subscribe(()=>{
+      this.snackBar.open("you have followed " + member.knownAs,undefined,{duration:1500})
+    })
+  }
 }

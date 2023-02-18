@@ -30,12 +30,15 @@ export class ErrorInterceptor implements HttpInterceptor {
                   }
                 }
                 throw modalStateErrors.flat();
-              } else {
+              } else if(typeof(error.error) === 'object'){
                 this.snackbar.open(
                   error.statusText === 'OK' ? 'Bad Request' : error.statusText,
                   error.status,
                   { duration: 1500 }
                 );
+              }
+              else {
+                this.snackbar.open(error.error +" "+error.status,undefined,{duration: 1500});
               }
               break;
             case 401:
