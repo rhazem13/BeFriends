@@ -16,7 +16,7 @@
           style="font-size: 1.35rem"
         ></mat-icon>
       </button>
-      <button mat-mini-fab color="primary">
+      <button mat-mini-fab color="primary" routerLink="/members/{{member.username}}" [queryParams]="{tab: 3}">
         <mat-icon
           fontSet="fa"
           fontIcon="fa-envelope"

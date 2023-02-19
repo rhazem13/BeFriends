@@ -4,8 +4,8 @@
   font-weight: 500;
 }
 .my-toggle-button.mat-button-toggle-checked {
-  background-color: white;
-  color: black;
+  background-color: #2b377c;
+  color: white;
   font-weight: 500;
 }
 

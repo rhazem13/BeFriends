@@ -1,4 +1,4 @@
-<div class="row" *ngIf="member">
+<div class="row">
   <div class="col-xs-4">
     <mat-card>
       <img
@@ -29,12 +29,12 @@
         </div>
       </mat-card-content>
         <button mat-flat-button color="primary" style="border-radius: 0px;">Follow</button>
-        <button mat-flat-button color="warn" style="border-radius: 0px;">Message</button>
+        <button mat-flat-button color="warn" style="border-radius: 0px;" (click)="selectTab(3)">Message</button>
     </mat-card>
   </div>
 
   <div class="col-xs-8">
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab-group (selectedTabChange)="onTabActivated($event)" mat-stretch-tabs="false" mat-align-tabs="start" #memberTabs>
       <mat-tab label="About">
         <h4>bio</h4>
         <p>{{member.bio}}</p>
@@ -49,7 +49,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Messages">
-        <p>messages will go here</p>
+        <app-member-messages [messages]="messages"></app-member-messages>
       </mat-tab>
     </mat-tab-group>
   </div>

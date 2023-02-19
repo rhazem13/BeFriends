@@ -1,0 +1,30 @@
+.my-toggle-button {
+  background-color: #3f51b5;
+  color: white;
+  font-weight: 500;
+}
+.my-toggle-button.mat-button-toggle-checked {
+  background-color: #2b377c;
+  color: white;
+  font-weight: 500;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-row:hover {
+  background-color: #ECECEC !important;
+  cursor: pointer;
+}
+
+.img-circle {
+  max-height: 50px;
+  border-radius: 50%;
+  margin-right: .6rem;
+}
+
+.table-img-container{
+  display: flex;
+  align-items: center;
+}
