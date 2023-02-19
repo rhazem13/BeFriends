@@ -38,10 +38,10 @@
       </ul>
   </mat-card-content>
   <mat-card-footer>
-    <form >
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
       <mat-form-field style="width:100%">
-        <input type="text" matInput>
-        <button matSuffix mat-icon-button type="submit">
+        <input type="text" matInput name="messageContent" required [(ngModel)]="messageContent">
+        <button color="primary" [disabled]="!messageForm.valid" matSuffix mat-icon-button type="submit">
           <mat-icon
           fontSet="fa"
           fontIcon="fa-paper-plane"

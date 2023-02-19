@@ -74,16 +74,16 @@
     <ng-container  matColumnDef="delete">
       <th style="width: 20%;" mat-header-cell *matHeaderCellDef=""></th>
       <td mat-cell *matCellDef="let message">
-        <button mat-flat-button color="accent">Delete</button>
+        <button (click)="$event.stopPropagation()" mat-flat-button color="accent" (click)="deleteMessage(message.id)">Delete</button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+    <tr [hidden]="loading" mat-row *matRowDef="let row; columns: displayedColumns;"
     routerLink='{{container === "Outbox" ? "/members/" + row.recipientUsername :"/members/" + row.senderUsername}}'
     [queryParams]="{tab: 3}"></tr>
   </table>
-  <div class="row" style="justify-content:center" *ngIf="pagination">
+  <div class="row" style="justify-content:center" *ngIf="pagination && !loading">
     <mat-paginator #paginator
                   (page)="handlePageEvent($event)"
                   [length]="pagination.totalItems"
