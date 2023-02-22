@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Edit Roles for {{data.user.userName}}</h1>
+<hr>
+<div mat-dialog-content>
+  <form #rolesForm="ngForm" id="rolesForm">
+    <!-- <div class="form-check" *ngFor="let role of data.roles">
+      <input type="checkbox" [checked]="role.checked" value="role.name" (change)="role.checked=!role.checked" [disabled]="role.name === 'Admin' && data.userName ==='admin'">
+      <label>{{role.name}}</label>
+    </div> -->
+    <mat-checkbox *ngFor="let role of data.roles" [disabled]="role.name === 'Admin' && data.user.userName ==='admin'"
+    (change)="role.checked=!role.checked" [checked]="role.checked">{{role.name}}</mat-checkbox>
+  </form>
+</div>
+<hr>
+<div mat-dialog-actions style="justify-content: flex-end;">
+    <button (click)="updateRoles()"  mat-button mat-dialog-close>Submit</button>
+</div>
