@@ -27,6 +27,7 @@
   </div>
 
   <mat-card-content>
+    <strong style="color:green" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.username)">active</strong>
     <h2>{{ member.knownAs }}</h2>
     <p>{{ member.city }}</p>
   </mat-card-content>

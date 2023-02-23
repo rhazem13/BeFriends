@@ -1,6 +1,7 @@
+import { PresenceService } from './../../services/presence.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MembersService } from './../../services/members.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Member } from 'src/app/models/member';
 
 @Component({
@@ -8,8 +9,8 @@ import { Member } from 'src/app/models/member';
   templateUrl: './member-card.component.html',
   styleUrls: ['./member-card.component.css']
 })
-export class MemberCardComponent {
-  constructor(private memberService: MembersService,private snackBar: MatSnackBar){}
+export class MemberCardComponent  {
+  constructor(private memberService: MembersService,private snackBar: MatSnackBar, public presenceService: PresenceService){}
   @Input() member: Member;
 
   addFollow(member: Member){

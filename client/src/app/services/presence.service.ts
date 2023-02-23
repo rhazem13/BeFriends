@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -11,6 +12,8 @@ import { HubConnectionBuilder } from '@microsoft/signalr/dist/esm/HubConnectionB
 export class PresenceService {
   hubUrl = environment.hubUrl;
   private hubConnection: HubConnection;
+  private onlineUserSource = new BehaviorSubject<string[]>([]);
+  onlineUsers$ = this.onlineUserSource.asObservable();
 
   constructor(private snackBar: MatSnackBar) { }
 
@@ -28,10 +31,15 @@ export class PresenceService {
 
     this.hubConnection.on('UserIsOnline', username=> {
       this.snackBar.open(username+' has connected',undefined,{duration:1500})
+
     })
 
     this.hubConnection.on('UserIsOffline', username=> {
       this.snackBar.open(username+' has disconnected',undefined,{duration:1500})
+    })
+
+    this.hubConnection.on('GetOnlineUsers', (usernames: string[]) => {
+      this.onlineUserSource.next(usernames);
     })
   }
 
