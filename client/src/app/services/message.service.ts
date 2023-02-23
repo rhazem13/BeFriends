@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Message } from '../models/message';
 import { PaginatedResult } from '../models/pagination';
 import { map, BehaviorSubject, take } from 'rxjs';
+import { Group } from '../modals/roles-modal/group';
 @Injectable({
   providedIn: 'root',
 })
@@ -42,6 +43,19 @@ export class MessageService {
         this.messageThreadSource.next([...messages,message])
       })
     })
+
+    this.hubConnection.on('UpdatedGroup', (group: Group) => {
+      if(group.connections.some(x=>x.username === otherUsername)){
+        this.messageThread$.pipe(take(1)).subscribe(messages=>{
+          messages.forEach(message=>{
+            if(!message.dateRead){
+              message.dateRead=new Date(Date.now())
+            }
+          })
+          this.messageThreadSource.next([...messages]);
+        })
+      }
+    });
   }
   stopHubConnection(){
     if ( this.hubConnection)
