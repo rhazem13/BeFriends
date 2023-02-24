@@ -10,24 +10,22 @@ namespace API.Controllers
     [Authorize]
     public class FollowsController : BaseApiController
     {
-        private readonly IUserRepository userRepository;
-        private readonly IFollowsRepository followsRepository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public FollowsController(IUserRepository userRepository, IFollowsRepository followsRepository)
+        public FollowsController(IUnitOfWork unitOfWork)
         {
-            this.userRepository = userRepository;
-            this.followsRepository = followsRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpPost("{username}")]
         public async Task<ActionResult> AddFollow(string username)
         {
             var sourceUserId = User.GetUserId();
-            var followedUser= await userRepository.GetUserByUsernameAsync(username);
-            var sourceUser = await followsRepository.GetUserWithFollows(sourceUserId);
+            var followedUser= await unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            var sourceUser = await unitOfWork.FollowsRepository.GetUserWithFollows(sourceUserId);
             if (followedUser == null) return NotFound();
             if (sourceUser.UserName == username) return BadRequest("You cannot follow yourself!");
-            var userFollow = await followsRepository.GetUserFollow(sourceUserId, followedUser.Id);
+            var userFollow = await unitOfWork.FollowsRepository.GetUserFollow(sourceUserId, followedUser.Id);
             if (userFollow != null) return BadRequest("you already follow this user");
             userFollow = new Entities.UserFollow
             {
@@ -35,7 +33,7 @@ namespace API.Controllers
                 FollowedUserId = followedUser.Id,
             };
             sourceUser.FollowedUsers.Add(userFollow);
-            if (await userRepository.SaveAllAsync()) return Ok();
+            if (await unitOfWork.Complete()) return Ok();
             return BadRequest("failed to follow user");
         }
 
@@ -43,7 +41,7 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<FollowDto>>> GetUserFollows([FromQuery]FollowsParams followsParams)
         {
             followsParams.UserId = User.GetUserId();
-            var users =  await followsRepository.GetUserFollows(followsParams);
+            var users =  await unitOfWork.FollowsRepository.GetUserFollows(followsParams);
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(users);
         }

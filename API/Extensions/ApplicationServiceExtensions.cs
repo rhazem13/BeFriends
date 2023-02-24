@@ -21,18 +21,10 @@ namespace API.Extensions
                 options.UseSqlServer(config.GetConnectionString("sqlserver"));
             });
             services.AddCors();
-            
-            // Services
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
-            services.AddScoped<IFollowsRepository, FollowsRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<LogUserActivity>();
-
-            // repositories
-            services.AddScoped<IUserRepository, UserRepository>();
-
-            // automappers
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             return services;
         }
