@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<hr>
+<div mat-dialog-content>
+  <p>{{data.message}}</p>
+</div>
+<hr>
+<div mat-dialog-actions style="justify-content: flex-end;">
+    <button (click)="confirm()" color="primary" mat-button mat-dialog-close>{{data.btnOkText}}</button>
+    <button (click)="decline()" color="accent" mat-button mat-dialog-close>{{data.btnCancelText}}</button>
+</div>

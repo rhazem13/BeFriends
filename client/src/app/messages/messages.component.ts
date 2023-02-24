@@ -1,3 +1,4 @@
+import { ConfirmService } from './../services/confirm.service';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Message } from '../models/message';
@@ -19,7 +20,7 @@ export class MessagesComponent implements OnInit {
   displayedColumns: string[] = ['Message', 'fromto', 'sentreceived','delete'];
   loading=false;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService, private confirmService: ConfirmService) {}
 
   ngOnInit(): void {
     this.loadMessages();
@@ -39,9 +40,16 @@ export class MessagesComponent implements OnInit {
   }
 
   deleteMessage(id: number){
-    this.messageService.deleteMessage(id).subscribe(()=>{
-      this.messages.splice(this.messages.findIndex(m=>m.id === id),1);
-      this.dataSource.data=this.messages
+    this.confirmService.confirm('Confirm delete message', 'This Cannot be undone').subscribe(result=>{
+      if(result){
+        this.messageService.deleteMessage(id).subscribe(() => {
+          this.messages.splice(
+            this.messages.findIndex((m) => m.id === id),
+            1
+          );
+          this.dataSource.data = this.messages;
+        });
+      }
     })
   }
 

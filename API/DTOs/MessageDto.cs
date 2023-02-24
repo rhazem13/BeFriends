@@ -1,4 +1,5 @@
 ﻿using API.Entities;
+using Newtonsoft.Json;
 
 namespace API.DTOs
 {
@@ -13,6 +14,6 @@ namespace API.DTOs
         public string RecipientPhotoUrl { get; set; }
         public string Content { get; set; }
         public DateTime? DateRead { get; set; }
-        public DateTime MessageSent { get; set; }
+        public DateTime? MessageSent { get; set; }
     }
 }
