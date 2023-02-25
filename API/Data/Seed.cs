@@ -27,6 +27,10 @@ namespace API.Data
             {
                 UserName = "admin"
             };
+            admin.Created = DateTime.UtcNow;
+            admin.Created = admin.Created.ToUniversalTime();
+            admin.LastActive = DateTime.UtcNow;
+            admin.LastActive = admin.LastActive.ToUniversalTime();
             var result = await userManager.CreateAsync(admin, "Pa$$w0rd");
             if (!result.Succeeded) {
                 throw new ArgumentException("Parameter cannot be null");
@@ -34,6 +38,10 @@ namespace API.Data
             await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
             foreach (var user in users)
             {
+                user.Created = DateTime.UtcNow;
+                user.Created = user.Created.ToUniversalTime();
+                user.LastActive = DateTime.UtcNow;
+                user.LastActive = user.LastActive.ToUniversalTime();
                 user.UserName = user.UserName.ToLower();
                 await userManager.CreateAsync(user,"Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, "Member");

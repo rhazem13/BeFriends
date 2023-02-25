@@ -18,7 +18,8 @@ namespace API.Extensions
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(config.GetConnectionString("sqlserver"));
+                //options.UseSqlServer(config.GetConnectionString("sqlserver"));
+                options.UseNpgsql(config.GetConnectionString("postgresql"));
             });
             services.AddCors();
             services.AddScoped<ITokenService, TokenService>();
