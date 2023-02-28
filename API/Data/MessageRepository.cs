@@ -73,6 +73,16 @@ namespace API.Data
             return await PagedList<MessageDto>.CreateAsync(messages, messageParams.PageNumber,messageParams.PageSize);
         }
 
+        public async Task<List<ChatDto>> GetChatsForUser(string username)
+        {
+            var result = await context.Messages.OrderByDescending(m => m.MessageSent)
+                .Include(m=>m.Sender).ThenInclude(s=>s.Photos)
+                .Include(m=>m.Recipient).ThenInclude(s => s.Photos)
+                .Where(m => ( m.RecipientUsername == username || m.SenderUsername == username))
+                .ToListAsync();
+            return mapper.Map<List<ChatDto>>(result);
+        }
+
         public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername)
         {
             var messages = await context.Messages
