@@ -7,6 +7,7 @@ import { Message } from '../models/message';
 import { PaginatedResult } from '../models/pagination';
 import { map, BehaviorSubject, take } from 'rxjs';
 import { Group } from '../modals/roles-modal/group';
+import { Chat } from '../models/chat';
 @Injectable({
   providedIn: 'root',
 })
@@ -98,5 +99,9 @@ export class MessageService {
 
   deleteMessage(id: number){
     return this.http.delete(this.baseUrl + 'messages/'+id);
+  }
+
+  getChats() {
+    return this.http.get<Chat[]>(this.baseUrl + 'messages/chats');
   }
 }
