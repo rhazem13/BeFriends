@@ -1,3 +1,5 @@
+<div class="container">
+
 <div class="row" *ngIf="chats?.length === 0">
   <h2>No messages</h2>
 </div>
@@ -36,4 +38,5 @@
     routerLink='{{ "/members/" + row.contactUsername }}'
     [queryParams]="{tab: 3}"></tr>
   </table>
+</div>
 </div>
