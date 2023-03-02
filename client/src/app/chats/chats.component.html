@@ -1,0 +1,42 @@
+<div class="container">
+
+<div class="row" *ngIf="chats?.length === 0">
+  <h2>No messages</h2>
+</div>
+<div class="row" >
+  <table mat-table [dataSource]="dataSource">
+    <ng-container  matColumnDef="fromto">
+      <th style="width: 20%;" mat-header-cell *matHeaderCellDef="">From / To</th>
+      <td mat-cell *matCellDef="let message">
+        <div class="table-img-container">
+          <img class="img-circle" src="{{message.contactPhotoUrl || './assets/user.png'}}" alt="{{message.contactUsername}}">
+          <strong>{{message.contactUsername|titlecase}}</strong>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container   matColumnDef="Message">
+      <th style="width: 40%;" mat-header-cell *matHeaderCellDef="">Message</th>
+      <td mat-cell *matCellDef="let message">{{message.content}}</td>
+    </ng-container>
+
+    <ng-container  matColumnDef="sentreceived">
+      <th style="width: 20%;" mat-header-cell *matHeaderCellDef="">	Sent / Received</th>
+      <td mat-cell *matCellDef="let message">{{message.messageSent | timeago}}</td>
+    </ng-container>
+
+    <ng-container  matColumnDef="seen">
+      <th style="width: 20%;" mat-header-cell *matHeaderCellDef=""></th>
+      <td mat-cell *matCellDef="let message">
+        <p *ngIf="message.dateRead">seen</p>
+        <p *ngIf="!message.dateRead">unseeen</p>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr [hidden]="loading" mat-row *matRowDef="let row; columns: displayedColumns;"
+    routerLink='{{ "/members/" + row.contactUsername }}'
+    [queryParams]="{tab: 3}"></tr>
+  </table>
+</div>
+</div>

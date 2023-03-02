@@ -1,24 +1,27 @@
-<div class="container">
-  <div *ngIf="!registerMode" style="text-align: center">
-    <h1>Let's make some friends</h1>
-    <p>Come on in to meet new people.. all you need to do is sign up!</p>
-    <div class="text-center">
-      <button
-        class="large-button"
-        (click)="registerToggle()"
-        mat-raised-button
-        color="primary"
-      >
-        Register
-      </button>
-      <button class="large-button" mat-button>Learn more</button>
+<div id="main" style="margin-top: -100px" class="row">
+  <div *ngIf="!registerMode" class="content">
+    <div>
+      <div style="padding: 50px;">
+        <h1>BeFriends</h1>
+        <h2>Come on in to meet new people.. all you need to do is sign up!</h2>
+        <button
+          class="large-button"
+          (click)="registerToggle()"
+          mat-raised-button
+          color="primary"
+        >
+          Register Now
+        </button>
+      </div>
     </div>
   </div>
-</div>
-<div *ngIf="registerMode" class="container">
-  <div class="row justify-content-center">
-    <div>
+  <div
+    *ngIf="registerMode"
+    class="content col-xs-11 col-sm-5 col-md-4 col-lg-3"
+  >
+    <div class="overlayContent">
       <app-register
+        class="row center-xs registerForm"
         (cancelRegister)="cancelRegisterMode($event)"
       ></app-register>
     </div>

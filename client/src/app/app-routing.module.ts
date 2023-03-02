@@ -1,3 +1,4 @@
+import { ChatsComponent } from './chats/chats.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { MemberDetailedResolver } from './resolvers/member-details.resolver';
@@ -35,6 +36,7 @@ const routes: Routes = [
       },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
+      { path: 'chats', component: ChatsComponent },
       { path: 'admin', component: AdminPanelComponent , canActivate: [AdminGuard]},
     ],
   },

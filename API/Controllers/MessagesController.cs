@@ -64,5 +64,16 @@ namespace API.Controllers
             if (await unitOfWork.Complete()) return Ok();
             return BadRequest("problem deleting the message");
         }
+
+        [HttpGet("Chats")]
+        public async Task<ActionResult<List<ChatDto>>> GetChats()
+        {
+            var username = User.GetUsername();
+            var chats = await this.unitOfWork.MessageRepository.GetChatsForUser(username);
+            chats.ForEach(c => c.ContactUsername = c.SenderUsername == username ? c.RecipientUsername : c.SenderUsername);
+            chats.ForEach(c => c.ContactPhotoUrl = c.SenderUsername == username ? c.RecipientPhotoUrl : c.SenderPhotoUrl);
+            var result = chats.GroupBy(c=>c.ContactUsername).Select(c=>c.First()).ToList();
+            return Ok(result);
+        }
     }
 }

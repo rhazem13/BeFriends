@@ -1,3 +1,5 @@
+<div class="container">
+
 <div class="row">
   <div *ngFor="let member of members" class="col-xs-2">
     <app-member-card [member]="member"></app-member-card>
@@ -12,4 +14,5 @@
               [pageSizeOptions]="pageSizeOptions ? pageSizeOptions : []"
               aria-label="Select page">
 </mat-paginator>
+</div>
 </div>
