@@ -25,6 +25,7 @@
     "@kolkov/ngx-gallery": "^2.0.1",
     "@microsoft/signalr": "^7.0.3",
     "angular-font-awesome": "^3.1.2",
+    "bootstrap": "^5.2.3",
     "flexboxgrid": "^6.3.1",
     "font-awesome": "^4.7.0",
     "ng-gallery": "^8.0.2",
