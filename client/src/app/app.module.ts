@@ -36,6 +36,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 import { ChatsComponent } from './chats/chats.component';
 import { HeaderComponent } from './nav/header/header.component';
+import { SidenavListComponent } from './nav/sidenav-list/sidenav-list.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { HeaderComponent } from './nav/header/header.component';
     ConfirmDialogComponent,
     ChatsComponent,
     HeaderComponent,
+    SidenavListComponent,
   ],
   imports: [
     BrowserModule,
