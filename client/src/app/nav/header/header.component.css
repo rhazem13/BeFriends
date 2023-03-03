@@ -17,3 +17,55 @@ a:hover, a:active {
     display: inline-block;
     padding-left: 6px;
 }
+
+/* from nav */
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.login-form {
+  display: flex;
+  align-items: center;
+  height: 80%;
+}
+.loggedindiv{
+  display: flex;
+  align-items: center;
+  height: 80%;
+}
+
+.login-form mat-form-field {
+  margin-right: 10px;
+  margin-top: 1em;
+}
+.mat-form-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#NavLogo {
+  text-decoration: none;
+  color: white;
+  font: 900;
+  font-size: x-large;
+  margin-right: 3rem;
+}
+
+.activebutton {
+  background-color: white;
+  color: black !important;
+  border-radius: 0.15em;
+}
+
+.loader-container{
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+
+img {
+  max-height: 46px !important;
+  border:2px solid #fff;
+  display: inline;
+}

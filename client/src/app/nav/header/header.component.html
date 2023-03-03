@@ -1,18 +1,50 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" >
   <div fxHide.gt-xs>
     <button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
     </button>
   </div>
-  <div>
-    <a routerLink="/">BeFriends</a>
-  </div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-    <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-      <li><a routerLink="/signup">Signup</a></li>
-      <li><a routerLink="/signin">Login</a></li>
-      <li><a routerLink="/training">Training</a></li>
-      <li><a style="cursor: pointer">Logout</a></li>
-    </ul>
+  <div class="container justify-content-center align-items-center">
+    <div>
+      <a routerLink="/">BeFriends</a>
+    </div>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs >
+      <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+        <ng-container *ngIf="accountService.currentUser$ | async">
+          <li><a style="cursor: pointer">Logout</a></li>
+        </ng-container>
+        <ng-container *ngIf="!(accountService.currentUser$ | async)">
+          <li>
+            <form
+              *ngIf="(accountService.currentUser$ | async) === null"
+              #loginForm="ngForm"
+              class="login-form"
+              (ngSubmit)="login()"
+              autocomplete="off"
+            >
+              <mat-form-field>
+                <input
+                  name="username"
+                  [(ngModel)]="model.username"
+                  matInput
+                  type="text"
+                  placeholder="Username"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <input
+                  name="password"
+                  [(ngModel)]="model.password"
+                  matInput
+                  type="password"
+                  placeholder="Password"
+                />
+              </mat-form-field>
+              <button mat-button type="submit">Login</button>
+            </form>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
   </div>
 </mat-toolbar>
