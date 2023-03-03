@@ -1,63 +1,63 @@
-  .large-button {
-    height: 70px;
-    width: 200px;
-    font-size: 20px;
-  }
-
-h1{
-  font: 700;
-  font-size:xx-large;
+.large-button {
+  height: 70px;
+  width: 200px;
+  font-size: 20px;
 }
 
-p{
+h1 {
+  font: 700;
+  font-size: xx-large;
+}
+
+p {
   font: 900;
   font-size: large;
 }
 
-
 body {
-	background: #445;
-	color: #FFF;
+  background: #445;
+  color: #fff;
 }
 
 #main {
-	background: linear-gradient(to bottom, rgba(0,0,0,0.66) 100%, transparent), url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/336999/shinokubo_test.jpg);
-	background-size: cover, cover;
-	background-position: center, center;
-	height: 100vh;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.66) 100%, transparent),
+    url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/336999/shinokubo_test.jpg);
+  background-size: cover, cover;
+  background-position: center, center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
-	font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-	font-size: 6rem;
-	display: inline-block;
-	padding: 1rem;
-	font-weight: 8  00;
-	position: relative;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka,
+    "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 6rem;
+  display: inline-block;
+  padding: 1rem;
+  font-weight: 8 00;
+  position: relative;
   color: white;
 }
 
-h2{
-  color:white;
+h2 {
+  color: white;
 }
 
-.content{
-	justify-content: center;
-	align-items: center;
+.content {
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
 .overlayContent {
-  background: white;
+  background: rgba(255, 255, 255, .5);
+  backdrop-filter: blur(5px);
   border-radius: 4%;
 }
 
-.registerForm{
+.registerForm {
   padding: 30px 20px 30px 20px;
 }
-

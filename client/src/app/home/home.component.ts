@@ -9,14 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   registerMode = false;
   constructor() {}
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   registerToggle() {
     this.registerMode = !this.registerMode;
   }
 
-  cancelRegisterMode(event: boolean){
+  cancelRegisterMode(event: boolean) {
     this.registerMode = event;
   }
 }
