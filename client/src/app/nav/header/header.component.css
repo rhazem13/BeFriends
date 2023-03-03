@@ -19,14 +19,10 @@ a:hover, a:active {
 }
 
 /* from nav */
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
 
 .login-form {
   display: flex;
   align-items: center;
-  height: 80%;
 }
 .loggedindiv{
   display: flex;
@@ -68,4 +64,10 @@ img {
   max-height: 46px !important;
   border:2px solid #fff;
   display: inline;
+}
+
+.img-circle {
+  max-height: 50px;
+  border-radius: 50%;
+  margin-right: .6rem;
 }

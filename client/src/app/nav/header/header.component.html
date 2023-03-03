@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" >
+<mat-toolbar color="primary">
   <div fxHide.gt-xs>
     <button mat-icon-button (click)="onToggleSidenav()">
       <mat-icon>menu</mat-icon>
@@ -8,11 +8,47 @@
     <div>
       <a routerLink="/">BeFriends</a>
     </div>
-    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs >
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
       <ul fxLayout fxLayoutGap="10px" class="navigation-items">
         <ng-container *ngIf="accountService.currentUser$ | async">
-          <li><a style="cursor: pointer">Logout</a></li>
+          <a mat-button routerLink="/members" routerLinkActive="activebutton"
+            >Members</a
+          >
+          <a mat-button routerLink="/lists" routerLinkActive="activebutton"
+            >Follows</a
+          >
+          <a mat-button routerLink="/messages" routerLinkActive="activebutton"
+            >Messages</a
+          >
+          <a mat-button routerLink="/chats" routerLinkActive="activebutton"
+            >Chats</a
+          >
+          <a
+            mat-button
+            routerLink="/admin"
+            routerLinkActive="activebutton"
+            *appHasRole="['Admin', 'Moderator']"
+            >Admin</a
+          >
         </ng-container>
+        <div
+          *ngIf="accountService.currentUser$ | async as user"
+          class="loggedindiv"
+        >
+          <button mat-button [matMenuTriggerFor]="menu">
+            <img
+              class="img-circle"
+              src="{{ user.photoUrl || './assets/user.png' }}"
+              alt="{{ user.username }}"
+            />
+          </button>
+          <mat-menu #menu="matMenu" yPosition="below">
+            <button mat-menu-item routerLink="/member/edit">
+              Edit Profile
+            </button>
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+        </div>
         <ng-container *ngIf="!(accountService.currentUser$ | async)">
           <li>
             <form
@@ -48,3 +84,8 @@
     </div>
   </div>
 </mat-toolbar>
+<div class="row" *ngIf="busyService.isLoading | async">
+  <div class="loader-container">
+    <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+  </div>
+</div>

@@ -1,18 +1,72 @@
 <mat-nav-list>
-  <a mat-list-item routerLink="/signup">
-    <mat-icon>face</mat-icon>
-    <span class="nav-caption">Signup</span>
-  </a>
-  <a mat-list-item routerLink="/signin">
-    <mat-icon>input</mat-icon>
-    <span class="nav-caption">Login</span>
-  </a>
-  <a mat-list-item routerLink="/training">
-    <mat-icon>fitness_center</mat-icon>
-    <span class="nav-caption">Training</span>
-  </a>
-  <a mat-list-item>
-    <mat-icon>eject</mat-icon>
-    <span class="nav-caption">Logout</span>
-  </a>
+  <div *ngIf="accountService.currentUser$ | async as user" class="loggedindiv">
+    <img
+      src="{{ user.photoUrl || './assets/user.png' }}"
+      alt="{{ user.username }}"
+    />
+    <button mat-button [matMenuTriggerFor]="menu">
+      {{ user.knownAs || user.username | titlecase }}
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/member/edit">Edit Profile</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+  <ng-container *ngIf="accountService.currentUser$ | async">
+    <a mat-list-item routerLink="/members" routerLinkActive="activebutton">
+      <mat-icon class="fa fa-users"></mat-icon>
+      <span class="nav-caption"> Members</span>
+    </a>
+    <a mat-list-item routerLink="/lists" routerLinkActive="activebutton">
+      <mat-icon class="fa fa-plus"></mat-icon>
+      <span class="nav-caption"> Follows</span>
+    </a>
+    <a mat-list-item routerLink="/messages" routerLinkActive="activebutton">
+      <mat-icon class="fa fa-envelope"></mat-icon>
+      <span class="nav-caption"> Messages</span>
+    </a>
+    <a mat-list-item routerLink="/chats" routerLinkActive="activebutton">
+      <mat-icon class="fa fa-comments"></mat-icon>
+      <span class="nav-caption"> Chats</span>
+    </a>
+    <a
+      mat-list-item
+      routerLink="/admin"
+      routerLinkActive="activebutton"
+      *appHasRole="['Admin', 'Moderator']"
+    >
+      <mat-icon>face</mat-icon>
+      <span class="nav-caption"> Admin</span></a
+    >
+  </ng-container>
+  <ng-container *ngIf="!(accountService.currentUser$ | async)">
+    <form
+      *ngIf="(accountService.currentUser$ | async) === null"
+      #loginForm="ngForm"
+      class="login-form"
+      (ngSubmit)="login()"
+      autocomplete="off"
+    >
+    <h2 class="text-center">Login</h2>
+      <mat-form-field class="d-flex justify-content-center align-items-center">
+        <input
+          name="username"
+          [(ngModel)]="model.username"
+          matInput
+          type="text"
+          placeholder="Username"
+        />
+      </mat-form-field>
+      <mat-form-field class="d-flex justify-content-center align-items-center">
+        <input
+          name="password"
+          [(ngModel)]="model.password"
+          matInput
+          type="password"
+          placeholder="Password"
+        />
+      </mat-form-field>
+      <button style="width: 100%;" mat-raised-button color="primary" type="submit">Login</button>
+    </form>
+  </ng-container>
 </mat-nav-list>
