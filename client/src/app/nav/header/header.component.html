@@ -19,9 +19,7 @@
             <a mat-button routerLink="/lists" routerLinkActive="activebutton"
               >Follows</a
             >
-            <a mat-button routerLink="/messages" routerLinkActive="activebutton"
-              >Messages</a
-            >
+
             <a mat-button routerLink="/chats" routerLinkActive="activebutton"
               >Chats</a
             >
@@ -45,6 +43,9 @@
               />
             </button>
             <mat-menu #menu="matMenu" yPosition="below">
+              <a mat-menu-item routerLink="/messages" routerLinkActive="activebutton"
+              >Messages History</a
+            >
               <button mat-menu-item routerLink="/member/edit">
                 Edit Profile
               </button>

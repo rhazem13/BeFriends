@@ -76,3 +76,11 @@ img {
   display: inline;
 }
 
+.img-circle {
+  max-height: 50px;
+  border-radius: 50%;
+  margin-right: .6rem;
+}
+.mat-icon {
+    vertical-align: middle;
+}

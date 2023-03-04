@@ -1,15 +1,23 @@
 <mat-nav-list>
   <div *ngIf="accountService.currentUser$ | async as user" class="loggedindiv">
-    <img
-      src="{{ user.photoUrl || './assets/user.png' }}"
-      alt="{{ user.username }}"
-    />
     <button mat-button [matMenuTriggerFor]="menu">
+      <img
+        class="img-circle"
+        src="{{ user.photoUrl || './assets/user.png' }}"
+        alt="{{ user.username }}"
+      />
       {{ user.knownAs || user.username | titlecase }}
     </button>
     <mat-menu #menu="matMenu">
-      <button  (click)="onClose()" mat-menu-item routerLink="/member/edit">Edit Profile</button>
-      <button (click)="onClose()" mat-menu-item (click)="logout()">Logout</button>
+      <a mat-menu-item routerLink="/messages" routerLinkActive="activebutton"
+        >Messages History</a
+      >
+      <button (click)="onClose()" mat-menu-item routerLink="/member/edit">
+        Edit Profile
+      </button>
+      <button (click)="onClose()" mat-menu-item (click)="logout()">
+        Logout
+      </button>
     </mat-menu>
   </div>
   <ng-container *ngIf="accountService.currentUser$ | async">
@@ -30,15 +38,6 @@
     >
       <mat-icon class="fa fa-plus"></mat-icon>
       <span class="nav-caption"> Follows</span>
-    </a>
-    <a
-      (click)="onClose()"
-      mat-list-item
-      routerLink="/messages"
-      routerLinkActive="activebutton"
-    >
-      <mat-icon class="fa fa-envelope"></mat-icon>
-      <span class="nav-caption"> Messages</span>
     </a>
     <a
       (click)="onClose()"
