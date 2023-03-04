@@ -11,6 +11,7 @@ import { BusyService } from '../services/busy.service';
 })
 export class LoginComponent {
   model: any = {};
+  wrongCreds=false;
 
   constructor(
     public accountService: AccountService,
@@ -25,6 +26,7 @@ export class LoginComponent {
         console.log(response);
       },
       (error) => {
+        this.wrongCreds=true;
         this.snackBar.open(error.error, undefined, {
           duration: 1500,
         });
