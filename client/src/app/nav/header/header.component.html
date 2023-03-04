@@ -6,7 +6,18 @@
   </div>
   <div class="container justify-content-center align-items-center">
     <div fxFlex fxLayout fxLayoutAlign="flex-start" fxHide.xs>
-      <a routerLink="/">BeFriends</a>
+      <a
+        *ngIf="!(accountService.currentUser$ | async)"
+        routerLink="/"
+        class="applogo"
+        >BeFriends</a
+      >
+      <a
+        *ngIf="accountService.currentUser$ | async"
+        routerLink="/members"
+        class="applogo"
+        >BeFriends</a
+      >
     </div>
     <div
       fxFlex
@@ -14,17 +25,28 @@
       fxLayoutAlign="flex-center"
       class="container justify-content-center align-items-center"
     >
-
       <ng-container *ngIf="accountService.currentUser$ | async">
-        <a mat-button routerLink="/members" routerLinkActive="activebutton" class="roundedbutton"
+        <a
+          mat-button
+          routerLink="/members"
+          routerLinkActive="activebutton"
+          class="roundedbutton"
           ><mat-icon class="fa fa-users icon-display"></mat-icon
         ></a>
-        <a mat-button routerLink="/lists" routerLinkActive="activebutton" class="roundedbutton"
-          ><mat-icon class="fa fa-plus icon-display"></mat-icon
+        <a
+          mat-button
+          routerLink="/lists"
+          routerLinkActive="activebutton"
+          class="roundedbutton"
+          ><mat-icon class="fa fa-user-plus icon-display"></mat-icon
         ></a>
 
-        <a mat-button routerLink="/chats" routerLinkActive="activebutton" class="roundedbutton"
-          ><mat-icon class="fa fa-comments icon-display"></mat-icon
+        <a
+          mat-button
+          routerLink="/chats"
+          routerLinkActive="activebutton"
+          class="roundedbutton"
+          ><mat-icon class="fa fa-paper-plane icon-display"></mat-icon
         ></a>
         <a
           mat-button
@@ -35,7 +57,7 @@
         >
       </ng-container>
     </div>
-    <div fxFlex fxLayout fxLayoutAlign="flex-end" >
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
       <div class="justify-content-center align-items-center">
         <ul fxLayout fxLayoutGap="10px" class="navigation-items">
           <div

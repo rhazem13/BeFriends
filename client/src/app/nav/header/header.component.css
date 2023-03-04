@@ -86,3 +86,8 @@ img {
 .mat-mdc-button>.mat-icon{
   margin: 0;
 }
+
+.applogo{
+  font-weight: 800;
+  font-size: x-large;
+}
