@@ -1,21 +1,21 @@
-
 a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
-a:hover, a:active {
-    color:lighgray;
-}
-
-.navigation-items{
-    list-style: none;
-    padding:0;
-    margin: 0;
+a:hover,
+a:active {
+  color: lighgray;
 }
 
-.nav-caption{
-    display: inline-block;
-    padding-left: 6px;
+.navigation-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-caption {
+  display: inline-block;
+  padding-left: 6px;
 }
 
 /* from nav */
@@ -24,7 +24,7 @@ a:hover, a:active {
   display: flex;
   align-items: center;
 }
-.loggedindiv{
+.loggedindiv {
   display: flex;
   align-items: center;
   height: 80%;
@@ -51,10 +51,11 @@ a:hover, a:active {
 .activebutton {
   background-color: white;
   color: black !important;
-  border-radius: 0.15em;
+  border-radius: 123vh;
+
 }
 
-.loader-container{
+.loader-container {
   position: fixed;
   width: 100%;
   z-index: 99;
@@ -62,12 +63,26 @@ a:hover, a:active {
 
 img {
   max-height: 46px !important;
-  border:2px solid #fff;
+  border: 2px solid #fff;
   display: inline;
 }
 
 .img-circle {
   max-height: 50px;
   border-radius: 50%;
-  margin-right: .6rem;
+  margin-right: 0.6rem;
+}
+.icon-display {
+  transform: scale(1.5);
+}
+.mat-icon {
+    vertical-align: middle;
+}
+.icon-text {
+    display: flex;
+    align-items: center;
+}
+
+.mat-mdc-button>.mat-icon{
+  margin: 0;
 }
