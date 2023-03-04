@@ -8,79 +8,82 @@
     <div>
       <a routerLink="/">BeFriends</a>
     </div>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs></div>
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-      <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-        <ng-container *ngIf="accountService.currentUser$ | async">
-          <a mat-button routerLink="/members" routerLinkActive="activebutton"
-            >Members</a
-          >
-          <a mat-button routerLink="/lists" routerLinkActive="activebutton"
-            >Follows</a
-          >
-          <a mat-button routerLink="/messages" routerLinkActive="activebutton"
-            >Messages</a
-          >
-          <a mat-button routerLink="/chats" routerLinkActive="activebutton"
-            >Chats</a
-          >
-          <a
-            mat-button
-            routerLink="/admin"
-            routerLinkActive="activebutton"
-            *appHasRole="['Admin', 'Moderator']"
-            >Admin</a
-          >
-        </ng-container>
-        <div
-          *ngIf="accountService.currentUser$ | async as user"
-          class="loggedindiv"
-        >
-          <button mat-button [matMenuTriggerFor]="menu">
-            <img
-              class="img-circle"
-              src="{{ user.photoUrl || './assets/user.png' }}"
-              alt="{{ user.username }}"
-            />
-          </button>
-          <mat-menu #menu="matMenu" yPosition="below">
-            <button mat-menu-item routerLink="/member/edit">
-              Edit Profile
-            </button>
-            <button mat-menu-item (click)="logout()">Logout</button>
-          </mat-menu>
-        </div>
-        <ng-container *ngIf="!(accountService.currentUser$ | async)">
-          <li>
-            <form
-              *ngIf="(accountService.currentUser$ | async) === null"
-              #loginForm="ngForm"
-              class="login-form"
-              (ngSubmit)="login()"
-              autocomplete="off"
+      <div class="justify-content-center align-items-center">
+        <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+          <ng-container *ngIf="accountService.currentUser$ | async">
+            <a mat-button routerLink="/members" routerLinkActive="activebutton"
+              >Members</a
             >
-              <mat-form-field>
-                <input
-                  name="username"
-                  [(ngModel)]="model.username"
-                  matInput
-                  type="text"
-                  placeholder="Username"
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <input
-                  name="password"
-                  [(ngModel)]="model.password"
-                  matInput
-                  type="password"
-                  placeholder="Password"
-                />
-              </mat-form-field>
-              <button mat-button type="submit">Login</button>
-            </form>
-          </li>
-        </ng-container>
-      </ul>
+            <a mat-button routerLink="/lists" routerLinkActive="activebutton"
+              >Follows</a
+            >
+            <a mat-button routerLink="/messages" routerLinkActive="activebutton"
+              >Messages</a
+            >
+            <a mat-button routerLink="/chats" routerLinkActive="activebutton"
+              >Chats</a
+            >
+            <a
+              mat-button
+              routerLink="/admin"
+              routerLinkActive="activebutton"
+              *appHasRole="['Admin', 'Moderator']"
+              >Admin</a
+            >
+          </ng-container>
+          <div
+            *ngIf="accountService.currentUser$ | async as user"
+            class="loggedindiv"
+          >
+            <button mat-button [matMenuTriggerFor]="menu">
+              <img
+                class="img-circle"
+                src="{{ user.photoUrl || './assets/user.png' }}"
+                alt="{{ user.username }}"
+              />
+            </button>
+            <mat-menu #menu="matMenu" yPosition="below">
+              <button mat-menu-item routerLink="/member/edit">
+                Edit Profile
+              </button>
+              <button mat-menu-item (click)="logout()">Logout</button>
+            </mat-menu>
+          </div>
+          <ng-container *ngIf="!(accountService.currentUser$ | async)">
+            <li>
+              <form
+                *ngIf="(accountService.currentUser$ | async) === null"
+                #loginForm="ngForm"
+                class="login-form"
+                (ngSubmit)="login()"
+                autocomplete="off"
+              >
+                <mat-form-field>
+                  <input
+                    name="username"
+                    [(ngModel)]="model.username"
+                    matInput
+                    type="text"
+                    placeholder="Username"
+                  />
+                </mat-form-field>
+                <mat-form-field>
+                  <input
+                    name="password"
+                    [(ngModel)]="model.password"
+                    matInput
+                    type="password"
+                    placeholder="Password"
+                  />
+                </mat-form-field>
+                <button mat-button type="submit">Login</button>
+              </form>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
     </div>
   </div>
 </mat-toolbar>

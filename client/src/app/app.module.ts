@@ -37,6 +37,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { ChatsComponent } from './chats/chats.component';
 import { HeaderComponent } from './nav/header/header.component';
 import { SidenavListComponent } from './nav/sidenav-list/sidenav-list.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { SidenavListComponent } from './nav/sidenav-list/sidenav-list.component'
     ChatsComponent,
     HeaderComponent,
     SidenavListComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-xs-12">
+<div class="row" >
+  <div class="col-xs-12" >
     <form
       [formGroup]="registerForm"
       (ngSubmit)="registerForm.valid && register()"
@@ -7,32 +7,22 @@
     >
       <div class="row" style="justify-content: center">
         <div class="col-xs-12">
-          <h1 class="text-center" style="font-size:2.5em;font-weight: 500;">Sign up</h1>
+          <h1 class="text-center" style="font-size: 2.5em; font-weight: 500">
+            Sign Up
+          </h1>
+          <p>It's quick and easy.</p>
+          <hr />
         </div>
       </div>
-      <div class="row" style="justify-content: center">
-        <div class="row-xs-12">
-          I am a
-          <mat-radio-group
-            [formControl]="registerForm.controls['gender']"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="male">male</mat-radio-button>
-            <mat-radio-button value="female">female</mat-radio-button>
-          </mat-radio-group>
-        </div>
-      </div>
+
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-6">
           <app-text-input
             [formControl]="registerForm.controls['username']"
             [label]="'Username'"
           ></app-text-input>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-6">
           <app-text-input
             [formControl]="registerForm.controls['knownAs']"
             [label]="'Known As'"
@@ -53,24 +43,6 @@
       <div class="row">
         <div class="col-xs-12">
           <app-text-input
-            [formControl]="registerForm.controls['city']"
-            [label]="'City'"
-          ></app-text-input>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <app-text-input
-            [formControl]="registerForm.controls['country']"
-            [label]="'Country'"
-          ></app-text-input>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <app-text-input
             [formControl]="registerForm.controls['password']"
             [label]="'password'"
             [type]="'password'"
@@ -85,6 +57,35 @@
             [label]="'Confirm Password'"
             [type]="'password'"
           ></app-text-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <app-text-input
+            [formControl]="registerForm.controls['city']"
+            [label]="'City'"
+          ></app-text-input>
+        </div>
+        <div class="col-xs-6">
+          <app-text-input
+            [formControl]="registerForm.controls['country']"
+            [label]="'Country'"
+          ></app-text-input>
+        </div>
+      </div>
+
+      <div class="row" style="justify-content: center">
+        <div class="row-xs-12">
+          I am a
+          <mat-radio-group
+            [formControl]="registerForm.controls['gender']"
+            aria-label="Select an option"
+            color="primary"
+          >
+            <mat-radio-button value="male">male</mat-radio-button>
+            <mat-radio-button value="female">female</mat-radio-button>
+          </mat-radio-group>
         </div>
       </div>
 

@@ -1,0 +1,57 @@
+<div class="row content">
+  <div class="col-xs-12">
+    <form
+      #loginForm="ngForm"
+      class="login-form"
+      (ngSubmit)="login()"
+      autocomplete="off"
+    >
+      <div class="row" style="justify-content: center">
+        <div class="col-xs-12">
+          <h1 class="text-center" style="font-size: 2.5em; font-weight: 500">
+            Welcome back
+          </h1>
+          <p>Enter you username and password.</p>
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <mat-form-field>
+            <input
+              name="username"
+              [(ngModel)]="model.username"
+              matInput
+              type="text"
+              placeholder="Username"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <mat-form-field>
+            <input
+              name="password"
+              [(ngModel)]="model.password"
+              matInput
+              type="password"
+              placeholder="Password"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row between-xs">
+            <button mat-button type="submit">Login</button>
+          </div>
+        </div>
+      </div>
+      <div></div>
+    </form>
+  </div>
+</div>

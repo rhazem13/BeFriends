@@ -1,0 +1,8 @@
+.mdc-notched-outline__leading {
+  border-radius: 13px 0 0 13px !important;
+  min-width: 28px !important;
+}
+
+.mdc-notched-outline__trailing {
+  border-radius: 0 13px 13px 0 !important;
+}

@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { ChatsComponent } from './chats/chats.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
@@ -18,6 +19,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -37,7 +39,11 @@ const routes: Routes = [
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'chats', component: ChatsComponent },
-      { path: 'admin', component: AdminPanelComponent , canActivate: [AdminGuard]},
+      {
+        path: 'admin',
+        component: AdminPanelComponent,
+        canActivate: [AdminGuard],
+      },
     ],
   },
   { path: 'errors', component: TestErrorsComponent },
