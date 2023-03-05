@@ -18,7 +18,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, data: { registerMode: false } },
+  { path: 'register', component: HomeComponent, data: { registerMode: true } },
   { path: 'login', component: LoginComponent },
   {
     path: '',

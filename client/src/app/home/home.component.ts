@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   registerMode = false;
-  constructor() {}
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute) {}
+  ngOnInit(): void {
+    this.route.data.subscribe((data) => {
+      this.registerMode = data.registerMode;
+    });
+
+  }
 
   registerToggle() {
     this.registerMode = !this.registerMode;
