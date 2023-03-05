@@ -116,3 +116,18 @@ hr {
   z-index: 0;
 }
 
+.status{
+      width: 30px;
+      height:30px;
+      top : 45%;
+      left: 65%;
+      border-top-left-radius: 50% 50%;
+      border-top-right-radius: 50% 50%;
+      border-bottom-right-radius: 50% 50%;
+      border-bottom-left-radius: 50% 50%;
+      z-index: 10;
+      border: 5px solid white;
+      margin-bottom: 2px;
+      position: absolute;
+      background-color: #31a24c;
+    }

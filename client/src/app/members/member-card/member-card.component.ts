@@ -7,15 +7,29 @@ import { Member } from 'src/app/models/member';
 @Component({
   selector: 'app-member-card',
   templateUrl: './member-card.component.html',
-  styleUrls: ['./member-card.component.css']
+  styleUrls: ['./member-card.component.css'],
 })
-export class MemberCardComponent  {
-  constructor(private memberService: MembersService,private snackBar: MatSnackBar, public presenceService: PresenceService){}
+export class MemberCardComponent {
+  constructor(
+    private memberService: MembersService,
+    private snackBar: MatSnackBar,
+    public presenceService: PresenceService
+  ) {}
   @Input() member: Member;
 
-  addFollow(member: Member){
-    this.memberService.addFollow(member.username).subscribe(()=>{
-      this.snackBar.open("you have followed " + member.knownAs,undefined,{duration:1500})
+  addFollow(member: Member) {
+    this.memberService.addFollow(member.username).subscribe(() => {
+      this.snackBar.open('you have followed ' + member.knownAs, undefined, {
+        duration: 1500,
+      });
+      this.member.followed = true;
+    });
+  }
+
+  removeFollow(member: Member) {
+    this.memberService.removeFollow(member.username).subscribe(()=>{
+      this.snackBar.open('you have unfollowed ' + member.knownAs, undefined, {duration: 1500});
+      this.member.followed=false;
     })
   }
 }

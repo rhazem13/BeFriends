@@ -70,6 +70,10 @@ export class MembersService {
     return this.http.post(this.baseUrl + 'follows/' + username, {});
   }
 
+  removeFollow(username: string) {
+    return this.http.delete(this.baseUrl +'follows/' + username);
+  }
+
   getFollows(predicate: string, pageNumber, pageSize){
     let params = new HttpParams();
     params = params.append('predicate', predicate);

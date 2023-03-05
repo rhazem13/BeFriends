@@ -41,6 +41,7 @@
       src="{{ member.photoUrl || './assets/user.png' }}"
       alt="{{ member.knownAs }}"
     />
+    <div class="status" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.username)">&nbsp;</div>
     <hr />
     <h2 routerLink="/members/{{ member.username }}" class="member-name">
       {{ member.knownAs }}
@@ -66,7 +67,7 @@
       class="unfollow-botton"
       mat-raised-button
       color="basic"
-      (click)="addFollow(member)"
+      (click)="removeFollow(member)"
       *ngIf="member.followed"
     >
       <mat-icon
