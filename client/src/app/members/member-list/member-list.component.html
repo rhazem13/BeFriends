@@ -5,8 +5,9 @@
     </div>
   </div>
   <div class="row" style="justify-content: center" *ngIf="pagination">
-    <mat-paginator
+    <mat-paginator class="d-flex justify-content-center align-items-center"
       #paginator
+      style="background-color: rgba(0,0,0,0);"
       (page)="handlePageEvent($event)"
       [length]="pagination.totalItems"
       [pageSize]="pagination.itemsPerPage"

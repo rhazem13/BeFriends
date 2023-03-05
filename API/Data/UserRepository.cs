@@ -30,7 +30,7 @@ namespace API.Data
         {
             var query = context.Users
                .AsQueryable();
-            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.UserName != userParams.CurrentUsername && u.UserName != "admin" );
             query = userParams.OrderBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),
