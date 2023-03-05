@@ -1,4 +1,4 @@
-<mat-card class="member-card">
+<!-- <mat-card class="member-card">
   <div  class="card-img-wrapper">
     <img  src="{{ member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" />
     <div class="fab-buttons animate">
@@ -30,5 +30,25 @@
     <strong style="color:green" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.username)">active</strong>
     <h2>{{ member.knownAs }}</h2>
     <p>{{ member.city }}</p>
+  </mat-card-content>
+</mat-card> -->
+
+<mat-card>
+  <mat-card-content>
+    <img
+      class="member-img"
+      src="{{ member.photoUrl || './assets/user.png' }}"
+      alt="{{ member.knownAs }}"
+    />
+    <hr>
+    <h2 class="member-name">{{ member.knownAs }}</h2>
+    <p class="member-city">{{ member.city }}</p>
+    <button class="follow-botton" mat-raised-button color="primary" (click)="addFollow(member)">
+        <mat-icon
+          fontSet="fa"
+          fontIcon="fa-plus"
+          style="font-size: 1.35rem"
+        ></mat-icon>Follow
+      </button>
   </mat-card-content>
 </mat-card>

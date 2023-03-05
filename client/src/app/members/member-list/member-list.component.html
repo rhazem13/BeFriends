@@ -1,18 +1,19 @@
 <div class="container">
-
-<div class="row">
-  <div *ngFor="let member of members" class="col-xs-2">
-    <app-member-card [member]="member"></app-member-card>
+  <div class="row" style="margin-top: 50px;margin-bottom: 50px;">
+    <div *ngFor="let member of members" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" style="margin-bottom: 20px;">
+      <app-member-card [member]="member"></app-member-card>
+    </div>
   </div>
-</div>
-<div class="row" style="justify-content:center" *ngIf="pagination">
-<mat-paginator #paginator
-              (page)="handlePageEvent($event)"
-              [length]="pagination.totalItems"
-              [pageSize]="pagination.itemsPerPage"
-              [showFirstLastButtons]="true"
-              [pageSizeOptions]="pageSizeOptions ? pageSizeOptions : []"
-              aria-label="Select page">
-</mat-paginator>
-</div>
+  <div class="row" style="justify-content: center" *ngIf="pagination">
+    <mat-paginator
+      #paginator
+      (page)="handlePageEvent($event)"
+      [length]="pagination.totalItems"
+      [pageSize]="pagination.itemsPerPage"
+      [showFirstLastButtons]="true"
+      [pageSizeOptions]="pageSizeOptions ? pageSizeOptions : []"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
 </div>

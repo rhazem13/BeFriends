@@ -1,4 +1,4 @@
-.member-card {
+/* .member-card {
   margin-bottom: 2rem;
 }
 
@@ -34,7 +34,7 @@
   margin-left: auto;
   margin-bottom: 1em;
   opacity: 0;
-  /* x-level: 2; */
+  x-level: 2;
 }
 
 .card-img-wrapper:hover .fab-buttons {
@@ -51,4 +51,52 @@
 .animate {
   transition: all 0.3s ease-in-out ;
 }
+ */
 
+.member-img {
+  border-radius: 50%;
+  max-height: 150px;
+  max-width: 150px;
+  width: 100%;
+  align-self: center;
+}
+
+.member-name {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.mat-mdc-card-content {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.member-city {
+  text-align: center;
+}
+
+.follow-botton{
+  border-radius: 50px;
+}
+.container {
+  position: relative;
+}
+
+img {
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+hr {
+  position: absolute;
+  top: 33%;
+  left: 0;
+  right: 0;
+  margin-top: -1px;
+  border: none;
+  border-top: 1px solid black;
+  z-index: 0;
+}
