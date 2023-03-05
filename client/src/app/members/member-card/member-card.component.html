@@ -63,15 +63,15 @@
       >Follow
     </button>
     <button
-      class="follow-botton"
+      class="unfollow-botton"
       mat-raised-button
-      color="primary"
+      color="basic"
       (click)="addFollow(member)"
       *ngIf="member.followed"
     >
       <mat-icon
         fontSet="fa"
-        fontIcon="fa-plus"
+        fontIcon="fa-times"
         style="font-size: 1.35rem"
       ></mat-icon
       >UnFollow

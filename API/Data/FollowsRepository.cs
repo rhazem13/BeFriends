@@ -53,5 +53,10 @@ namespace API.Data
         {
             return await context.Users.Include(x => x.FollowedUsers).FirstOrDefaultAsync(x => x.Id == userId);
         }
+
+        public void RemoveUserFollow(UserFollow userFollow)
+        {
+           context.Follows.Remove(userFollow);
+        }
     }
 }

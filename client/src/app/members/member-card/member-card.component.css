@@ -79,12 +79,20 @@
 
 .member-city {
   cursor: pointer;
-  
+
   text-align: center;
 }
 
 .follow-botton{
   border-radius: 50px;
+}
+.unfollow-botton{
+  color: #3f51b5;
+  border: 1px solid #3f51b5;
+  border-radius: 50px;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: 500;
 }
 .container {
   position: relative;
@@ -107,3 +115,4 @@ hr {
   border-top: 1px solid black;
   z-index: 0;
 }
+
