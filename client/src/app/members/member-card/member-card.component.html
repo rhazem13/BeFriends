@@ -36,19 +36,45 @@
 <mat-card>
   <mat-card-content>
     <img
+      routerLink="/members/{{ member.username }}"
       class="member-img"
       src="{{ member.photoUrl || './assets/user.png' }}"
       alt="{{ member.knownAs }}"
     />
-    <hr>
-    <h2 class="member-name">{{ member.knownAs }}</h2>
-    <p class="member-city">{{ member.city }}</p>
-    <button class="follow-botton" mat-raised-button color="primary" (click)="addFollow(member)">
-        <mat-icon
-          fontSet="fa"
-          fontIcon="fa-plus"
-          style="font-size: 1.35rem"
-        ></mat-icon>Follow
-      </button>
+    <hr />
+    <h2 routerLink="/members/{{ member.username }}" class="member-name">
+      {{ member.knownAs }}
+    </h2>
+    <p routerLink="/members/{{ member.username }}" class="member-city">
+      {{ member.city }}
+    </p>
+    <button
+      class="follow-botton"
+      mat-raised-button
+      color="primary"
+      (click)="addFollow(member)"
+      *ngIf="!member.followed"
+    >
+      <mat-icon
+        fontSet="fa"
+        fontIcon="fa-plus"
+        style="font-size: 1.35rem"
+      ></mat-icon
+      >Follow
+    </button>
+    <button
+      class="follow-botton"
+      mat-raised-button
+      color="primary"
+      (click)="addFollow(member)"
+      *ngIf="member.followed"
+    >
+      <mat-icon
+        fontSet="fa"
+        fontIcon="fa-plus"
+        style="font-size: 1.35rem"
+      ></mat-icon
+      >UnFollow
+    </button>
   </mat-card-content>
 </mat-card>

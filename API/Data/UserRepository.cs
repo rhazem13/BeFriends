@@ -26,7 +26,7 @@ namespace API.Data
                 .ProjectTo<MemberDto>(mapper.ConfigurationProvider).SingleOrDefaultAsync();
         }
 
-        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams, int curUserId)
         {
             var query = context.Users
                .AsQueryable();
@@ -36,7 +36,9 @@ namespace API.Data
                 "created" => query.OrderByDescending(u => u.Created),
                 _ => query.OrderByDescending(u => u.LastActive)
             };
-            return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
+            var users = await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
+            users.ForEach(u => u.Followed = (context.Follows.Any(f => f.SourceUserId == curUserId && f.FollowedUserId == u.Id)));
+            return users;
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
