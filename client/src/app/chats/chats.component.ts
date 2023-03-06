@@ -12,24 +12,26 @@ import { Chat } from '../models/chat';
 })
 export class ChatsComponent implements OnInit {
   chats: Chat[] = [];
-  dataSource: MatTableDataSource<Chat>;
   displayedColumns: string[] = ['fromto', 'Message', 'sentreceived', 'seen'];
   loading = false;
+  openchatusername;
 
   constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.loadChats();
-    this.dataSource = new MatTableDataSource<Chat>(this.chats);
   }
 
   loadChats() {
     this.loading = true;
     return this.messageService.getChats().subscribe((response) => {
       this.chats = response;
-      this.dataSource.data = this.chats;
       this.loading = false;
-      console.log(response);
     });
+  }
+
+  openChat(username: string){
+    console.log(username);
+    this.openchatusername = username;
   }
 }

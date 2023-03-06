@@ -28,3 +28,22 @@ table {
   display: flex;
   align-items: center;
 }
+
+.chat-avatar{
+  border-radius: 50%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.material-icons {
+    position: relative;
+    top: 11px; /*Change this to adjust the icon*/
+}
+
+
+.chatrow :hover{
+  background-color: #F0F0F0	;
+  cursor: pointer;
+}
+.activeChat{
+  background-color: #E0E0E0	;
+}
