@@ -1,57 +1,166 @@
-<mat-card>
-  <mat-card-content>
-      <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
-        No messages yet.. say hi by using the message box below
+<div *ngIf="!username" style="height: 100%">
+  <div class="row align-items-center h-100 d-flex justify-content-center">
+    <div class="col-xs-5">
+      <div
+        style="
+          border-radius: 13px;
+          background-color: #b8b8b8;
+          text-align: center;
+        "
+      >
+        <h3 style="color: white">select a chat to start messaging</h3>
       </div>
-      <ul #scrollMe
-      style="overflow: scroll; height: 500px;"
-      [scrollTop]="scrollMe.scrollHeight"
-      *ngIf="(messageService.messageThread$ | async)?.length > 0"
-      class="chat scroller">
-        <li *ngFor="let message of (messageService.messageThread$ | async)">
-          <div>
-            <div class="row">
-              <div class="col-xs-10">
-                <div class="chat-body">
-                  <div class="header">
-                    <small class="text-muted">
-                      <span class="fa fa-clock-o"> {{message.messageSent | timeago}}</span>
-                      <span *ngIf="!message.dateRead
-                      && message.senderUsername!==username" style="color:grey">
-                      (unseen)
-                      </span>
-                      <span style="color:green" *ngIf="message.dateRead
-                      && message.senderUsername!==username">
-                      (seen {{message.dateRead|timeago}})
-                      </span>
-                    </small>
-                  </div>
-                  <p>{{message.content}}</p>
-                </div>
+    </div>
+  </div>
+</div>
+<!-- <div *ngIf="username">
+  <ul
+    #scrollMe
+    style="overflow: scroll; height: 500px"
+    [scrollTop]="scrollMe.scrollHeight"
+    class="chat scroller"
+  >
+    <li *ngFor="let message of messageService.messageThread$ | async">
+      <div>
+        <div class="row">
+          <div class="col-xs-10">
+            <div class="chat-body">
+              <div class="header">
+                <small class="text-muted">
+                  <span class="fa fa-clock-o">
+                    {{ message.messageSent | timeago }}</span
+                  >
+                  <span
+                    *ngIf="
+                      !message.dateRead && message.senderUsername !== username
+                    "
+                    style="color: grey"
+                  >
+                    (unseen)
+                  </span>
+                  <span
+                    style="color: green"
+                    *ngIf="
+                      message.dateRead && message.senderUsername !== username
+                    "
+                  >
+                    (seen {{ message.dateRead | timeago }})
+                  </span>
+                </small>
               </div>
-              <div class="col-xs-2" style="display: flex;">
-                <span class="chat-img">
-                  <img src="{{message.senderPhotoUrl||'./assets/user.png'}}" class="rounded-circle" alt="{{message.senderUsername}}" />
-                </span>
-              </div>
+              <p>{{ message.content }}</p>
             </div>
-
           </div>
-        </li>
-      </ul>
-  </mat-card-content>
-  <mat-card-footer>
-    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
-      <mat-form-field style="width:100%">
-        <input type="text" matInput name="messageContent" required [(ngModel)]="messageContent">
-        <button color="primary" [disabled]="!messageForm.valid" matSuffix mat-icon-button type="submit">
-          <mat-icon
+          <div class="col-xs-2" style="display: flex">
+            <span class="chat-img">
+              <img
+                src="{{ message.senderPhotoUrl || './assets/user.png' }}"
+                class="rounded-circle"
+                alt="{{ message.senderUsername }}"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+    <mat-form-field style="width: 100%">
+      <input
+        type="text"
+        matInput
+        name="messageContent"
+        required
+        [(ngModel)]="messageContent"
+      />
+      <button
+        color="primary"
+        [disabled]="!messageForm.valid"
+        matSuffix
+        mat-icon-button
+        type="submit"
+      >
+        <mat-icon
           fontSet="fa"
           fontIcon="fa-paper-plane"
           style="font-size: 1.35rem"
         ></mat-icon>
-        </button>
-      </mat-form-field>
-    </form>
-  </mat-card-footer>
-</mat-card>
+      </button>
+    </mat-form-field>
+  </form>
+</div> -->
+<div *ngIf="username">
+  <div class="row" style="box-shadow: 0px .3px 0px  #606266;">
+    <div class="col-xs-1">
+      <img
+        src="{{ contact.photoUrl }}"
+        class="contact-avatar"
+        alt="{{ contact.knownAs }}"
+      />
+    </div>
+    <div class="col-xs-11">
+      <p style="font-size: 1.3rem; font-weight: 500;">
+        {{ contact.username }}
+      </p>
+      <p style="font-size: .8rem;font-weight: 300;color: #606266;">
+        Active {{ contact.lastActive | timeago }}
+      </p>
+    </div>
+  </div>
+  <ul
+    #scrollMe
+    style="overflow: scroll; height: 500px"
+    [scrollTop]="scrollMe.scrollHeight"
+    class="chat scroller"
+  >
+    <li *ngFor="let message of messageService.messageThread$ | async">
+      <div>
+        <div class="row">
+          <div class="col-xs-12">
+            <ng-container *ngIf="displaydate(message.messageSent) === true">
+              <br />
+              <span class="messagetime">{{
+                message.messageSent | timeago
+              }}</span>
+              <br />
+            </ng-container>
+            <div
+              *ngIf="message.senderUsername === username"
+              class="messagereceivedbody"
+            >
+              {{ message.content }}
+            </div>
+            <div
+              *ngIf="message.senderUsername != username"
+              class="messagesentbody"
+            >
+              <div class="messagetext">
+                {{ message.content }}
+              </div>
+              <i *ngIf="message.dateRead" class="bi bi-check seen"></i>
+              <i *ngIf="!message.dateRead" class="bi bi-check-all sent"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <input
+        type="text"
+        matInput
+        name="messageContent"
+        appearance="outline"
+        [(ngModel)]="messageContent"
+      />
+      <button color="primary" matSuffix mat-icon-button type="submit">
+        <mat-icon
+          fontSet="fa"
+          fontIcon="fa-paper-plane"
+          style="font-size: 1.35rem"
+        ></mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</div>

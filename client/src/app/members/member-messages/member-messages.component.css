@@ -7,7 +7,6 @@
 .chat li {
   margin-bottom: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px dotted #B3A9A9;
 }
 
 .rounded-circle {
@@ -15,7 +14,7 @@
   border-radius: 50%;
 }
 
-.chat-img{
+.chat-img {
   margin-left: auto;
 }
 
@@ -23,7 +22,7 @@
   width: 100%;
   height: 200px;
   overflow-y: scroll;
-  overflow-x:auto;
+  overflow-x: auto;
 }
 
 /* width */
@@ -45,4 +44,58 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #3f51b5;
+}
+.messagesentbody {
+  max-width: 50%;
+  padding: 10px 10px;
+  margin: 3px;
+  float: right;
+  clear: right;
+  background-color: #3f51b5;
+  border-radius: 14px;
+  color: white;
+  line-height: 20px;
+  font-size: 0.9375rem;
+}
+
+.seen {
+  color: white;
+  float: right;
+}
+.sent {
+  color: white;
+  float: right;
+}
+
+.messagereceivedbody {
+  max-width: 50%;
+  padding: 10px 10px;
+  margin: 3px;
+  float: left;
+  clear: left;
+  background-color: #e4e6eb;
+  border-radius: 14px;
+  color: #050505;
+  line-height: 20px;
+  font-size: 0.9375rem;
+}
+
+.messagetime {
+  display: table;
+  margin: 0 auto;
+}
+
+.mdc-notched-outline__leading {
+  border-radius: 55px 0 0 55px !important;
+  min-width: 28px !important;
+}
+
+.mdc-notched-outline__trailing {
+  border-radius: 0 55px 55px 0 !important;
+}
+
+.contact-avatar {
+  border-radius: 50%;
+  max-width: 100%;
+  max-height: 100%;
 }

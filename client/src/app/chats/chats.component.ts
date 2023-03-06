@@ -31,7 +31,6 @@ export class ChatsComponent implements OnInit {
   }
 
   openChat(username: string){
-    console.log(username);
     this.openchatusername = username;
   }
 }
