@@ -37,7 +37,7 @@ namespace API.Data
                 users = follows.Select(follow => follow.SourceUser);
             }
 
-            var followedUsers = users.Select(user => new FollowDto
+            var followedUsers = users.Where(u => u.UserName != "admin").Select(user => new FollowDto
             {
                 Username = user.UserName,
                 KnownAs = user.KnownAs,

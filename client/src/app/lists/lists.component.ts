@@ -12,9 +12,9 @@ export class ListsComponent implements OnInit {
   members: Partial<Member[]>;
   predicate = 'followed';
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 8;
   pagination: Pagination;
-  pageSizeOptions = [5, 10, 25];
+  pageSizeOptions = [8, 16, 32];
 
   constructor(private memberService: MembersService) {}
   ngOnInit(): void {

@@ -68,6 +68,10 @@
   cursor: pointer;
 }
 
+.mat-mdc-card{
+  border-radius: 13px;
+}
+
 .mat-mdc-card-content {
   display: flex;
   flex-direction: column;
