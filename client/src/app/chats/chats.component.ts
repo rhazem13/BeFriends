@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConfirmService } from './../services/confirm.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Message } from '../models/message';
@@ -15,6 +15,7 @@ export class ChatsComponent implements OnInit {
   displayedColumns: string[] = ['fromto', 'Message', 'sentreceived', 'seen'];
   loading = false;
   openchatusername;
+  searchContact;
 
   constructor(private messageService: MessageService) {}
 
@@ -30,7 +31,9 @@ export class ChatsComponent implements OnInit {
     });
   }
 
-  openChat(username: string){
+  openChat(username: string) {
     this.openchatusername = username;
   }
+
+  searchContacts() {}
 }
