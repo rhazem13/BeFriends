@@ -56,6 +56,7 @@
   color: white;
   line-height: 20px;
   font-size: 0.9375rem;
+  margin-right: 2rem;
 }
 
 .seen {
@@ -78,6 +79,7 @@
   color: #050505;
   line-height: 20px;
   font-size: 0.9375rem;
+  margin-left: 2rem;
 }
 
 .messagetime {

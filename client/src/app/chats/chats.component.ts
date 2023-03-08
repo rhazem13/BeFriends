@@ -1,8 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ConfirmService } from './../services/confirm.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { Message } from '../models/message';
-import { Pagination } from '../models/pagination';
 import { MessageService } from '../services/message.service';
 import { Chat } from '../models/chat';
 @Component({
@@ -35,5 +31,7 @@ export class ChatsComponent implements OnInit {
     this.openchatusername = username;
   }
 
-  searchContacts() {}
+  searchContacts() {
+    console.log(this.searchContact);
+  }
 }
