@@ -18,6 +18,8 @@ namespace API.Data
 
         public IFollowsRepository FollowsRepository => new FollowsRepository(context);
 
+        public IPostsRepository PostsRepository => new PostsRepository(context);
+
         public async Task<bool> Complete()
         {
             return await context.SaveChangesAsync() > 0;

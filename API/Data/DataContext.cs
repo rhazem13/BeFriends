@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System.ComponentModel;
+using System.Reflection.Emit;
 
 namespace API.Data
 {
@@ -25,6 +26,8 @@ namespace API.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<UserPostLike> UserPostsLikes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -61,6 +64,28 @@ namespace API.Data
                 .HasOne(u=>u.Sender)
                 .WithMany(m=>m.MessagesSent)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<UserPostLike>()
+                .HasKey(like=> new {like.PostId, like.UserId});
+            builder.Entity<UserPostLike>()
+            .HasOne(like => like.Post)
+            .WithMany(post => post.UserPostLikes)
+            .HasForeignKey(like => like.PostId);
+
+            builder.Entity<UserPostLike>()
+                .HasOne(like => like.User)
+                .WithMany(user => user.UserPostLikes)
+                .HasForeignKey(like => like.UserId);
+
+            builder.Entity<Post>()
+            .HasMany(post => post.Comments)
+            .WithOne(comment => comment.Post)
+            .HasForeignKey(comment => comment.PostId);
+
+            builder.Entity<Comment>()
+            .HasOne(comment => comment.User)
+            .WithMany(user => user.Comments)
+            .HasForeignKey(comment => comment.UserId);
         }
     }
 }

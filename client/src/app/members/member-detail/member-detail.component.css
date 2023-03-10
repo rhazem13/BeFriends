@@ -1,0 +1,14 @@
+.card-content{
+  align-items: center;
+}
+.card-img{
+  width: 100%;
+  max-width: 20rem;
+  border-radius: 50%;
+}
+
+.card-name{
+  margin-top: 1rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
