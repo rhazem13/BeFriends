@@ -25,6 +25,12 @@ namespace API.Helpers
             CreateMap<Message, ChatDto>()
                 .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url));
+            CreateMap<Post, GetPostDto>()
+                .ForMember(dest => dest.PosterUserName, opt => opt.MapFrom(src => src.PosterUsername))
+                .ForMember(dest => dest.PosterKnownAs, opt => opt.MapFrom(src => src.Poster.KnownAs))
+                .ForMember(dest => dest.PosterPhotoUrl, opt => opt.MapFrom(src => src.Poster.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.UserPostLikes.Count()))
+                .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments.Count()));
         }
     }
 }

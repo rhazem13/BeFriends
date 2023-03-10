@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int PosterId { get; set; }
+        public string PosterUsername { get; set; }
         public AppUser Poster { get; set; }
         public string Content { get; set; }
         public string? ContentImageUrl { get; set; }

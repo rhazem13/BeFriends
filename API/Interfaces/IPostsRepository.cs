@@ -6,7 +6,7 @@ namespace API.Interfaces
     public interface IPostsRepository
     {
         public Task<List<Post>> GetPostsAsync(int userId);
-        public Post CreatePostAsync(CreatePostDto post,int PosterId);
+        public Post CreatePostAsync(CreatePostDto post,int PosterId, string PosterUserName);
         public void LikePost(Post post, int userId);
         public void UnLikePost(Post post, int userId);
         public Post? GetPostById(int id);

@@ -2,6 +2,7 @@
 using API.Entities;
 using API.Extensions;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,24 +12,28 @@ namespace API.Controllers
     public class PostController : BaseApiController
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
 
-        public PostController(IUnitOfWork unitOfWork)
+        public PostController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<List<Post>> GetPostsAsync()
+        public async Task<List<GetPostDto>> GetPostsAsync()
         {
             int userId = User.GetUserId();
-            return await unitOfWork.PostsRepository.GetPostsAsync(userId);
+            var result =  await unitOfWork.PostsRepository.GetPostsAsync(userId);
+            return mapper.Map<List<GetPostDto>>(result);
         }
 
         [HttpPost]
         public ActionResult<Post> CreatePostAsync(CreatePostDto createPostDto)
         {
             int userId = User.GetUserId();
-            var result =  unitOfWork.PostsRepository.CreatePostAsync(createPostDto, userId);
+            string posterUsername = User.GetUsername();
+            var result =  unitOfWork.PostsRepository.CreatePostAsync(createPostDto, userId,posterUsername);
             if(unitOfWork.Complete().Result)
                 return Ok(result);
             return BadRequest(result);
@@ -67,7 +72,5 @@ namespace API.Controllers
                 return Ok();
             return BadRequest();
         }
-        
-
     }
 }

@@ -27,11 +27,12 @@ namespace API.Data
             return comment;
         }
 
-        public Post CreatePostAsync(CreatePostDto createPostDto, int PosterId)
+        public Post CreatePostAsync(CreatePostDto createPostDto, int PosterId, string PosterUserName)
         {
             Post post = new Post
             {
                 PosterId = PosterId,
+                PosterUsername = PosterUserName,
                 Content = createPostDto.Content,
                 ContentImageUrl = createPostDto.ContentImageUrl,
                 Posted = DateTime.UtcNow
@@ -55,6 +56,10 @@ namespace API.Data
                 .Where(joinResult=>joinResult.Follow.SourceUserId== userId)
                 .Select(joinResult=>joinResult.Post)
                 .OrderByDescending(r=>r.Posted)
+                .Include(p=>p.Poster)
+                .ThenInclude(p=>p.Photos)
+                .Include(p=>p.UserPostLikes)
+                .Include(p=>p.Comments)
                 .ToListAsync();
         }
 
