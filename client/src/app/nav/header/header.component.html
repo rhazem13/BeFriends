@@ -14,7 +14,7 @@
       >
       <a
         *ngIf="accountService.currentUser$ | async"
-        routerLink="/members"
+        routerLink="/feed"
         class="applogo"
         >BeFriends</a
       >
@@ -26,6 +26,13 @@
       class="container justify-content-center align-items-center"
     >
       <ng-container *ngIf="accountService.currentUser$ | async">
+        <a
+          mat-button
+          routerLink="/feed"
+          routerLinkActive="activebutton"
+          class="roundedbutton"
+          ><mat-icon class="fa fa-home icon-display"></mat-icon
+        ></a>
         <a
           mat-button
           routerLink="/members"

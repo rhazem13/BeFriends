@@ -1,3 +1,4 @@
+import { FeedComponent } from './feed/feed.component';
 import { LoginComponent } from './login/login.component';
 import { ChatsComponent } from './chats/chats.component';
 import { AdminGuard } from './guards/admin.guard';
@@ -37,6 +38,7 @@ const routes: Routes = [
         component: MemberEditComponent,
         canDeactivate: [PreventUnsavedChangesGuard],
       },
+      { path: 'feed', component: FeedComponent },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'chats', component: ChatsComponent },

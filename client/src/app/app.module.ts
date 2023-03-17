@@ -38,6 +38,7 @@ import { ChatsComponent } from './chats/chats.component';
 import { HeaderComponent } from './nav/header/header.component';
 import { SidenavListComponent } from './nav/sidenav-list/sidenav-list.component';
 import { LoginComponent } from './login/login.component';
+import { FeedComponent } from './feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { LoginComponent } from './login/login.component';
     HeaderComponent,
     SidenavListComponent,
     LoginComponent,
+    FeedComponent,
   ],
   imports: [
     BrowserModule,

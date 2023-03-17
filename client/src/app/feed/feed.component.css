@@ -1,0 +1,20 @@
+.post-form {
+  padding: 1rem;
+}
+
+.post-textarea {
+  border: none;
+  border-radius: 2rem;
+  resize: none;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.custom-file-label::after {
+  content: "Browse";
+}
+
+.post-btn {
+  margin: 0.5rem;
+  background-color: #3f51b5 !important;
+  border-radius: 2rem;
+}
