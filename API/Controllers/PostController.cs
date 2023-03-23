@@ -13,11 +13,13 @@ namespace API.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly IPhotoService photoService;
 
-        public PostController(IUnitOfWork unitOfWork, IMapper mapper)
+        public PostController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
+            this.photoService = photoService;
         }
 
         [HttpGet]
@@ -29,12 +31,20 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Post> CreatePostAsync(CreatePostDto createPostDto)
+        public async Task<ActionResult<Post>> CreatePostAsync( [FromForm] string content, [FromForm] IFormFile image = null)
         {
             int userId = User.GetUserId();
             string posterUsername = User.GetUsername();
-            var result =  unitOfWork.PostsRepository.CreatePostAsync(createPostDto, userId,posterUsername);
-            if(unitOfWork.Complete().Result)
+            var createPostDto = new CreatePostDto();
+            createPostDto.Content = content;
+            if(image!= null)
+            {
+                var imgresult = await photoService.AddPhotoAsync(image);
+                if (imgresult.Error != null) return BadRequest(imgresult.Error.Message);
+                createPostDto.ContentImageUrl = imgresult.SecureUrl.AbsoluteUri;
+            }
+            var result = unitOfWork.PostsRepository.CreatePostAsync(createPostDto, userId, posterUsername);
+            if (unitOfWork.Complete().Result)
                 return Ok(result);
             return BadRequest(result);
         }

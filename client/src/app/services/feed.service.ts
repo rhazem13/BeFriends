@@ -13,4 +13,8 @@ export class FeedService {
   getPosts(){
     return this.http.get<getPost[]>(this.baseUrl + 'post');
   }
+
+  createPost(formdata){
+    return this.http.post(this.baseUrl + 'post',formdata)
+  }
 }
