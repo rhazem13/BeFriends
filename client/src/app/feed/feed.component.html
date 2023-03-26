@@ -1,6 +1,76 @@
-<div class="container">
-  <div class="col-xs-8 mx-auto" style="padding: 20px 50px">
-    <mat-card>
+<div class="row">
+  <div class="col-xs-4 sidenav">
+    <div class="row">
+      <div class="col-xs-7">
+        <div
+          class="row sidenavrowcontainer"
+          routerLink="/members/{{ user.username }}"
+        >
+          <div class="col-xs-1">
+            <img class="sidenavavatar" src="{{ user.photoUrl }}" />
+          </div>
+          <div class="col-xs-11 sidenavusername">{{ user.username }}</div>
+        </div>
+         <div class="row sidenavrowcontainer" routerLink="/member/edit">
+          <div class="col-xs-1">
+            <img draggable="false" height="36" width="36" alt="" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/rsrc.php/v3/yj/r/8OasGoQgQgF.png">
+          </div>
+          <div class="col-xs-11 sidenavusername">Edit profile</div>
+        </div>
+        <div class="row sidenavrowcontainer" routerLink="/lists">
+          <div class="col-xs-1">
+            <i
+              data-visualcompletion="css-img"
+              class=""
+              style="
+                background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/BHDNlEdwMgn.png');
+                background-position: 0px -296px;
+                background-size: auto;
+                width: 36px;
+                height: 36px;
+                background-repeat: no-repeat;
+                display: inline-block;
+              "
+            ></i>
+          </div>
+          <div class="col-xs-11 sidenavusername">Following</div>
+        </div>
+
+        <div class="row sidenavrowcontainer" (click)="refreshPage()">
+          <div class="col-xs-1">
+            <img draggable="false" height="36" width="36" alt="" referrerpolicy="origin-when-cross-origin" src="https://static.xx.fbcdn.net/rsrc.php/v3/yb/r/eECk3ceTaHJ.png">
+          </div>
+          <div class="col-xs-11 sidenavusername">Most recent</div>
+        </div>
+        <div class="row sidenavrowcontainer" routerLink="/chats">
+          <div class="col-xs-1">
+            <i
+              data-visualcompletion="css-img"
+              class=""
+              style="
+                background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/y0/r/CQd7aGaFAXB.png');
+                background-position: 0px -37px;
+                background-size: auto;
+                width: 36px;
+                height: 36px;
+                background-repeat: no-repeat;
+                display: inline-block;
+              "
+            ></i>
+          </div>
+          <div class="col-xs-11 sidenavusername">Messages</div>
+        </div>
+        <div class="row sidenavrowcontainer" routerLink="/messages">
+          <div class="col-xs-1">
+            <i data-visualcompletion="css-img" class="" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yU/r/BHDNlEdwMgn.png&quot;); background-position: 0px -444px; background-size: auto; width: 36px; height: 36px; background-repeat: no-repeat; display: inline-block;"></i>
+          </div>
+          <div class="col-xs-11 sidenavusername">Messages History</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <mat-card class="createpost">
       <div class="row">
         <div class="col-xs-2">
           <img
@@ -44,10 +114,10 @@
                         "
                       ></i
                     ></label>
-                    <span *ngIf=
-        "selectedFile !== null">{{ selectedFile.name }}</span>
+                    <span *ngIf="selectedFile !== null">{{
+                      selectedFile.name
+                    }}</span>
                   </div>
-
                 </div>
               </div>
               <div class="col-xs-4">
@@ -64,48 +134,46 @@
         </div>
       </div>
     </mat-card>
-  </div>
+    <div *ngFor="let post of posts" class="post">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image">
+            <img
+              src="{{ post.posterPhotoUrl }}"
+              style="width: 50px; height: 50px; border-radius: 50%"
+            />
+          </div>
+          <mat-card-title>{{ post.posterUserName }}</mat-card-title>
+          <mat-card-subtitle
+            >{{ post.posted | timeago }} · <i class="fa fa-user"></i
+          ></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p style="font-size: 1.1rem; padding: 0.5rem 0rem">
+            {{ post.content }}
+          </p>
+        </mat-card-content>
+        <img
+          *ngIf="post.contentImageUrl != null"
+          mat-card-image
+          style="max-height: 500px; width: auto; object-fit: cover"
+          src="{{ post.contentImageUrl }}"
+          alt="Photo of a Shiba Inu"
+        />
 
-  <div
-    *ngFor="let post of posts"
-    style="padding: 10px 50px"
-    class="col-xs-8 mx-auto"
-  >
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image">
-          <img
-            src="{{ post.posterPhotoUrl }}"
-            style="width: 50px; height: 50px; border-radius: 50%"
-          />
-        </div>
-        <mat-card-title>{{ post.posterUserName }}</mat-card-title>
-        <mat-card-subtitle>{{ post.posted | timeago }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p style="font-size: 1.1rem; padding: 0.5rem 0rem">
-          {{ post.content }}
-        </p>
-      </mat-card-content>
-      <img
-        *ngIf="post.contentImageUrl != null"
-        mat-card-image
-        style="max-height: 500px; width: auto; object-fit: cover"
-        src="{{ post.contentImageUrl }}"
-        alt="Photo of a Shiba Inu"
-      />
-
-      <mat-card-actions>
-        <button style="width: 100%" mat-button>
-          <i class="fa fa-thumbs-up"></i>Like
-        </button>
-        <button style="width: 100%" mat-button>
-          <i class="fa fa-comment"></i>Comment
-        </button>
-        <button style="width: 100%" mat-button>
-          <i class="fa fa-share"></i>Share
-        </button>
-      </mat-card-actions>
-    </mat-card>
+        <mat-card-actions>
+          <button style="width: 100%" mat-button>
+            <i class="fa fa-thumbs-up"></i>Like
+          </button>
+          <button style="width: 100%" mat-button>
+            <i class="fa fa-comment"></i>Comment
+          </button>
+          <button style="width: 100%" mat-button>
+            <i class="fa fa-share"></i>Share
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
+  <div class="col-xs-4"></div>
 </div>

@@ -18,3 +18,40 @@
   background-color: #3f51b5 !important;
   border-radius: 2rem;
 }
+
+.createpost{
+  margin-top:2rem;
+  margin-bottom:2rem;
+}
+
+.post{
+  margin-bottom: 2rem;
+}
+
+.sidenav{
+  margin-top: 1.5rem;
+  margin-left: 1rem;
+}
+
+.sidenavavatar{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.sidenavusername{
+  font-size: 15px;
+  font-weight: 500;
+  align-self: center;
+  padding-left: 25px;
+}
+
+.sidenavrowcontainer{
+  padding: 8px 8px;
+  border-radius: 5px;
+}
+
+.sidenavrowcontainer:hover{
+  background-color: #E4E6E9;
+  cursor: pointer;
+}

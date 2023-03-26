@@ -34,6 +34,10 @@ export class FeedComponent implements OnInit {
     });
   }
 
+  refreshPage(){
+    location.reload();
+  }
+
   // called when a file is selected from input element
   onFileSelected(event): void {
     this.selectedFile = event.target.files[0];
