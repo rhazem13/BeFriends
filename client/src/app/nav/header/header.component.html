@@ -1,7 +1,9 @@
   <div class="row navbarcontainer">
-    <div class="col-xs-4 navbarlogo">
+    <div class="col-xs-4 ">
       <div fxHide.xs>
-        <a routerLink="/" class="applogo">BeFriends</a>
+        <a routerLink="/" class="applogo">
+          <img class="navlogo" src="./assets/logo.png">
+        </a>
       </div>
     </div>
     <div class="col-xs-4">
@@ -61,7 +63,7 @@
             >
               <button mat-button [matMenuTriggerFor]="menu">
                 <img
-                  class="img-circle"
+                  class="img-circle userphoto"
                   src="{{ user.photoUrl || './assets/user.png' }}"
                   alt="{{ user.username }}"
                 />

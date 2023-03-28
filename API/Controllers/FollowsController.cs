@@ -1,4 +1,5 @@
-﻿using API.DTOs;
+﻿using API.Data;
+using API.DTOs;
 using API.Extensions;
 using API.Helpers;
 using API.Interfaces;
@@ -11,10 +12,12 @@ namespace API.Controllers
     public class FollowsController : BaseApiController
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly DataContext context;
 
-        public FollowsController(IUnitOfWork unitOfWork)
+        public FollowsController(IUnitOfWork unitOfWork, DataContext context)
         {
             this.unitOfWork = unitOfWork;
+            this.context = context;
         }
 
         [HttpPost("{username}")]
@@ -57,6 +60,15 @@ namespace API.Controllers
         {
             followsParams.UserId = User.GetUserId();
             var users =  await unitOfWork.FollowsRepository.GetUserFollows(followsParams);
+            if (followsParams.Predicate == "followed")
+            {
+                users.ForEach(u => u.Followed = true);
+            }
+            else
+            {
+                users.ForEach(u => u.Followed = (context.Follows.Any(f => f.SourceUserId == User.GetUserId() && f.FollowedUserId == u.Id)));
+            }
+
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(users);
         }

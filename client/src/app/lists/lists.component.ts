@@ -19,6 +19,7 @@ export class ListsComponent implements OnInit {
   constructor(private memberService: MembersService) {}
   ngOnInit(): void {
     this.loadFollows();
+
   }
 
   loadFollows() {
@@ -27,6 +28,8 @@ export class ListsComponent implements OnInit {
       .subscribe((response) => {
         this.members = response.result;
         this.pagination = response.pagination;
+    console.log(this.members[0].followed);
+
       });
   }
 

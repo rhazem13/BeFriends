@@ -28,6 +28,8 @@ export class MemberListComponent implements OnInit {
       .subscribe((response) => {
         this.members = response.result;
         this.pagination = response.pagination;
+    console.log(this.members[0].followed);
+
       });
   }
 
