@@ -6,6 +6,8 @@ import { User } from '../models/user';
 import { AccountService } from '../services/account.service';
 import { take } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { Chat } from '../models/chat';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-feed',
@@ -16,10 +18,13 @@ export class FeedComponent implements OnInit {
   user: User;
   selectedFile: File = null;
   content: string = '';
+  chats: Chat[] = [];
+
   constructor(
     private feedService: FeedService,
     private accountService: AccountService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private messageService: MessageService
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -28,13 +33,19 @@ export class FeedComponent implements OnInit {
   posts: getPost[] = [];
 
   ngOnInit(): void {
+    this.loadChats();
+
     this.feedService.getPosts().subscribe((posts) => {
       this.posts = posts;
       console.log(posts);
     });
   }
-
-  refreshPage(){
+  loadChats() {
+    return this.messageService.getChats().subscribe((response) => {
+      this.chats = response;
+    });
+  }
+  refreshPage() {
     location.reload();
   }
 

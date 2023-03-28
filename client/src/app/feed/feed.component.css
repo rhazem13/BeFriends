@@ -20,7 +20,7 @@
 }
 
 .createpost{
-  margin-top:2rem;
+  margin-top:1.5rem;
   margin-bottom:2rem;
 }
 
@@ -30,7 +30,7 @@
 
 .sidenav{
   margin-top: 1.5rem;
-  margin-left: 1rem;
+  padding-left: 20px;
 }
 
 .sidenavavatar{
@@ -54,4 +54,13 @@
 .sidenavrowcontainer:hover{
   background-color: #E4E6E9;
   cursor: pointer;
+}
+
+.contactscontainer{
+  margin-top: 1rem;
+}
+
+.contactslabel{
+  color: #65676B;
+  font-size: 17px;
 }
