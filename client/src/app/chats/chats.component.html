@@ -1,59 +1,48 @@
-
-
-<div
-  class="container"
-  style="
-    margin-top: 50px;
-    background-color: white;
-    border-radius: 13px;
-    height: 680px;
-  "
->
+<div class="chatscontainer">
   <div class="row">
-    <div class="col-xs-4" style="padding: 2rem">
-      <div>
-        <div class="col">
-          <div class="row-xs-2">
-            <h2 style="font-size: 1.5rem; font-weight: 500">Chats</h2>
-            <form
-              #messageForm="ngForm"
-              (ngSubmit)="searchContacts()"
-              autocomplete="off"
-            >
-
-              <mat-form-field appearance="outline" style="width: 100%;">
-                <input
-                  type="text"
-                  matInput
-                  name="messageContent"
-                  appearance="outline"
-                  [(ngModel)]="searchContact"
-                />
-                <button
-                  color="primary"
-                  matSuffix
-                  mat-icon-button
-                  type="submit"
-                  style="margin-right: 0.7rem"
-                >
-                  <mat-icon fontSet="fa" fontIcon="fa-search"></mat-icon>
-                </button>
-              </mat-form-field>
-            </form>
-          </div>
+    <div class="col-xs-3 leftmenucontainer">
+      <div class="col">
+        <div class="row-xs-2">
+          <h2 style="font-size: 1.5rem; font-weight: 550">Chats</h2>
+          <form
+            #messageForm="ngForm"
+            (ngSubmit)="searchContacts()"
+            autocomplete="off"
+          >
+            <div class="input-group mb-3">
+              <div class="input-group-append">
+                <span
+                  style="
+                    height: 100%;
+                    color: #65676b;
+                    border-radius: 30px 0px 0px 30px;
+                    background-color: #f3f3f5;
+                    border: 0px solid black;
+                  "
+                  class="input-group-text"
+                  ><i class="fa fa-search"></i
+                ></span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search Contacts"
+                style="
+                  border-radius: 0px 30px 30px 0px;
+                  background-color: #f3f3f5;
+                  border: 0px solid black;
+                "
+              />
+            </div>
+          </form>
         </div>
       </div>
       <div
         *ngFor="let chat of chats"
         class="chatrow"
-        [ngClass]="{ 'activeChat': chat.contactUsername === openchatusername }"
-        style="width: 100%;padding: 0rem 0.3rem;"
+        [ngClass]="{ activeChat: chat.contactUsername === openchatusername }"
       >
-        <div
-          class="row"
-          style="margin-bottom: 10px"
-          (click)="openChat(chat.contactUsername)"
-        >
+        <div class="row" (click)="openChat(chat.contactUsername)">
           <div class="col-xs-2">
             <img
               class="chat-avatar"
@@ -63,14 +52,15 @@
           </div>
           <div class="col-xs-10">
             <div class="col">
-              <div class="row-xs-6" style="padding: 0px !important;">
+              <div class="row-xs-6">
                 <div class="row">
                   <div
                     class="col-xs-8"
-                    style="font-size: 1.1rem; font-weight: 500;"
+                    style="font-size: 1.1rem; font-weight: 500"
                   >
-                  <p style="margin: 0;">{{ chat.contactUsername | titlecase | slice : 0 : 10 }}</p>
-
+                    <p style="margin: 0">
+                      {{ chat.contactUsername | titlecase | slice : 0 : 10 }}
+                    </p>
                   </div>
                   <div class="col-xs-4" style="color: gray">
                     <p style="float: right">
@@ -79,7 +69,7 @@
                   </div>
                 </div>
               </div>
-              <div class="row-xs-6" style="color: gray;">
+              <div class="row-xs-6" style="color: gray">
                 {{ chat.content | slice : 0 : 48 }}
                 <i
                   *ngIf="chat.dateRead"
@@ -97,8 +87,12 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-8" style="padding-top: 2rem;padding-right: 2rem;padding-left: .5rem;">
+    <div
+      class="col-xs-8"
+      style="padding-top: 2rem; padding-right: 2rem; padding-left: 0.5rem"
+    >
       <app-member-messages [username]="openchatusername"></app-member-messages>
     </div>
   </div>
 </div>
+

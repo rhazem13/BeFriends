@@ -17,7 +17,6 @@ export class ChatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadChats();
-
   }
 
   loadChats() {
