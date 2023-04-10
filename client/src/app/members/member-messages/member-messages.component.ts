@@ -33,7 +33,6 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   contact: Member;
   latestDate?: Date = null;
   // emoji
-  message: string = '';
   emoji: string = '';
 
   selectEmoji(event: any) {

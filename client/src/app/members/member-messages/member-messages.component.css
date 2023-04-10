@@ -38,12 +38,12 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #3f51b5;
+  background: #0084FF;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #3f51b5;
+  background: #0084FF;
 }
 .messagesentbody {
   max-width: 50%;
@@ -51,7 +51,7 @@
   margin: 3px;
   float: right;
   clear: right;
-  background-color: #3f51b5;
+  background-color: #0084FF;
   border-radius: 14px;
   color: white;
   line-height: 20px;
