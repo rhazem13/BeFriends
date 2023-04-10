@@ -3,8 +3,8 @@
     <mat-card>
       <img mat-card-image src="{{ photo.url }}" alt="{{ photo.url }}" />
       <mat-card-content class="fab-buttons">
-        <button *ngIf="photo.isMain" mat-raised-button color="primary">Main</button>
-        <button *ngIf="!photo.isMain" mat-stroked-button color="primary" (click)="setMainPhoto(photo)">Main</button>
+        <button *ngIf="photo.isMain" mat-raised-button style="background-color: #0084FF;color:white">Main</button>
+        <button *ngIf="!photo.isMain" mat-stroked-button style="background-color: #0084FF;color:white" (click)="setMainPhoto(photo)">Main</button>
         <button mat-mini-fab color="warn" style="border-radius: 3cm" [disabled]="photo.isMain" (click)="deletePhoto(photo.id)">
           <mat-icon
             fontSet="fa"
@@ -64,7 +64,7 @@
     <div>
       <button
         mat-raised-button
-        color="primary"
+        style="background-color: #0084FF;color:white"
         type="button"
         class="btn btn-success btn-s"
         (click)="uploader.uploadAll()"

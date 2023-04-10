@@ -4,11 +4,7 @@
       <div class="col">
         <div class="row-xs-2">
           <h2 style="font-size: 1.5rem; font-weight: 550">Chats</h2>
-          <form
-            #messageForm="ngForm"
-            (ngSubmit)="searchContacts()"
-            autocomplete="off"
-          >
+
             <div class="input-group mb-3">
               <div class="input-group-append">
                 <span
@@ -25,6 +21,9 @@
               </div>
               <input
                 type="text"
+                name="search"
+                [(ngModel)]="searchContact"
+                (input)="filterContacts(searchContact)"
                 class="form-control"
                 placeholder="Search Contacts"
                 style="
@@ -34,11 +33,10 @@
                 "
               />
             </div>
-          </form>
         </div>
       </div>
       <div
-        *ngFor="let chat of chats"
+        *ngFor="let chat of filteredchats"
         class="chatrow"
         [ngClass]="{ activeChat: chat.contactUsername === openchatusername }"
       >

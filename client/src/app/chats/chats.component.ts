@@ -8,9 +8,10 @@ import { Chat } from '../models/chat';
 })
 export class ChatsComponent implements OnInit {
   chats: Chat[] = [];
+  filteredchats: Chat[] = [];
   displayedColumns: string[] = ['fromto', 'Message', 'sentreceived', 'seen'];
   loading = false;
-  openchatusername='lancaster';
+  openchatusername = 'lancaster';
   searchContact;
 
   constructor(private messageService: MessageService) {}
@@ -23,6 +24,7 @@ export class ChatsComponent implements OnInit {
     this.loading = true;
     return this.messageService.getChats().subscribe((response) => {
       this.chats = response;
+      this.filteredchats=response;
       this.loading = false;
     });
   }
@@ -31,7 +33,14 @@ export class ChatsComponent implements OnInit {
     this.openchatusername = username;
   }
 
-  searchContacts() {
-    console.log(this.searchContact);
+  filterContacts(searchContact) {
+    console.log(searchContact);
+    // write the logic to filter this.chats based on searchContact
+    this.filteredchats = this.chats.filter((chat) => {
+      return chat.contactUsername
+        .toLowerCase()
+        .includes(this.searchContact.toLowerCase());
+    });
+
   }
 }
