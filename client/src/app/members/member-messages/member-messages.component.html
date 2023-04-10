@@ -13,85 +13,9 @@
     </div>
   </div>
 </div>
-<!-- <div *ngIf="username">
-  <ul
-    #scrollMe
-    style="overflow: scroll; height: 500px"
-    [scrollTop]="scrollMe.scrollHeight"
-    class="chat scroller"
-  >
-    <li *ngFor="let message of messageService.messageThread$ | async">
-      <div>
-        <div class="row">
-          <div class="col-xs-10">
-            <div class="chat-body">
-              <div class="header">
-                <small class="text-muted">
-                  <span class="fa fa-clock-o">
-                    {{ message.messageSent | timeago }}</span
-                  >
-                  <span
-                    *ngIf="
-                      !message.dateRead && message.senderUsername !== username
-                    "
-                    style="color: grey"
-                  >
-                    (unseen)
-                  </span>
-                  <span
-                    style="color: green"
-                    *ngIf="
-                      message.dateRead && message.senderUsername !== username
-                    "
-                  >
-                    (seen {{ message.dateRead | timeago }})
-                  </span>
-                </small>
-              </div>
-              <p>{{ message.content }}</p>
-            </div>
-          </div>
-          <div class="col-xs-2" style="display: flex">
-            <span class="chat-img">
-              <img
-                src="{{ message.senderPhotoUrl || './assets/user.png' }}"
-                class="rounded-circle"
-                alt="{{ message.senderUsername }}"
-              />
-            </span>
-          </div>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
-    <mat-form-field style="width: 100%">
-      <input
-        type="text"
-        matInput
-        name="messageContent"
-        required
-        [(ngModel)]="messageContent"
-      />
-      <button
-        color="primary"
-        [disabled]="!messageForm.valid"
-        matSuffix
-        mat-icon-button
-        type="submit"
-      >
-        <mat-icon
-          fontSet="fa"
-          fontIcon="fa-paper-plane"
-          style="font-size: 1.35rem"
-        ></mat-icon>
-      </button>
-    </mat-form-field>
-  </form>
-</div> -->
 <div *ngIf="username">
   <div class="row" style="box-shadow: 0px .3px 0px  #606266;margin-bottom: 1rem;">
-    <div class="col-xs-1">
+    <div style="width:50px">
       <img
         src="{{ contact.photoUrl }}"
         class="contact-avatar"
@@ -99,17 +23,17 @@
       />
     </div>
     <div class="col-xs-11">
-      <p style="font-size: 1.3rem; font-weight: 500;margin-bottom: 0px;">
+      <p style="font-size: 15px; font-weight: 500;margin-bottom: 0px;">
         {{ contact.username }}
       </p>
-      <p style="font-size: .8rem;font-weight: 300;color: #606266;">
+      <p style="font-size: 13px;font-weight: 300;color: #606266;">
         Active {{ contact.lastActive | timeago }}
       </p>
     </div>
   </div>
   <ul
     #scrollMe
-    style="overflow: scroll; height: 500px"
+    style="overflow: scroll; height: calc(100vh - 240px)"
     [scrollTop]="scrollMe.scrollHeight"
     class="chat scroller"
   >
@@ -145,7 +69,7 @@
       </div>
     </li>
   </ul>
-  <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+  <!-- <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
     <mat-form-field appearance="outline" style="width: 100%">
       <input
         type="text"
@@ -162,5 +86,40 @@
         ></mat-icon>
       </button>
     </mat-form-field>
-  </form>
+  </form> -->
+<form
+            #messageForm="ngForm"
+            (ngSubmit)="sendMessage()"
+            autocomplete="off"
+          >
+            <div class="input-group mb-3">
+
+              <input
+                type="text"
+                matInput
+        name="messageContent"
+        [(ngModel)]="messageContent"
+                class="form-control"
+                placeholder="Aa"
+                style="
+                  border-radius: 30px 0px 0px 30px;
+                  background-color: #f3f3f5;
+                  border: 0px solid black;
+                "
+              />
+              <div class="input-group-append">
+                <span
+                  style="
+                    height: 100%;
+                    color: #65676b;
+                    border-radius: 0px 30px 30px 0px;
+                    background-color: #f3f3f5;
+                    border: 0px solid black;
+                  "
+                  class="input-group-text"
+                  ><i style="color:blue" class="fa fa-send"></i
+                ></span>
+              </div>
+            </div>
+          </form>
 </div>

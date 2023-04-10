@@ -43,22 +43,22 @@
         [ngClass]="{ activeChat: chat.contactUsername === openchatusername }"
       >
         <div class="row" (click)="openChat(chat.contactUsername)">
-          <div class="col-xs-2">
+          <div class="col-xs-2 chat-avatar-container">
             <img
               class="chat-avatar"
               src="{{ chat.contactPhotoUrl || './assets/user.png' }}"
               alt="{{ chat.contactUsername }}"
             />
           </div>
-          <div class="col-xs-10">
+          <div class="col-xs-10 chat-content-container">
             <div class="col">
               <div class="row-xs-6">
-                <div class="row">
+                <div class="row" style="height: 22px;">
                   <div
                     class="col-xs-8"
-                    style="font-size: 1.1rem; font-weight: 500"
+                    style="font-size: 15px; font-weight: 500"
                   >
-                    <p style="margin: 0">
+                    <p style="margin: 0;padding:0">
                       {{ chat.contactUsername | titlecase | slice : 0 : 10 }}
                     </p>
                   </div>
@@ -88,7 +88,7 @@
       </div>
     </div>
     <div
-      class="col-xs-8"
+      class="col-xs-9"
       style="padding-top: 2rem; padding-right: 2rem; padding-left: 0.5rem"
     >
       <app-member-messages [username]="openchatusername"></app-member-messages>

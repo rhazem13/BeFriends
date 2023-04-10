@@ -10,7 +10,7 @@ export class ChatsComponent implements OnInit {
   chats: Chat[] = [];
   displayedColumns: string[] = ['fromto', 'Message', 'sentreceived', 'seen'];
   loading = false;
-  openchatusername;
+  openchatusername='lancaster';
   searchContact;
 
   constructor(private messageService: MessageService) {}
