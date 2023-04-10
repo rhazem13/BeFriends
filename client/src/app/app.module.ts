@@ -39,6 +39,8 @@ import { HeaderComponent } from './nav/header/header.component';
 import { SidenavListComponent } from './nav/sidenav-list/sidenav-list.component';
 import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { FeedComponent } from './feed/feed.component';
     BrowserAnimationsModule,
     SharedModule,
     ReactiveFormsModule,
+    PickerModule,
+    EmojiModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

@@ -32,6 +32,16 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   user: User;
   contact: Member;
   latestDate?: Date = null;
+  // emoji
+  message: string = '';
+  emoji: string = '';
+
+  selectEmoji(event: any) {
+    const emoji = event.emoji;
+    this.messageContent += emoji.native;
+  }
+
+  //
 
   constructor(
     public messageService: MessageService,
@@ -52,7 +62,9 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   ngOnChanges() {
     this.messageService.stopHubConnection();
     this.messageService.createHubConnection(this.user, this.username);
-    this.memberService.getMember(this.username).subscribe(member=>this.contact=member)
+    this.memberService
+      .getMember(this.username)
+      .subscribe((member) => (this.contact = member));
   }
 
   sendMessage() {
