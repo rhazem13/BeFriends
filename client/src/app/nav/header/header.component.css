@@ -6,12 +6,15 @@ a:hover,
 a:active {
   color: lighgray;
 }
-.navlogo{
-  height: 35px;
-  margin-top: 12px;
-  margin-left: 20px;
-  width: 30%;
-  height: auto;
+.navlogo {
+  margin-left: 40px;
+  margin-top: 29px;
+}
+.navlogotext {
+  font-size: 50px;
+  font-family: "Black Han Sans";
+  font-weight: 100;
+
 }
 .navigation-items {
   list-style: none;
@@ -26,11 +29,7 @@ a:active {
 
 /* from nav */
 
-.loggedindiv {
-  display: flex;
-  align-items: center;
-  height: 80%;
-}
+
 
 .mat-form-field {
   display: flex;
@@ -44,17 +43,16 @@ a:active {
   font: 900;
 }
 
-.navbutton{
+.navbutton {
   height: 100%;
   width: 100%;
-  color:#171f48 !important;
+  color: #171f48 !important;
 }
 
 .activebutton {
   color: white !important;
-  border-bottom: 3px solid white;
+  border-bottom: 5px solid white;
   border-radius: 0px !important;
-
 }
 
 .loader-container {
@@ -62,21 +60,22 @@ a:active {
   width: 100%;
   z-index: 99;
 }
-
-.userphoto {
-  height: 40px;
-  width: 40px;
-  border: 2px solid #fff;
-  display: inline;
-}
-
-.img-circle {
-  max-height: 50px;
+.loggedindiv {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  margin-right: 0.6rem;
+  margin-right: 30px;
 }
+.userphoto {
+  height: 60px;
+  width: 60px;
+  margin-top: 22px;
+  margin-right: 16px;
+  border-radius: 50%;
+}
+
 .icon-display {
-  transform: scale(1.5);
+  transform: scale(2.5);
 }
 .mat-icon {
   vertical-align: middle;
@@ -96,9 +95,9 @@ a:active {
 }
 
 .navbarcontainer {
-  height: 56px;
-  background-color: #0084FF;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  height: 74px;
+  background-color: #0084ff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 0;
   left: 0;
@@ -106,12 +105,11 @@ a:active {
   z-index: 999;
 }
 
-.navbarlogo{
+.navbarlogo {
   padding-top: 17px;
   padding-left: 25px;
 }
 
-.navbarphotocontainer{
+.navbarphotocontainer {
   padding-top: 10px;
-
 }
