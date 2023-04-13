@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 @import '~@ctrl/ngx-emoji-mart/picker';
-@import "@fontsource/black-han-sans"; 
+@import "@fontsource/black-han-sans";
 
 html,
 body {
@@ -15,4 +15,32 @@ body {
 }
 .blurred {
   backdrop-filter: blur(5px);
+}
+
+.scroller {
+  width: 100%;
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0084FF;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0084FF;
 }

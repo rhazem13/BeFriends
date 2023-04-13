@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-4 d-none d-lg-block">
+  <div class="col-lg-3 d-none d-lg-block">
     <div class="row" class="leftsidecontainer">
       <div class="sidenav">
         <div
@@ -95,122 +95,170 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-12 col-md-6 col-lg-4">
-    <mat-card class="createpost">
-      <div class="row">
-        <div class="col-xs-2 col-md-1">
-          <img
-            src="{{ user.photoUrl || './assets/user.png' }}"
-            style="width: 90px; border-radius: 50%; padding: 1rem;"
-          />
-        </div>
-        <div class="col-xs-10 col-md-11">
-          <form class="post-form" (ngSubmit)="submitPost()">
-            <div class="form-group">
-              <textarea
-                class="form-control post-textarea"
-                rows="2"
-                placeholder="What's on your mind, {{ user.username }}?"
-                [(ngModel)]="content"
-                name="post-content"
-              ></textarea>
-            </div>
-            <hr />
+  <div class="col-xs-12 col-md-6 col-lg-6">
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-10">
+        <div>
+          <mat-card class="createpost">
             <div class="row">
-              <div class="col-xs-8">
-                <div class="form-group" >
-                  <div class="file-upload" >
-                    <input
-                      type="file"
-                      class="file-upload-input"
-                      id="imageUpload"
-                      name="imageUpload"
-                      (change)="onFileSelected($event)"
-                      #fileInput
-                      accept=".jpg,.png,.jpeg"
-                      style="display: none"
-                    />
-                    <label for="imageUpload"
-                      ><i
-                        class="fa fa-photo"
-                        style="
-                          color: #0084FF;
-                          font-size: 1.5rem;
-                          margin-left: 0.5rem;
-                        "
-                      ></i
-                    ></label>
-                    <span *ngIf="selectedFile !== null">{{
-                      selectedFile.name
-                    }}</span>
-                  </div>
-                </div>
+              <div class="col-xs-2 col-md-1">
+                <img
+                  src="{{ user.photoUrl || './assets/user.png' }}"
+                  style="width: 90px; border-radius: 50%; padding: 1rem"
+                />
               </div>
-              <div class="col-xs-4">
-                <button
-                  type="submit"
-                  class="btn btn-primary post-btn"
-                  style="float: right"
-                >
-                  Post <i class="fa fa-location-arrow"></i>
-                </button>
+              <div class="col-xs-10 col-md-11">
+                <form class="post-form" (ngSubmit)="submitPost()">
+                  <div class="form-group">
+                    <textarea
+                      class="form-control post-textarea"
+                      rows="2"
+                      placeholder="What's on your mind, {{ user.username }}?"
+                      [(ngModel)]="content"
+                      name="post-content"
+                    ></textarea>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-xs-8">
+                      <div class="form-group">
+                        <div class="file-upload">
+                          <input
+                            type="file"
+                            class="file-upload-input"
+                            id="imageUpload"
+                            name="imageUpload"
+                            (change)="onFileSelected($event)"
+                            #fileInput
+                            accept=".jpg,.png,.jpeg"
+                            style="display: none"
+                          />
+                          <label for="imageUpload"
+                            ><i
+                              class="fa fa-photo"
+                              style="
+                                color: #0084ff;
+                                font-size: 2.5rem;
+                                margin-left: 0.5rem;
+                                margin-top: -4px;
+                              "
+                            ></i
+                          ></label>
+                          <span *ngIf="selectedFile !== null">{{
+                            selectedFile.name
+                          }}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-4">
+                      <button
+                        type="submit"
+                        class="btn btn-primary post-btn"
+                        style="float: right"
+                      >
+                        Post <i class="fa fa-location-arrow"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-          </form>
+          </mat-card>
+          <div *ngFor="let post of posts" class="post">
+            <mat-card>
+              <mat-card-header>
+                <div mat-card-avatar>
+                  <img src="{{ post.posterPhotoUrl }}" class="posterphotourl" />
+                </div>
+                <mat-card-title class="postusername">{{
+                  post.posterUserName
+                }}</mat-card-title>
+                <mat-card-subtitle class="posttime"
+                  >{{ post.posted | timeago }} · <i class="fa fa-user"></i
+                ></mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="postcontent">
+                  {{ post.content }}
+                </p>
+              </mat-card-content>
+              <img
+                *ngIf="post.contentImageUrl != null"
+                mat-card-image
+                style="max-height: 500px; width: auto; object-fit: cover"
+                src="{{ post.contentImageUrl }}"
+                alt="Photo of a Shiba Inu"
+              />
+              <hr style="margin-bottom: 0px" />
+
+              <mat-card-actions>
+                <button style="width: 100%" mat-button>
+                  <i
+                    data-visualcompletion="css-img"
+                    class="x1b0d499 x1d69dk1"
+                    style="
+                      background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png');
+                      background-position: 0px -343px;
+                      background-size: auto;
+                      width: 18px;
+                      height: 18px;
+                      background-repeat: no-repeat;
+                      display: inline-block;
+                    "
+                  ></i>
+                  Like
+                </button>
+                <button style="width: 100%" mat-button>
+                  <i
+                    data-visualcompletion="css-img"
+                    class="x1b0d499 x1d69dk1"
+                    style="
+                      background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png');
+                      background-position: 0px -305px;
+                      background-size: auto;
+                      width: 18px;
+                      height: 18px;
+                      background-repeat: no-repeat;
+                      display: inline-block;
+                    "
+                  ></i>
+                  Comment
+                </button>
+                <button style="width: 100%" mat-button>
+                  <i
+                    data-visualcompletion="css-img"
+                    class="x1b0d499 x1d69dk1"
+                    style="
+                      background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png');
+                      background-position: 0px -362px;
+                      background-size: auto;
+                      width: 18px;
+                      height: 18px;
+                      background-repeat: no-repeat;
+                      display: inline-block;
+                    "
+                  ></i>
+                  Share
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
         </div>
       </div>
-    </mat-card>
-    <div *ngFor="let post of posts" class="post">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image">
-            <img
-              src="{{ post.posterPhotoUrl }}"
-              style="width: 50px; height: 50px; border-radius: 50%"
-            />
-          </div>
-          <mat-card-title>{{ post.posterUserName }}</mat-card-title>
-          <mat-card-subtitle
-            >{{ post.posted | timeago }} · <i class="fa fa-user"></i
-          ></mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p style="font-size: 1.1rem; padding: 0.5rem 0rem">
-            {{ post.content }}
-          </p>
-        </mat-card-content>
-        <img
-          *ngIf="post.contentImageUrl != null"
-          mat-card-image
-          style="max-height: 500px; width: auto; object-fit: cover"
-          src="{{ post.contentImageUrl }}"
-          alt="Photo of a Shiba Inu"
-        />
-          <hr style="margin-bottom: 0px;">
-
-        <mat-card-actions>
-          <button style="width: 100%" mat-button>
-            <i data-visualcompletion="css-img" class="x1b0d499 x1d69dk1" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png&quot;); background-position: 0px -343px; background-size: auto; width: 18px; height: 18px; background-repeat: no-repeat; display: inline-block;"></i> Like
-          </button>
-          <button style="width: 100%" mat-button>
-            <i data-visualcompletion="css-img" class="x1b0d499 x1d69dk1" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png&quot;); background-position: 0px -305px; background-size: auto; width: 18px; height: 18px; background-repeat: no-repeat; display: inline-block;"></i> Comment
-          </button>
-          <button style="width: 100%" mat-button>
-            <i data-visualcompletion="css-img" class="x1b0d499 x1d69dk1" style="background-image: url(&quot;https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png&quot;); background-position: 0px -362px; background-size: auto; width: 18px; height: 18px; background-repeat: no-repeat; display: inline-block;"></i> Share
-          </button>
-        </mat-card-actions>
-      </mat-card>
+      <div class="col-xs-1"></div>
     </div>
   </div>
-  <div class="col-lg-4 d-none d-lg-block">
+  <div class="col-lg-3 d-none d-lg-block">
     <div class="row" style="height: 100%">
       <div class="col-xs-5"></div>
       <div class="col-xs-7 contactscontainer">
-        <hr />
-        <p class="contactslabel">Contacts</p>
+        <hr style="margin-left: 14px;" />
+        <p class="contactslabel"style="margin-left:14px">Contacts</p>
         <div
           *ngFor="let chat of chats"
           class="row sidenavrowcontainer"
+          style="margin:0px 8px 0px 0px!important"
           routerLink="/members/{{ user.username }}"
         >
           <div class="col-xs-1">

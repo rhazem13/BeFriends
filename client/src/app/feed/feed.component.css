@@ -1,10 +1,13 @@
 .post-form {
   padding: 1.5rem;
 }
+@import url(https://fonts.googleapis.com/css?family=Alata);
 
 .post-textarea {
   border: none;
   resize: none;
+  font-size: 22px;
+  font-family: "Alata";
 }
 
 .custom-file-label::after {
@@ -12,13 +15,13 @@
 }
 
 .post-btn {
-  margin: 0rem .5rem;
-  background-color: #0084FF !important;
+  margin: 0rem 0.5rem;
+  background-color: #0084ff !important;
   border-radius: 2rem;
 }
 
 .createpost {
-  margin-top: 1.5rem;
+  margin-top: 3rem;
   margin-bottom: 1rem;
 }
 
@@ -29,20 +32,17 @@
 .sidenav {
   padding-top: 1.5rem;
   padding-left: 20px;
-  background-color: white;
-  border-right: 1px solid #cccccc; /* thickness and color of the border */
-  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.1);
-/**/
+  margin-left: 12px;
+  margin-top: 7px;
+  /**/
   position: fixed;
-top: 54px;
-bottom: 0;
-width: 350px;
+  top: 54px;
+  bottom: 0;
+  width: 350px;
 
-/* Make the sidenav sticky */
-overflow-y: auto;
-z-index: 1;
-
-
+  /* Make the sidenav sticky */
+  overflow-y: auto;
+  z-index: 1;
 }
 
 .sidenavavatar {
@@ -53,14 +53,13 @@ z-index: 1;
 
 .sidenavusername {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   align-self: center;
   padding-left: 25px;
 }
 
 .sidenavrowcontainer {
   padding: 8px 8px;
-  border-radius: 5px;
 }
 
 .sidenavrowcontainer:hover {
@@ -70,20 +69,17 @@ z-index: 1;
 
 .contactscontainer {
   padding-top: 1rem;
-  background-color: white;
-  border-left: 1px solid #cccccc; /* thickness and color of the border */
-  box-shadow: -1px 0 2px rgba(0, 0, 0, 0.1);
 
   /**/
   position: fixed;
-top: 54px;
-bottom: 0;
-width: 365px;
-right: 0;
+  top: 54px;
+  bottom: 0;
+  width: 365px;
+  right: 0;
 
-/* Make the sidenav sticky */
-overflow-y: auto;
-z-index: 1;
+  /* Make the sidenav sticky */
+  overflow-y: auto;
+  z-index: 1;
 }
 
 .contactslabel {
@@ -91,7 +87,32 @@ z-index: 1;
   font-size: 17px;
 }
 
-.leftsidecontainer{
+.leftsidecontainer {
   height: 100%;
 }
 
+.postusername {
+  font-family: "alata";
+  margin-left: 15px;
+}
+.posttime {
+  font-family: "alata";
+  margin-left: 15px;
+
+}
+.postcontent {
+  line-height: 1.6rem;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-left: 2px;
+  font-weight: 450;
+  padding-bottom: 15px;
+  font-family: 'Segoe UI';
+  /* margin-left: 70px; */
+}
+
+.posterphotourl {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
