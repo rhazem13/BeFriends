@@ -30,6 +30,14 @@ namespace API.Controllers
             return mapper.Map<List<GetPostDto>>(result);
         }
 
+        [HttpGet("{username}/posts")]
+        public async Task<List<GetPostDto>> GetUserPostsAsync(string username)
+        {
+            int userId = User.GetUserId();
+            var result =  await unitOfWork.PostsRepository.GetUserPostsAsync(username,userId);
+            return mapper.Map<List<GetPostDto>>(result);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Post>> CreatePostAsync( [FromForm] string content, [FromForm] IFormFile image = null)
         {

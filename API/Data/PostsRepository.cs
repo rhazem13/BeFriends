@@ -63,6 +63,17 @@ namespace API.Data
                 .ToListAsync();
         }
 
+        public async Task<List<Post>> GetUserPostsAsync(string username, int userId)
+        {
+            return await this.context.Posts
+                .Where(post=>post.PosterUsername==username)
+                .OrderByDescending(r=>r.Posted)
+                .Include(p=>p.Poster)
+                .ThenInclude(p=>p.Photos)
+                .Include(p=>p.UserPostLikes)
+                .Include(p=>p.Comments)
+                .ToListAsync();
+        }
 
         public void LikePost(Post post, int userId)
         {
