@@ -1,4 +1,4 @@
-.card-content{
+/* .card-content{
   align-items: center;
 }
 .card-img{
@@ -11,4 +11,150 @@
   margin-top: 1rem;
   font-size: 2rem;
   font-weight: 500;
+} */
+
+.topsection {
+  margin-top: 70px;
+  height: 620px;
+  background-color: white;
+  border-bottom: 1px solid rgb(236, 236, 236);
+  box-shadow: 0 1px 3px -1px grey;
+}
+
+.cover-photo {
+  width: 100%;
+  height: 450px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0px 0px 10px 10px;
+}
+.profile-picture {
+  position: relative;
+  top: -35px;
+  left: 35px;
+  width: 180px;
+  height: 180px;
+  border: 5px solid white;
+  border-radius: 50%;
+  background-color: red;
+  background-size: cover;
+  background-position: center;
+}
+.user-info {
+  position: relative;
+  top: -160px;
+  left: 230px;
+  color: rgb(0, 0, 0);
+}
+.user-info h1 {
+  font-size: 32px;
+  font-weight: 650;
+  margin-bottom: 10px;
+}
+.user-info p {
+  font-size: 17px;
+  font-weight: 500;
+  color: #65676b;
+}
+
+.primarybtn {
+  position: relative;
+  top: -160px;
+  left: 79%;
+  background-color: #e4e6e8;
+  border-radius: 8px;
+  border: 0;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 9px 6px;
+}
+.secondarybtn {
+  position: relative;
+  top: -160px;
+  left: 80%;
+  color: white;
+  background-color: #0084ff;
+  border-radius: 8px;
+  border: 0;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 9px 16px;
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 767px) {
+  .cover-photo {
+    height: 200px;
+  }
+  .profile-picture {
+    top: -50px;
+    left: calc(50% - 90px);
+  }
+
+  .user-info {
+    text-align: center;
+    top: -44px;
+    left: 0%;
+  }
+  .primarybtn {
+    top: -44px;
+    left: calc(50% - 110px);
+  }
+  .secondarybtn {
+    top: -44px;
+    left: calc(50% - 95px);
+  }
+}
+
+.coverimg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0px 0px 8px 8px;
+}
+.avatarimg {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.introductioncard {
+  margin-left: 38px;
+  margin-top: 16px;
+}
+.Intro {
+  margin-top: 20px;
+  margin-left: 13px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.bio {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+.introdetails {
+  color: #050505;
+  margin-left: 20px;
+  margin: 9px 15px;
+  font-size: 20px;
+}
+.introdetailsicon {
+  color: #8c939d;
+  font-size: 30px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.Postsword {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px;
+  margin: 10px ;
 }

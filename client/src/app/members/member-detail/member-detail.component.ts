@@ -20,14 +20,13 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./member-detail.component.css'],
 })
 export class MemberDetailComponent implements OnInit, OnDestroy {
-  @ViewChild('memberTabs', {static: true}) memberTabs: MatTabGroup;
+  @ViewChild('memberTabs', { static: true }) memberTabs: MatTabGroup;
   member: Member;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   activeTab: MatTab;
   messages: Message[] = [];
   user: User;
-
   constructor(
     public presenceService: PresenceService,
     private route: ActivatedRoute,
@@ -35,25 +34,27 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private router: Router
   ) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user =user);
+    this.accountService.currentUser$
+      .pipe(take(1))
+      .subscribe((user) => (this.user = user));
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
   ngOnDestroy(): void {
     this.messageService.stopHubConnection();
   }
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
+    this.route.data.subscribe((data) => {
       this.member = data.member;
-    })
-    this.route.queryParams.subscribe(params => {
-      params.tab?this.selectTab(params.tab) : this.selectTab(0);
+    });
+    this.route.queryParams.subscribe((params) => {
+      params.tab ? this.selectTab(params.tab) : this.selectTab(0);
       if (params.tab == 3) {
         this.messageService.createHubConnection(
           this.user,
           this.member.username
         );
       }
-    })
+    });
     this.galleryOptions = [
       {
         width: '500px',
@@ -87,14 +88,14 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  selectTab(tabId: number){
+  selectTab(tabId: number) {
     this.memberTabs.selectedIndex = tabId;
   }
 
   onTabActivated(data: MatTab) {
     this.activeTab = data['tab'];
     if (this.activeTab.textLabel === 'Messages' && this.messages.length === 0) {
-      console.log("create hub connection");
+      console.log('create hub connection');
       this.messageService.createHubConnection(this.user, this.member.username);
     } else {
       this.messageService.stopHubConnection();
