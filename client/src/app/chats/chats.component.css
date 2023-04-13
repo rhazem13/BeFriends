@@ -1,3 +1,12 @@
+.chatslabel {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 8px;
+  font-size: 24px;
+  font-weight: 670;
+  font-family: 'Segoe UI';
+}
+
 .chatscontainer {
   background-color: white;
   height: calc(100vh - 56px);
@@ -10,8 +19,8 @@
   height: calc(100vh - 56px);
 }
 .chatrow {
-  padding: 0px;
-  margin-bottom: 14px;
+  padding: 8px 10px;
+  margin:0px;
 }
 .chatrow :hover {
   background-color: #f0f0f0;
@@ -24,14 +33,14 @@
   border-radius: 10px;
 }
 
-.chat-avatar-container{
+.chat-avatar-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 48px;
   width: 48px;
   padding: 0;
-  margin:0;
+  margin: 0;
 }
 
 .chat-avatar {
@@ -39,17 +48,16 @@
   height: 48px;
   width: 48px;
   padding: 0;
-  margin:0;
+  margin: 0;
 }
 
-.chat-content-container{
+.chat-content-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 0px;
   margin: 0px;
 }
-
 
 .img-circle {
   max-height: 60px;

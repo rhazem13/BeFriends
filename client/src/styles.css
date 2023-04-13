@@ -1,17 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap-icons/font/bootstrap-icons.css";
-@import '~@ctrl/ngx-emoji-mart/picker';
+@import "~@ctrl/ngx-emoji-mart/picker";
 @import "@fontsource/black-han-sans";
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 
 html,
 body {
   height: 100%;
   width: 100%;
   margin: 0;
+  font-family: "Open Sans";
 }
 body {
   margin: 0;
-  font-family: "Roboto", "Helvetica Neue", sans-serif;
 }
 .blurred {
   backdrop-filter: blur(5px);
@@ -37,10 +38,10 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #0084FF;
+  background: #0084ff;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #0084FF;
+  background: #0084ff;
 }
