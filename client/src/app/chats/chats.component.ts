@@ -1,6 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MessageService } from '../services/message.service';
 import { Chat } from '../models/chat';
+
 @Component({
   selector: 'app-chats',
   templateUrl: './chats.component.html',
@@ -11,20 +13,27 @@ export class ChatsComponent implements OnInit {
   filteredchats: Chat[] = [];
   displayedColumns: string[] = ['fromto', 'Message', 'sentreceived', 'seen'];
   loading = false;
-  openchatusername = 'lancaster';
+  // make this reads dynamic from url maybe
+  openchatusername = '';
   searchContact;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.loadChats();
+    this.route.queryParams.subscribe((params) => {
+      console.log(params['openchatusername']);
+      if (params['openchatusername']) {
+        this.openchatusername = params['openchatusername'];
+      }
+    });
   }
 
   loadChats() {
     this.loading = true;
     return this.messageService.getChats().subscribe((response) => {
       this.chats = response;
-      this.filteredchats=response;
+      this.filteredchats = response;
       this.loading = false;
     });
   }
@@ -41,6 +50,5 @@ export class ChatsComponent implements OnInit {
         .toLowerCase()
         .includes(this.searchContact.toLowerCase());
     });
-
   }
 }

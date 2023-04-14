@@ -138,4 +138,12 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
       this.member.followed = false;
     });
   }
+
+  openChat(username:string) {
+    console.log(username);
+
+    this.router.navigate(['chats'], {
+      queryParams: { openchatusername: this.member.username },
+    });
+  }
 }

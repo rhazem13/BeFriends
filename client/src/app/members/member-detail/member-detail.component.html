@@ -81,7 +81,7 @@
         <p>{{followCount.followers}} followers • {{followCount.following}} following</p>
       </div>
       <ng-container *ngIf="member.username!=user.username">
-      <button class="primarybtn">
+      <button class="primarybtn" (click)="openChat(member.username)">
         <i class="fa fa-paper-plane"></i> Message
       </button>
       <button *ngIf="!member.followed" (click)="addFollow(member)" class="secondarybtn"><i class="fa fa-plus"></i> Follow</button>
