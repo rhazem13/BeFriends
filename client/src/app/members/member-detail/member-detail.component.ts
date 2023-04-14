@@ -13,6 +13,10 @@ import { Message } from 'src/app/models/message';
 import { MessageService } from 'src/app/services/message.service';
 import { take } from 'rxjs';
 import { User } from 'src/app/models/user';
+import { getPost } from 'src/app/models/getpost';
+import { FeedService } from 'src/app/services/feed.service';
+import { MembersService } from 'src/app/services/members.service';
+import { FollowsCount } from 'src/app/models/followscount';
 
 @Component({
   selector: 'app-member-detail',
@@ -27,12 +31,16 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   activeTab: MatTab;
   messages: Message[] = [];
   user: User;
+  posts: getPost[] = [];
+  followCount:FollowsCount;
   constructor(
     public presenceService: PresenceService,
     private route: ActivatedRoute,
     private messageService: MessageService,
     private accountService: AccountService,
-    private router: Router
+    private router: Router,
+    private feedService: FeedService,
+    private memberService: MembersService
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -66,6 +74,15 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
       },
     ];
     this.galleryImages = this.getImages();
+    this.feedService.getUserPosts(this.member.username).subscribe((posts) => {
+      this.posts = posts;
+      console.log(posts);
+    });
+    this.memberService.getFollowsCount(this.member.username).subscribe((res) => {
+      this.followCount=res;
+      console.log(res);
+
+    });
   }
 
   getImages(): NgxGalleryImage[] {

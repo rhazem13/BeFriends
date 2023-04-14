@@ -12,6 +12,7 @@
   font-size: 2rem;
   font-weight: 500;
 } */
+@import url(https://fonts.googleapis.com/css?family=Alata);
 
 .topsection {
   margin-top: 70px;
@@ -157,4 +158,38 @@
   font-weight: 600;
   padding: 10px;
   margin: 10px ;
+}
+
+.post {
+  margin-bottom: 1rem;
+}
+
+.postusername {
+  font-family: "alata";
+  margin-left: 15px;
+}
+.posttime {
+  font-family: "alata";
+  margin-left: 15px;
+
+}
+.postcontent {
+  line-height: 1.6rem;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-left: 2px;
+  font-weight: 450;
+  padding-bottom: 15px;
+  font-family: 'Segoe UI';
+  /* margin-left: 70px; */
+}
+
+.posterphotourl {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.customdetails{
+  font-weight: 500;
 }

@@ -10,5 +10,6 @@ namespace API.Interfaces
         void RemoveUserFollow(UserFollow userFollow);
         Task<AppUser> GetUserWithFollows(int userId);
         Task<PagedList<FollowDto>> GetUserFollows(FollowsParams followsParams);
+        FollowsCount GetUserFollowsCount(string username);
     }
 }

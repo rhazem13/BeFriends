@@ -72,5 +72,11 @@ namespace API.Controllers
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(users);
         }
+
+        [HttpGet("{username}/followscount")]
+        public ActionResult<FollowsCount> GetFollowscountAsync(string username){
+            var followscount =  unitOfWork.FollowsRepository.GetUserFollowsCount(username);
+            return Ok(followscount);
+        }
     }
 }

@@ -74,11 +74,11 @@
         <img class="coverimg" src="./assets/defaultcover.jpg" />
       </div>
       <div class="profile-picture">
-        <img class="avatarimg" src="./assets/defaultavatar.jpg" />
+        <img class="avatarimg" src="{{ member.photoUrl || './assets/user.png' }}" />
       </div>
       <div class="user-info">
-        <h1>Hazem</h1>
-        <p>20 followers • 50 following</p>
+        <h1>{{member.knownAs}}</h1>
+        <p>{{followCount.followers}} followers • {{followCount.following}} following</p>
       </div>
       <button class="primarybtn">
         <i class="fa fa-paper-plane"></i> Message
@@ -95,23 +95,100 @@
       <div class="col-xs-5">
         <mat-card class="introductioncard">
           <p class="Intro">Intro</p>
-          <p class="bio">Here goes my bio</p>
+          <p class="bio">{{member.bio}}</p>
           <p class="introdetails">
-            <i class="fa fa-home introdetailsicon"></i>Lives in Suez
+            <i class="fa fa-home introdetailsicon"></i>Lives in <span class="customdetails">{{member.city}}</span>
           </p>
           <p class="introdetails">
             <i class="fa fa-user introdetailsicon" style="margin-left: 5px"></i
-            >28 Years old
+            ><span class="customdetails">{{member.age}}</span> Years old
           </p>
           <p class="introdetails" style="margin-bottom: 50px">
-            <i class="fa fa-calendar introdetailsicon"></i>Member since 25 Feb
-            2023
+            <i class="fa fa-calendar introdetailsicon"></i>Member since <span class="customdetails">{{ member.created | date : "dd MMM yyyy" }}</span>
           </p>
         </mat-card>
       </div>
       <div class="col-xs-7">
-        <mat-card style="margin-top:17px;"><p class="Postsword">Posts</p></mat-card>
-        
+        <mat-card style="margin-top:17px;margin-bottom: 15px;"><p class="Postsword">Posts</p></mat-card>
+        <div *ngFor="let post of posts" class="post">
+            <mat-card>
+              <mat-card-header>
+                <div mat-card-avatar>
+                  <img src="{{ post.posterPhotoUrl }}" class="posterphotourl" />
+                </div>
+                <mat-card-title class="postusername">{{
+                  post.posterUserName
+                }}</mat-card-title>
+                <mat-card-subtitle class="posttime"
+                  >{{ post.posted | timeago }} · <i class="fa fa-user"></i
+                ></mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p class="postcontent">
+                  {{ post.content }}
+                </p>
+              </mat-card-content>
+              <img
+                *ngIf="post.contentImageUrl != null"
+                mat-card-image
+                style="max-height: 500px; width: auto; object-fit: cover"
+                src="{{ post.contentImageUrl }}"
+                alt="Photo of a Shiba Inu"
+              />
+              <hr style="margin-bottom: 0px" />
+
+              <mat-card-actions>
+                <button style="width: 100%" mat-button>
+                  <i
+                    data-visualcompletion="css-img"
+                    class="x1b0d499 x1d69dk1"
+                    style="
+                      background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png');
+                      background-position: 0px -343px;
+                      background-size: auto;
+                      width: 18px;
+                      height: 18px;
+                      background-repeat: no-repeat;
+                      display: inline-block;
+                    "
+                  ></i>
+                  Like
+                </button>
+                <button style="width: 100%" mat-button>
+                  <i
+                    data-visualcompletion="css-img"
+                    class="x1b0d499 x1d69dk1"
+                    style="
+                      background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png');
+                      background-position: 0px -305px;
+                      background-size: auto;
+                      width: 18px;
+                      height: 18px;
+                      background-repeat: no-repeat;
+                      display: inline-block;
+                    "
+                  ></i>
+                  Comment
+                </button>
+                <button style="width: 100%" mat-button>
+                  <i
+                    data-visualcompletion="css-img"
+                    class="x1b0d499 x1d69dk1"
+                    style="
+                      background-image: url('https://static.xx.fbcdn.net/rsrc.php/v3/yr/r/MQeT9DYW9Fz.png');
+                      background-position: 0px -362px;
+                      background-size: auto;
+                      width: 18px;
+                      height: 18px;
+                      background-repeat: no-repeat;
+                      display: inline-block;
+                    "
+                  ></i>
+                  Share
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
       </div>
     </div>
   </div>

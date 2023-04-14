@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { of, map } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../models/member';
+import { FollowsCount } from '../models/followscount';
 @Injectable({
   providedIn: 'root',
 })
@@ -97,5 +98,11 @@ export class MembersService {
           return this.paginatedResult;
         })
       );
+  }
+
+  getFollowsCount(username: string){
+    return this.http.get<FollowsCount>(
+      this.baseUrl + 'follows/' + username + '/followscount'
+    );
   }
 }

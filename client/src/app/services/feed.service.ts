@@ -10,11 +10,15 @@ export class FeedService {
   baseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
-  getPosts(){
+  getPosts() {
     return this.http.get<getPost[]>(this.baseUrl + 'post');
   }
 
-  createPost(formdata){
-    return this.http.post(this.baseUrl + 'post',formdata)
+  getUserPosts(username:string) {
+    return this.http.get<getPost[]>(this.baseUrl + 'post/'+username+'/posts');
+  }
+
+  createPost(formdata) {
+    return this.http.post(this.baseUrl + 'post', formdata);
   }
 }

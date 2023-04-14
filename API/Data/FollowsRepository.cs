@@ -49,6 +49,13 @@ namespace API.Data
             return await PagedList<FollowDto>.CreateAsync(followedUsers, followsParams.PageNumber,followsParams.PageSize);
         }
 
+        public  FollowsCount GetUserFollowsCount(string username)
+        {
+            var followersCount = context.Follows.Where(follow => follow.FollowedUser.UserName == username).Count();
+            var followedCount = context.Follows.Where(follow => follow.SourceUser.UserName == username).Count();
+            return new FollowsCount { followers = followersCount, following = followedCount };
+        }
+
         public async Task<AppUser> GetUserWithFollows(int userId)
         {
             return await context.Users.Include(x => x.FollowedUsers).FirstOrDefaultAsync(x => x.Id == userId);
