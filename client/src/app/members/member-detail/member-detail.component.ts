@@ -17,6 +17,7 @@ import { getPost } from 'src/app/models/getpost';
 import { FeedService } from 'src/app/services/feed.service';
 import { MembersService } from 'src/app/services/members.service';
 import { FollowsCount } from 'src/app/models/followscount';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-member-detail',
@@ -32,7 +33,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   messages: Message[] = [];
   user: User;
   posts: getPost[] = [];
-  followCount:FollowsCount;
+  followCount: FollowsCount;
   constructor(
     public presenceService: PresenceService,
     private route: ActivatedRoute,
@@ -40,7 +41,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private router: Router,
     private feedService: FeedService,
-    private memberService: MembersService
+    private memberService: MembersService,
+    private snackBar: MatSnackBar
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -53,6 +55,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.member = data.member;
+      console.log(this.member);
     });
     this.route.queryParams.subscribe((params) => {
       params.tab ? this.selectTab(params.tab) : this.selectTab(0);
@@ -76,13 +79,12 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.galleryImages = this.getImages();
     this.feedService.getUserPosts(this.member.username).subscribe((posts) => {
       this.posts = posts;
-      console.log(posts);
     });
-    this.memberService.getFollowsCount(this.member.username).subscribe((res) => {
-      this.followCount=res;
-      console.log(res);
-
-    });
+    this.memberService
+      .getFollowsCount(this.member.username)
+      .subscribe((res) => {
+        this.followCount = res;
+      });
   }
 
   getImages(): NgxGalleryImage[] {
@@ -117,5 +119,23 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     } else {
       this.messageService.stopHubConnection();
     }
+  }
+
+  addFollow(member: Member) {
+    this.memberService.addFollow(member.username).subscribe(() => {
+      this.snackBar.open('you have followed ' + member.knownAs, undefined, {
+        duration: 1500,
+      });
+      this.member.followed = true;
+    });
+  }
+
+  removeFollow(member: Member) {
+    this.memberService.removeFollow(member.username).subscribe(() => {
+      this.snackBar.open('you have unfollowed ' + member.knownAs, undefined, {
+        duration: 1500,
+      });
+      this.member.followed = false;
+    });
   }
 }

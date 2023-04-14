@@ -19,11 +19,13 @@ namespace API.Data
             this.mapper = mapper;
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDto> GetMemberAsync(string username, int curUserId)
         {
-            return await context.Users.AsNoTracking()
+            var user= await context.Users.AsNoTracking()
                 .Where(u => u.UserName == username)
                 .ProjectTo<MemberDto>(mapper.ConfigurationProvider).SingleOrDefaultAsync();
+            user.Followed = (context.Follows.Any(f => f.SourceUserId == curUserId && f.FollowedUserId == user.Id));
+            return user;
         }
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams, int curUserId)

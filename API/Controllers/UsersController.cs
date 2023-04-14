@@ -39,7 +39,8 @@ namespace API.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return Ok(await unitOfWork.UserRepository.GetMemberAsync(username));
+            var curUserId = User.GetUserId();
+            return Ok(await unitOfWork.UserRepository.GetMemberAsync(username,curUserId));
         }
 
         [HttpPut]

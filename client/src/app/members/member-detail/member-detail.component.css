@@ -105,6 +105,16 @@
     top: -44px;
     left: calc(50% - 95px);
   }
+  .introductioncard {
+    margin-left: 13px !important;
+    margin-right: 13px !important;
+    margin-top: 16px;
+    border-radius: 10px;
+  }
+
+  .topsection{
+    height: 500px;
+  }
 }
 
 .coverimg {
