@@ -8,6 +8,7 @@ import { take } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Chat } from '../models/chat';
 import { MessageService } from '../services/message.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed',
@@ -24,7 +25,8 @@ export class FeedComponent implements OnInit {
     private feedService: FeedService,
     private accountService: AccountService,
     private snackbar: MatSnackBar,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -74,6 +76,13 @@ export class FeedComponent implements OnInit {
       });
       this.content = '';
       this.selectedFile = null;
+    });
+  }
+
+  openChat(username: string) {
+    console.log(username);
+    this.router.navigate(['chats'], {
+      queryParams: { openchatusername: username },
     });
   }
 }

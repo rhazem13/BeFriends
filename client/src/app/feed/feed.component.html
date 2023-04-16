@@ -102,7 +102,7 @@
         <div>
           <mat-card class="createpost">
             <div class="row">
-              <div class="col-xs-2 col-md-1">
+              <div class="col-xs-2 col-md-1" routerLink="/members/{{ user.username }}" style="cursor:pointer">
                 <img
                   src="{{ user.photoUrl || './assets/user.png' }}"
                   style="width: 90px; border-radius: 50%; padding: 1rem"
@@ -134,7 +134,7 @@
                             accept=".jpg,.png,.jpeg"
                             style="display: none"
                           />
-                          <label for="imageUpload"
+                          <label for="imageUpload" style="cursor:pointer"
                             ><i
                               class="fa fa-photo"
                               style="
@@ -168,10 +168,10 @@
           <div *ngFor="let post of posts" class="post">
             <mat-card>
               <mat-card-header>
-                <div mat-card-avatar>
+                <div mat-card-avatar routerLink="/members/{{ post.posterUserName }}" style="cursor:pointer">
                   <img src="{{ post.posterPhotoUrl }}" class="posterphotourl" />
                 </div>
-                <mat-card-title class="postusername">{{
+                <mat-card-title class="postusername" routerLink="/members/{{ post.posterUserName }}" style="cursor:pointer">{{
                   post.posterUserName
                 }}</mat-card-title>
                 <mat-card-subtitle class="posttime"
@@ -259,7 +259,7 @@
           *ngFor="let chat of chats"
           class="row sidenavrowcontainer"
           style="margin:0px 8px 0px 0px!important"
-          routerLink="/members/{{ user.username }}"
+          (click)="openChat(chat.contactUsername)"
         >
           <div class="col-xs-1">
             <img
