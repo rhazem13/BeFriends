@@ -15,27 +15,35 @@ export class MemberListComponent implements OnInit {
   pageNumber = 1;
   pageSize = 8;
   pageSizeOptions = [8, 16, 32];
-
-  constructor(private memberService: MembersService) {
-  }
+  searchName = '';
+  constructor(private memberService: MembersService) {}
   ngOnInit(): void {
     this.loadMembers();
   }
 
   loadMembers() {
+    console.log("inside load members");
+    console.log(this.searchName);
+
     this.memberService
-      .getMembers(this.pageNumber, this.pageSize)
+      .getMembers(this.searchName,this.pageNumber, this.pageSize)
       .subscribe((response) => {
         this.members = response.result;
         this.pagination = response.pagination;
-    console.log(this.members[0].followed);
-
+        console.log(this.members);
       });
   }
 
-  handlePageEvent(event: any){
-    this.pageNumber = event.pageIndex+1;
+  handlePageEvent(event: any) {
+    this.pageNumber = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.loadMembers();
+  }
+
+  filterMembers(){
+    console.log(this.searchName);
+    this.members=[];
+    this.loadMembers();
+
   }
 }

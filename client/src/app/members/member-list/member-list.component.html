@@ -1,13 +1,33 @@
-<div class="container" >
-  <div class="row" style="margin-top: 6rem;margin-bottom: 50px;">
-    <div *ngFor="let member of members" class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2" style="margin-bottom: 20px;">
+<div class="container">
+  <div class="row" style="margin-top: 6rem; margin-bottom: 50px">
+    <div class="input-group mb-3">
+      <div class="input-group-append">
+        <span class="input-group-text searchicon"
+          ><i class="fa fa-search"></i
+        ></span>
+      </div>
+      <input
+        type="text"
+        name="search"
+        [(ngModel)]="searchName"
+        (input)="filterMembers()"
+        class="form-control searchinput"
+        placeholder="Search for a member"
+      />
+    </div>
+    <div
+      *ngFor="let member of members"
+      class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+      style="margin-bottom: 20px"
+    >
       <app-member-card [member]="member"></app-member-card>
     </div>
   </div>
   <div class="row" style="justify-content: center" *ngIf="pagination">
-    <mat-paginator class="d-flex justify-content-center align-items-center"
+    <mat-paginator
+      class="d-flex justify-content-center align-items-center"
       #paginator
-      style="background-color: rgba(0,0,0,0);"
+      style="background-color: rgba(0, 0, 0, 0)"
       (page)="handlePageEvent($event)"
       [length]="pagination.totalItems"
       [pageSize]="pagination.itemsPerPage"

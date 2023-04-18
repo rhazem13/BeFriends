@@ -15,16 +15,24 @@ export class MembersService {
   paginatedResult: PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
 
   constructor(private http: HttpClient) {}
-  getMembers(page?: number, itemsPerPage?: number) {
-    var response = this.memberCache.get(page+'-'+itemsPerPage);
-    if (response) {
-      return of(response);
-    }
+  getMembers(searchName: string,page?: number, itemsPerPage?: number ) {
+        console.log('inside getMembers');
+        console.log(searchName);
+        // if(searchName=='')
+        //   var response = this.memberCache.get(page + '-' + itemsPerPage);
+        //   if (response) {
+        //     return of(response);
+        //   }
     let params = new HttpParams();
     if (page !== null && itemsPerPage !== null) {
       params = params.append('pageNumber', page.toString());
       params = params.append('pageSize', itemsPerPage.toString());
     }
+    if (searchName != '') params = params.append('Search', searchName);
+    console.log(searchName);
+    console.log(searchName);
+    console.log(searchName);
+    console.log(searchName);
     return this.http
       .get<Member[]>(this.baseUrl + 'users', { observe: 'response', params })
       .pipe(
@@ -35,18 +43,20 @@ export class MembersService {
               response.headers.get('Pagination')
             );
           }
-          this.memberCache.set(page + '-' + itemsPerPage, Object.assign({},this.paginatedResult));
+          this.memberCache.set(
+            page + '-' + itemsPerPage,
+            Object.assign({}, this.paginatedResult)
+          );
           return this.paginatedResult;
-        }),
+        })
       );
   }
 
   getMember(username: string) {
     const member = [...this.memberCache.values()]
-    .reduce((arr, elem) => arr.concat(elem.result), [])
-    .find((member: Member)=> member.username === username);
-    if(member)
-      return of(member);
+      .reduce((arr, elem) => arr.concat(elem.result), [])
+      .find((member: Member) => member.username === username);
+    if (member) return of(member);
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
 
@@ -72,10 +82,10 @@ export class MembersService {
   }
 
   removeFollow(username: string) {
-    return this.http.delete(this.baseUrl +'follows/' + username);
+    return this.http.delete(this.baseUrl + 'follows/' + username);
   }
 
-  getFollows(predicate: string, pageNumber, pageSize){
+  getFollows(predicate: string, pageNumber, pageSize) {
     let params = new HttpParams();
     params = params.append('predicate', predicate);
     if (pageNumber !== null && pageSize !== null) {
@@ -100,7 +110,7 @@ export class MembersService {
       );
   }
 
-  getFollowsCount(username: string){
+  getFollowsCount(username: string) {
     return this.http.get<FollowsCount>(
       this.baseUrl + 'follows/' + username + '/followscount'
     );
