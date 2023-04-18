@@ -1,11 +1,34 @@
 <div class="row" style="width: 100%; margin-top: 2rem">
-  <div class="col-xs-3" *ngFor="let photo of member.photos" style="width: 100%">
+  <div
+    *ngFor="let photo of member.photos"
+    class="col-md-3 col-xs-6"
+    style="margin-bottom: 10px"
+  >
     <mat-card>
       <img mat-card-image src="{{ photo.url }}" alt="{{ photo.url }}" />
       <mat-card-content class="fab-buttons">
-        <button *ngIf="photo.isMain" mat-raised-button style="background-color: #0084FF;color:white">Main</button>
-        <button *ngIf="!photo.isMain" mat-stroked-button style="background-color: #0084FF;color:white" (click)="setMainPhoto(photo)">Main</button>
-        <button mat-mini-fab color="warn" style="border-radius: 3cm" [disabled]="photo.isMain" (click)="deletePhoto(photo.id)">
+        <button
+          *ngIf="photo.isMain"
+          mat-button
+          style="background-color: #0084ff; color: white; margin-right: 10px"
+        >
+          Main
+        </button>
+        <button
+          *ngIf="!photo.isMain"
+          mat-button
+          style="background-color: #0084ff; color: white; margin-right: 10px"
+          (click)="setMainPhoto(photo)"
+        >
+          Main
+        </button>
+        <button
+          mat-mini-fab
+          color="warn"
+          style="border-radius: 3cm"
+          [disabled]="photo.isMain"
+          (click)="deletePhoto(photo.id)"
+        >
           <mat-icon
             fontSet="fa"
             fontIcon="fa-trash"
@@ -16,7 +39,7 @@
     </mat-card>
   </div>
 </div>
-<div class="row" style="margin-top: 3px;margin-left: 0px;margin-right: 0px;">
+<div class="row" style="margin-top: 3px; margin-left: 0px; margin-right: 0px">
   <div class="col-xs-3">
     <h2>Add Photos</h2>
     <mat-card
@@ -32,15 +55,31 @@
       </mat-card-content>
     </mat-card>
     <h3>Multiple</h3>
-    <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+    <label for="file-upload" class="custom-file-upload"> Choose files </label>
+    <input
+      id="file-upload"
+      type="file"
+      ng2FileSelect
+      [uploader]="uploader"
+      multiple
+      style="display: none"
+    />
 
     <h3>Single</h3>
-    <input type="file" ng2FileSelect [uploader]="uploader" />
+    <div class="custom-file">
+      <input
+        type="file"
+        style="display: none"
+        ng2FileSelect
+        [uploader]="uploader"
+        id="file-upload"
+      />
+      <label class="custom-file-label custom-file-upload" for="file-upload"
+        >Choose file</label
+      >
+    </div>
   </div>
-  <div
-    class="col-xs-9"
-    style="margin-bottom: 40px;"
-  >
+  <div class="col-xs-9" >
     <h3>Upload queue</h3>
     <p>Queue length: {{ uploader?.queue?.length }}</p>
     <table class="table">
@@ -64,7 +103,7 @@
     <div>
       <button
         mat-raised-button
-        style="background-color: #0084FF;color:white"
+        style="background-color: #0084ff; color: white"
         type="button"
         class="btn btn-success btn-s"
         (click)="uploader.uploadAll()"
