@@ -14,7 +14,6 @@ a:active {
   font-size: 50px;
   font-family: "Black Han Sans";
   font-weight: 100;
-
 }
 .navigation-items {
   list-style: none;
@@ -28,8 +27,6 @@ a:active {
 }
 
 /* from nav */
-
-
 
 .mat-form-field {
   display: flex;
@@ -114,3 +111,8 @@ a:active {
 .navbarphotocontainer {
   padding-top: 10px;
 }
+
+.navphotocontainer {
+  float: right;
+}
+
