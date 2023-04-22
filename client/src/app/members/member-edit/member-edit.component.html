@@ -9,6 +9,9 @@
         <mat-tab label="Edit Cover photo">
           <app-cover-editor [member]="member"></app-cover-editor>
         </mat-tab>
+        <mat-tab label="Edit Profile Picture">
+          <app-photo-editor [member]="member"></app-photo-editor>
+        </mat-tab>
         <mat-tab label="About {{ member.knownAs }}">
           <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
             <h2>bio</h2>
@@ -59,9 +62,6 @@
               </div>
             </div>
           </form>
-        </mat-tab>
-        <mat-tab label="Edit Profile Picture">
-          <app-photo-editor [member]="member"></app-photo-editor>
         </mat-tab>
       </mat-tab-group>
     </div>

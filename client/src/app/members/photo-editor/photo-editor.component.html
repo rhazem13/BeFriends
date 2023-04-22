@@ -41,20 +41,7 @@
 </div>
 <div class="row" style="margin-top: 3px; margin-left: 0px; margin-right: 0px">
   <div class="col-xs-3">
-    <h2>Add Photos</h2>
-    <mat-card
-      ng2FileDrop
-      [ngClass]="{ 'nv-file-over': hasBaseDropzoneOver }"
-      (fileOver)="fileOverBase($event)"
-      [uploader]="uploader"
-      class="well my-drop-zone"
-    >
-      <mat-card-content>
-        <i class="fa fa-upload fa-3x"></i>
-        Drop photos
-      </mat-card-content>
-    </mat-card>
-    <h3>Multiple</h3>
+    <h3>Add Photos</h3>
     <label for="file-upload" class="custom-file-upload"> Choose files </label>
     <input
       id="file-upload"
@@ -64,23 +51,9 @@
       multiple
       style="display: none"
     />
-
-    <h3>Single</h3>
-    <div class="custom-file">
-      <input
-        type="file"
-        style="display: none"
-        ng2FileSelect
-        [uploader]="uploader"
-        id="file-upload"
-      />
-      <label class="custom-file-label custom-file-upload" for="file-upload"
-        >Choose file</label
-      >
-    </div>
   </div>
   <div class="col-xs-9" >
-    <h3>Upload queue</h3>
+    <h3></h3>
     <p>Queue length: {{ uploader?.queue?.length }}</p>
     <table class="table">
       <thead>
@@ -103,7 +76,7 @@
     <div>
       <button
         mat-raised-button
-        style="background-color: #0084ff; color: white"
+        style="background-color: #0084ff; color: white;margin:10px"
         type="button"
         class="btn btn-success btn-s"
         (click)="uploader.uploadAll()"
@@ -116,6 +89,7 @@
         color="warn"
         type="button"
         class="btn btn-warning btn-s"
+        style="margin:10px"
         (click)="uploader.cancelAll()"
         [disabled]="!uploader.isUploading"
       >
@@ -125,6 +99,7 @@
         mat-raised-button
         color="accent"
         type="button"
+        style="margin:10px"
         class="btn btn-danger btn-s"
         (click)="uploader.clearQueue()"
         [disabled]="!uploader.queue.length"
