@@ -29,10 +29,6 @@ export class MembersService {
       params = params.append('pageSize', itemsPerPage.toString());
     }
     if (searchName != '') params = params.append('Search', searchName);
-    console.log(searchName);
-    console.log(searchName);
-    console.log(searchName);
-    console.log(searchName);
     return this.http
       .get<Member[]>(this.baseUrl + 'users', { observe: 'response', params })
       .pipe(
@@ -75,6 +71,16 @@ export class MembersService {
 
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId, {});
+  }
+
+  uploadCover(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(this.baseUrl + 'users/set-cover-photo', formData);
+  }
+
+  deleteCover(){
+    return this.http.delete(this.baseUrl + 'users/delete-cover-photo');
   }
 
   addFollow(username: string) {

@@ -1,0 +1,22 @@
+
+<div class="topsection">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="cover-photo">
+        <img class="coverimg" src="{{ member.coverUrl || './assets/defaultcover.jpg' }}" />
+      </div>
+      <div class="profile-picture">
+        <img class="avatarimg" src="{{ member.photoUrl || './assets/user.png' }}" />
+      </div>
+      <div class="user-info">
+        <h1>{{member.knownAs}}</h1>
+      </div>
+      <button class="primarybtn" (click)="deleteCover()">
+        <i class="fa fa-trash"></i> Remove Cover
+      </button>
+      <input type="file" #fileInput (change)="handleFileInput($event.target.files)" style="display: none">
+
+      <button class="secondarybtn" (click)="updateCover()"><i class="fa fa-plus"></i> Update Cover</button>
+    </div>
+  </div>
+</div>

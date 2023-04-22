@@ -110,6 +110,39 @@ namespace API.Controllers
             if (await unitOfWork.Complete()) return Ok();
             return BadRequest("failed to delete the photo");
         }
+        
+        [HttpPost("set-cover-photo")]
+        public async Task<ActionResult> SetCoverPhoto(IFormFile file){
+            var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+            var result = await photoService.AddPhotoAsync(file);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+            user.CoverUrl = result.SecureUrl.AbsoluteUri;
+            // var photo = new Photo
+            // {
+            //     Url = result.SecureUrl.AbsoluteUri,
+            //     PublicId = result.PublicId
+            // };
+            // if(user.Photos.Count == 0) { 
+            //     photo.IsMain= true;
+            // }
+            // user.Photos.Add(photo);
+            if(await unitOfWork.Complete())
+            {
+                //return mapper.Map<PhotoDto>(photo); 
+                // return CreatedAtRoute("GetUser", new {username=user.UserName}, mapper.Map<PhotoDto>(photo));
+                return NoContent();
+            }
+            return BadRequest("problem adding photo");
+        }
 
+        [HttpDelete("delete-cover-photo")]
+        public async Task<ActionResult> DeleteCoverPhoto()
+        {
+            var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+            if(user.CoverUrl == null) return NotFound();
+            user.CoverUrl = "";
+            if (await unitOfWork.Complete()) return Ok();
+            return BadRequest("failed to delete the photo");
+        }
     }
 }

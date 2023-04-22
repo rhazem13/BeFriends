@@ -41,6 +41,7 @@ import { LoginComponent } from './login/login.component';
 import { FeedComponent } from './feed/feed.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { CoverEditorComponent } from './members/cover-editor/cover-editor.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
     SidenavListComponent,
     LoginComponent,
     FeedComponent,
+    CoverEditorComponent,
   ],
   imports: [
     BrowserModule,

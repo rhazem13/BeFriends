@@ -4,41 +4,11 @@
       <h1>Edit profile</h1>
     </div>
     <div class="savechangesdiv"></div>
-    <!-- <div class="col-xs-4">
-    <mat-card>
-      <img
-        mat-card-image
-        src="{{ member.photoUrl || './assets/user.png' }}"
-        alt=""
-        class="card-img-top img-thmbnail"
-      />
-      <mat-card-content>
-        <div>
-          <h2 style="align-self: center">{{ member.knownAs }}</h2>
-        </div>
-        <div>
-          <strong>Location:</strong>
-          <p>{{ member.city }}, {{ member.country }}</p>
-        </div>
-        <div>
-          <strong>Age:</strong>
-          <p>{{ member.age }}</p>
-        </div>
-        <div>
-          <strong>Last Active:</strong>
-          <p>{{ member.lastActive | timeago}}</p>
-        </div>
-        <div>
-          <strong>Member since:</strong>
-          <p>{{ member.created | date: 'dd MMM yyyy'}}</p>
-        </div>
-      </mat-card-content>
-
-    </mat-card>
-  </div> -->
-
     <div class="col-xs-12">
       <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+        <mat-tab label="Edit Cover photo">
+          <app-cover-editor [member]="member"></app-cover-editor>
+        </mat-tab>
         <mat-tab label="About {{ member.knownAs }}">
           <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
             <h2>bio</h2>
@@ -90,15 +60,14 @@
             </div>
           </form>
         </mat-tab>
-        <mat-tab label="Edit Photos">
+        <mat-tab label="Edit Profile Picture">
           <app-photo-editor [member]="member"></app-photo-editor>
         </mat-tab>
       </mat-tab-group>
     </div>
     <mat-card class="unsavedchanges-card" *ngIf="editForm.dirty">
       <mat-card-content>
-        <strong>Any unsaved
-        changes will be lost: </strong>
+        <strong>Any unsaved changes will be lost: </strong>
         <button
           [disabled]="!editForm.dirty"
           form="editForm"

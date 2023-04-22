@@ -71,7 +71,7 @@
     <div class="col-lg-2 d-none d-lg-block"></div>
     <div class="col-xs-12 col-lg-8">
       <div class="cover-photo">
-        <img class="coverimg" src="./assets/defaultcover.jpg" />
+        <img class="coverimg" src="{{ member.coverUrl || './assets/defaultcover.jpg' }}" />
       </div>
       <div class="profile-picture">
         <img class="avatarimg" src="{{ member.photoUrl || './assets/user.png' }}" />
