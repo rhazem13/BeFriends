@@ -12,7 +12,6 @@ import { AccountService } from '../services/account.service';
 })
 export class HomeComponent implements OnInit {
   user: User;
-  registerMode = false;
   constructor(
     private route: ActivatedRoute,
     private accountService: AccountService,
@@ -26,16 +25,5 @@ export class HomeComponent implements OnInit {
     if(this.user){
       this.router.navigate(['/feed'])
     }
-    this.route.data.subscribe((data) => {
-      this.registerMode = data.registerMode;
-    });
-  }
-
-  registerToggle() {
-    this.registerMode = !this.registerMode;
-  }
-
-  cancelRegisterMode(event: boolean) {
-    this.registerMode = event;
   }
 }

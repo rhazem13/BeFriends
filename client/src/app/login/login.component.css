@@ -1,4 +1,4 @@
-#main {
+/* #main {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.66) 100%, transparent),
     url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/336999/shinokubo_test.jpg);
   background-size: cover, cover;
@@ -26,4 +26,97 @@
   backdrop-filter: blur(5px);
   border-radius: 4%;
   padding: 30px 20px 30px 20px;
+} */
+
+.overlayContent {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow:  0 0 5px #999;
+  margin: 0px 30px;
+}
+@media only screen and (max-width: 767px) {
+  .overlayContent {
+  margin: 0px;
+}
+}
+.logotext{
+  color:#0084FF;
+  font-size: 50px;
+  font-family: "Black Han Sans";
+  font-weight: 100;
+}
+.introtextcontainer{
+  margin-top: 12%;
+}
+.introtext{
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.footer {
+  margin-top: 1%;
+  position: fixed;
+  color: white;
+  box-shadow:  0 -3px 3px -3px #ccc;
+  bottom: 0;
+  width: 100%;
+  height: 165px; /* Change this value to match the desired height of your footer */
+
+}
+html, body {
+  margin:0;
+  height: 100%;
+}
+.content {
+  /* Set a margin bottom to make space for the footer */
+  margin-bottom: 20px; /* Change this value to match the height of your footer */
+}
+
+
+.hazemragab{
+  font-size: 60px;
+  font-weight: 900;
+  color: #828282;
+  padding: 70px 0px 0px 0px;
+}
+
+.socialicon{
+  padding: 0px 10px;
+  font-size: 30px;
+}
+.contact{
+  padding: 50px 0px 0px 0px;
+  float: right;
+}
+
+.socialicon{
+  font-size: 60px;
+  color: #828282;
+}
+
+
+@media (max-width: 767px) {
+  /* Styles for screens less than 768 pixels wide */
+
+.hazemragab{
+  font-size: 30px;
+  text-align: center;
+  font-weight: 900;
+  color: #828282;
+  padding: 40px 0px 0px 0px;
+}
+
+.socialicon{
+  padding: 0px 10px;
+  font-size: 10px;
+}
+.contact{
+  padding: 20px 0px 0px 0px;
+  float: right;
+}
+.socialicon{
+  font-size: 60px;
+  color: #828282;
+}
 }

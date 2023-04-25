@@ -1,103 +1,110 @@
-<div class="row navbarcontainer">
-  <div fxHide.sm fxHide.xs class="col-xs-3">
-    <div  class="navlogo">
-      <a routerLink="/" class="applogo" >
-        <span class="navlogotext">BeFriends</span>
-        <!-- <img class="navlogo" src="./assets/logo.png"> -->
-      </a>
+<ng-container *ngIf="accountService.currentUser$ | async">
+  <div class="row navbarcontainer">
+    <div fxHide.sm fxHide.xs class="col-xs-3">
+      <div class="navlogo">
+        <a routerLink="/" class="applogo">
+          <span class="navlogotext">BeFriends</span>
+          <!-- <img class="navlogo" src="./assets/logo.png"> -->
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="col-md-6 col-xs-9 navbuttonscontainer">
-    <div class="col-xs-1"></div>
-    <div
-      fxFlex
-      fxLayout
-      fxLayoutAlign="flex-center"
-      class="container justify-content-center align-items-center"
-    >
-      <ng-container *ngIf="accountService.currentUser$ | async">
-        <a
-          mat-button
-          routerLink="/feed"
-          class="navbutton"
-          routerLinkActive="activebutton"
-          ><mat-icon class="fa fa-home icon-display"></mat-icon
-        ></a>
-        <a
-          mat-button
-          routerLink="/members"
-          class="navbutton"
-          routerLinkActive="activebutton"
-          ><mat-icon class="fa fa-users icon-display"></mat-icon
-        ></a>
-        <a
-          mat-button
-          routerLink="/lists"
-          class="navbutton"
-          routerLinkActive="activebutton"
-          ><mat-icon class="fa fa-user-plus icon-display"></mat-icon
-        ></a>
+    <div class="col-md-6 col-xs-9 navbuttonscontainer">
+      <div class="col-xs-1"></div>
+      <div
+        fxFlex
+        fxLayout
+        fxLayoutAlign="flex-center"
+        class="container justify-content-center align-items-center"
+      >
+        <ng-container *ngIf="accountService.currentUser$ | async">
+          <a
+            mat-button
+            routerLink="/feed"
+            class="navbutton"
+            routerLinkActive="activebutton"
+            ><mat-icon class="fa fa-home icon-display"></mat-icon
+          ></a>
+          <a
+            mat-button
+            routerLink="/members"
+            class="navbutton"
+            routerLinkActive="activebutton"
+            ><mat-icon class="fa fa-users icon-display"></mat-icon
+          ></a>
+          <a
+            mat-button
+            routerLink="/lists"
+            class="navbutton"
+            routerLinkActive="activebutton"
+            ><mat-icon class="fa fa-user-plus icon-display"></mat-icon
+          ></a>
 
-        <a
-          mat-button
-          routerLink="/chats"
-          routerLinkActive="activebutton"
-          class="navbutton"
-          ><mat-icon class="fa fa-paper-plane icon-display"></mat-icon
-        ></a>
-        <a
-          mat-button
-          routerLink="/admin"
-          routerLinkActive="activebutton"
-          *appHasRole="['Admin', 'Moderator']"
-          >Admin</a
-        >
-      </ng-container>
-    </div>
-    <div class="col-xs-1"></div>
-  </div>
-  <div class=" col-xs-3 navphotocontainer">
-    <div fxFlex fxLayout fxLayoutAlign="flex-end" class="navbarphotocontainer">
-      <div class="justify-content-center align-items-center">
-        <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-          <div
-            *ngIf="accountService.currentUser$ | async as user"
-            class="loggedindiv"
+          <a
+            mat-button
+            routerLink="/chats"
+            routerLinkActive="activebutton"
+            class="navbutton"
+            ><mat-icon class="fa fa-paper-plane icon-display"></mat-icon
+          ></a>
+          <a
+            mat-button
+            routerLink="/admin"
+            routerLinkActive="activebutton"
+            *appHasRole="['Admin', 'Moderator']"
+            >Admin</a
           >
-            <button mat-button [matMenuTriggerFor]="menu">
-              <img
-                class="img-circle userphoto"
-                src="{{ user.photoUrl || './assets/user.png' }}"
-                alt="{{ user.username }}"
-              />
-            </button>
-            <mat-menu #menu="matMenu" yPosition="below">
-              <a
-                mat-menu-item
-                routerLink="/messages"
-                routerLinkActive="activebutton"
-                >Messages History</a
-              >
-              <button mat-menu-item routerLink="/member/edit">
-                Edit Profile
+        </ng-container>
+      </div>
+      <div class="col-xs-1"></div>
+    </div>
+    <div class="col-xs-3 navphotocontainer">
+      <div
+        fxFlex
+        fxLayout
+        fxLayoutAlign="flex-end"
+        class="navbarphotocontainer"
+      >
+        <div class="justify-content-center align-items-center">
+          <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+            <div
+              *ngIf="accountService.currentUser$ | async as user"
+              class="loggedindiv"
+            >
+              <button mat-button [matMenuTriggerFor]="menu">
+                <img
+                  class="img-circle userphoto"
+                  src="{{ user.photoUrl || './assets/user.png' }}"
+                  alt="{{ user.username }}"
+                />
               </button>
-              <button mat-menu-item (click)="logout()">Logout</button>
-            </mat-menu>
-          </div>
-          <ng-container *ngIf="!(accountService.currentUser$ | async)">
+              <mat-menu #menu="matMenu" yPosition="below">
+                <a
+                  mat-menu-item
+                  routerLink="/messages"
+                  routerLinkActive="activebutton"
+                  >Messages History</a
+                >
+                <button mat-menu-item routerLink="/member/edit">
+                  Edit Profile
+                </button>
+                <button mat-menu-item (click)="logout()">Logout</button>
+              </mat-menu>
+            </div>
+            <!-- <ng-container *ngIf="!(accountService.currentUser$ | async)">
             <li>
               <a mat-button routerLink="/login" routerLinkActive="activebutton"
                 >Login</a
               >
             </li>
-          </ng-container>
-        </ul>
+          </ng-container> -->
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row" *ngIf="busyService.isLoading | async">
-  <div class="loader-container">
-    <mat-progress-bar color="primary" mode="indeterminate"></mat-progress-bar>
+  <div class="row" *ngIf="busyService.isLoading | async">
+    <div class="loader-container">
+      <mat-progress-bar color="primary" mode="indeterminate"></mat-progress-bar>
+    </div>
   </div>
-</div>
+</ng-container>
