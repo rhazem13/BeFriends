@@ -1,9 +1,10 @@
-<div class="chatscontainer">
-  <div class="row">
-    <div class="col-xs-3 leftmenucontainer">
-      <div class="col">
-        <div class="row-xs-2">
-          <p class="chatslabel" >Chats</p>
+<div class="row d-none d-md-flex">
+  <div class="chatscontainer">
+    <div class="row">
+      <div class="col-xs-3 leftmenucontainer">
+        <div class="col">
+          <div class="row-xs-2">
+            <p class="chatslabel">Chats</p>
 
             <div class="input-group mb-3">
               <div class="input-group-append">
@@ -33,64 +34,181 @@
                 "
               />
             </div>
-        </div>
-      </div>
-      <div
-        *ngFor="let chat of filteredchats"
-        class="chatrow"
-        [ngClass]="{ activeChat: chat.contactUsername === openchatusername }"
-      >
-        <div class="row" (click)="openChat(chat.contactUsername)">
-          <div class="col-xs-2 chat-avatar-container">
-            <img
-              class="chat-avatar"
-              src="{{ chat.contactPhotoUrl || './assets/user.png' }}"
-              alt="{{ chat.contactUsername }}"
-            />
           </div>
-          <div class="col-xs-10 chat-content-container">
-            <div class="col">
-              <div class="row-xs-6">
-                <div class="row" style="height: 22px;">
-                  <div
-                    class="col-xs-8"
-                    style="font-size: 15px; font-weight: 500"
-                  >
-                    <p style="margin: 0;padding:0">
-                      {{ chat.contactUsername | titlecase | slice : 0 : 10 }}
-                    </p>
-                  </div>
-                  <div class="col-xs-4" style="color: gray">
-                    <p style="float: right">
-                      {{ chat.messageSent | timeago | slice : 0 : 6 }}
-                    </p>
+        </div>
+        <div
+          *ngFor="let chat of filteredchats"
+          class="chatrow"
+          [ngClass]="{ activeChat: chat.contactUsername === openchatusername }"
+        >
+          <div class="row" (click)="openChat(chat.contactUsername)">
+            <div class="col-xs-2 chat-avatar-container">
+              <img
+                class="chat-avatar"
+                src="{{ chat.contactPhotoUrl || './assets/user.png' }}"
+                alt="{{ chat.contactUsername }}"
+              />
+            </div>
+            <div class="col-xs-10 chat-content-container">
+              <div class="col">
+                <div class="row-xs-6">
+                  <div class="row" style="height: 22px">
+                    <div
+                      class="col-xs-8"
+                      style="font-size: 15px; font-weight: 500"
+                    >
+                      <p>
+                        {{ chat.contactUsername | titlecase | slice : 0 : 10 }}
+                      </p>
+                    </div>
+                    <div class="col-xs-4" style="color: gray">
+                      <p style="float: right">
+                        {{ chat.messageSent | timeago | slice : 0 : 6 }}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="row-xs-6" style="color: gray">
-                {{ chat.content | slice : 0 : 48 }}
-                <i
-                  *ngIf="chat.dateRead"
-                  style="color: gray"
-                  class="bi bi-check"
-                ></i>
-                <i
-                  *ngIf="!chat.dateRead"
-                  style="color: blue"
-                  class="bi bi-check-all"
-                ></i>
+                <div class="row-xs-6" style="color: gray">
+                  {{ chat.content | slice : 0 : 48 }}
+                  <i
+                    *ngIf="chat.dateRead"
+                    style="color: gray"
+                    class="bi bi-check"
+                  ></i>
+                  <i
+                    *ngIf="!chat.dateRead"
+                    style="color: blue"
+                    class="bi bi-check-all"
+                  ></i>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div
-      class="col-xs-9"
-      style="padding-top: 2rem; padding-right: 2rem; padding-left: 0.5rem"
-    >
-      <app-member-messages [username]="openchatusername"></app-member-messages>
+      <div
+        class="col-xs-9"
+        style="padding-top: 2rem; padding-right: 2rem; padding-left: 0.5rem"
+      >
+        <app-member-messages
+          [username]="openchatusername"
+        ></app-member-messages>
+      </div>
     </div>
   </div>
 </div>
+<!-- now for mobile -->
+<div class="d-md-none">
+  <div class="">
+    <div class="row">
 
+        <button mat-fab class="sidenav-toggle" (click)="sidenav.toggle()">
+          <mat-icon>chat</mat-icon>
+        </button>
+      <mat-sidenav-container class="chatscontainer">
+        <mat-sidenav #sidenav mode="over">
+          <div class="col-xs-12 leftmenucontainer">
+            <div class="col">
+              <div class="row-xs-2">
+                <p class="chatslabel">Chats</p>
+
+                <div class="input-group mb-3">
+                  <div class="input-group-append">
+                    <span
+                      style="
+                        height: 100%;
+                        color: #65676b;
+                        border-radius: 30px 0px 0px 30px;
+                        background-color: #f3f3f5;
+                        border: 0px solid black;
+                      "
+                      class="input-group-text"
+                      ><i class="fa fa-search"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    name="search"
+                    [(ngModel)]="searchContact"
+                    (input)="filterContacts(searchContact)"
+                    class="form-control"
+                    placeholder="Search Contacts"
+                    style="
+                      border-radius: 0px 30px 30px 0px;
+                      background-color: #f3f3f5;
+                      border: 0px solid black;
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              *ngFor="let chat of filteredchats"
+              class="chatrow"
+              [ngClass]="{
+                activeChat: chat.contactUsername === openchatusername
+              }"
+            >
+              <div class="row" (click)="openChat(chat.contactUsername)">
+                <div class="col-xs-2 chat-avatar-container">
+                  <img
+                    class="chat-avatar"
+                    src="{{ chat.contactPhotoUrl || './assets/user.png' }}"
+                    alt="{{ chat.contactUsername }}"
+                  />
+                </div>
+                <div class="col-xs-10 chat-content-container">
+                  <div class="col">
+                    <div class="row-xs-6">
+                      <div class="row" style="height: 22px">
+                        <div
+                          class="col-xs-8"
+                          style="font-size: 15px; font-weight: 500"
+                        >
+                          <p style="margin: 0; padding: 0">
+                            {{
+                              chat.contactUsername | titlecase | slice : 0 : 10
+                            }}
+                          </p>
+                        </div>
+                        <div class="col-xs-4" style="color: gray">
+                          <p style="float: right">
+                            {{ chat.messageSent | timeago | slice : 0 : 6 }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row-xs-6" style="color: gray">
+                      {{ chat.content | slice : 0 : 48 }}
+                      <i
+                        *ngIf="chat.dateRead"
+                        style="color: gray"
+                        class="bi bi-check"
+                      ></i>
+                      <i
+                        *ngIf="!chat.dateRead"
+                        style="color: blue"
+                        class="bi bi-check-all"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content autosize>
+          <div
+
+            style="padding-top: 5px; padding-right: 5px; padding-left:5px"
+          >
+            <app-member-messages
+              [username]="openchatusername"
+            ></app-member-messages>
+          </div>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  </div>
+</div>

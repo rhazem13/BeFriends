@@ -59,6 +59,7 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges() {
+    this.contact=null;
     this.messageService.stopHubConnection();
     this.messageService.createHubConnection(this.user, this.username);
     this.memberService

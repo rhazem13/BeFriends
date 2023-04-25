@@ -9,7 +9,87 @@
 
 .chatscontainer {
   background-color: white;
+  height: calc(100vh - 57px);
+  margin: 0;
+  padding: 0;
+}
+.leftmenucontainer {
+  padding: 20px;
+  border-right: 1px solid #e5e5e5;
   height: calc(100vh - 56px);
+}
+.chatrow {
+  padding: 8px 10px;
+  margin:0px;
+}
+.chatrow :hover {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.activeChat {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.chat-avatar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  padding: 0;
+  margin: 0;
+  z-index: 100;
+}
+
+.chat-avatar {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  padding: 0;
+  margin: 0;
+
+}
+
+.chat-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+.img-circle {
+  max-height: 60px;
+  border-radius: 50%;
+}
+
+.table-img-container {
+  display: flex;
+  align-items: center;
+}
+
+.material-icons {
+  position: relative;
+  top: 11px;
+}
+
+@media (max-width: 760px) {
+  /* CSS styles for screens less than 760px wide go here */
+  .chatslabel {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-left: 8px;
+  font-size: 24px;
+  font-weight: 670;
+  font-family: 'Segoe UI';
+}
+
+.chatscontainer {
+  background-color: white;
+  height: calc(100vh - 55px);
   margin: 0;
   padding: 0;
 }
@@ -55,7 +135,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 0px;
+  padding-left: 10px;
   margin: 0px;
 }
 
@@ -72,4 +152,22 @@
 .material-icons {
   position: relative;
   top: 11px;
+}
+}
+.sidenav-toggle {
+  position: fixed;
+  bottom:130px; /* adjust as needed */
+  left: 20px; /* adjust as needed */
+  z-index: 1000; /* ensure the button is on top of other elements */
+  background-color: #0084ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.sidenav-toggle mat-icon {
+  margin-top: -30px;
+  margin-left: -4px;
+  font-size: 30px;
 }

@@ -74,3 +74,17 @@
   width: 36px;
   height: 36px;
 }
+
+.opencontactbar{
+margin-top:4px;margin-left:5px;
+}
+@media (max-width: 760px) {
+  /* CSS styles for screens less than 760px wide go here */
+  .emptychatmsg{
+margin-top:50%;
+  }
+
+.opencontactbar{
+margin-top:20px;margin-left:5px;
+}
+}
