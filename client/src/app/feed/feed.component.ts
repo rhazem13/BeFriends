@@ -85,4 +85,8 @@ export class FeedComponent implements OnInit {
       queryParams: { openchatusername: username },
     });
   }
+
+  notimplemented(){
+    this.snackbar.open('Likes, comments, and shares are out for a coffee break. They\'ll be back, caffeinated and ready, soon!', undefined, {duration: 3000});
+  }
 }
