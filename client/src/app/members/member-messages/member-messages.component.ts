@@ -10,6 +10,8 @@ import {
   OnDestroy,
   OnChanges,
   ViewEncapsulation,
+  ElementRef,
+  Renderer2,
 } from '@angular/core';
 import { Message } from 'src/app/models/message';
 import { MessageService } from 'src/app/services/message.service';
@@ -38,6 +40,10 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   selectEmoji(event: any) {
     const emoji = event.emoji;
     this.messageContent += emoji.native;
+    const nullIndex = this.messageContent.indexOf('null');
+    if (nullIndex !== -1) {
+      this.messageContent = this.messageContent.replace('null', '');
+    }
   }
 
   //
@@ -45,7 +51,9 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   constructor(
     public messageService: MessageService,
     private accountService: AccountService,
-    private memberService: MembersService
+    private memberService: MembersService,
+    private elementRef: ElementRef,
+    private renderer: Renderer2
   ) {
     this.accountService.currentUser$
       .pipe(take(1))
@@ -59,7 +67,7 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges() {
-    this.contact=null;
+    this.contact = null;
     this.messageService.stopHubConnection();
     this.messageService.createHubConnection(this.user, this.username);
     this.memberService
@@ -69,10 +77,20 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
 
   sendMessage() {
     if (this.messageContent != '') {
+      this.messageForm.form.disable();
+
       this.messageService
         .sendMessage(this.username, this.messageContent)
         .then(() => {
           this.messageForm.resetForm();
+          this.scrollToBottom();
+
+          this.messageForm.form.enable();
+        })
+        .catch((error) => {
+          console.error('Error sending message:', error);
+          // Enable form submission in case of error
+          this.messageForm.form.enable();
         });
     }
   }
@@ -82,6 +100,8 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
       .getMessageThread(this.username)
       .subscribe((messages) => {
         this.messages = messages;
+        this.scrollToBottom();
+
       });
   }
 
@@ -101,5 +121,12 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
       }
       return false;
     }
+  }
+
+  scrollToBottom() {
+  setTimeout(() => {
+    const scrollContainer = this.elementRef.nativeElement.querySelector('.chat');
+    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+  }, 0);
   }
 }
