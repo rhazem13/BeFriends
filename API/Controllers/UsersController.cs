@@ -114,7 +114,7 @@ namespace API.Controllers
         [HttpPost("set-cover-photo")]
         public async Task<ActionResult> SetCoverPhoto(IFormFile file){
             var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
-            var result = await photoService.AddPhotoAsync(file);
+            var result = await photoService.AddCoverPhotoAsync(file);
             if (result.Error != null) return BadRequest(result.Error.Message);
             user.CoverUrl = result.SecureUrl.AbsoluteUri;
             // var photo = new Photo

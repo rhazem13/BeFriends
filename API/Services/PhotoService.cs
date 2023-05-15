@@ -30,6 +30,22 @@ namespace API.Services
             return uploadResult;
         }
 
+        public async Task<ImageUploadResult> AddCoverPhotoAsync(IFormFile file)
+        {
+            var uploadResult = new ImageUploadResult();
+            if (file.Length > 0)
+            {
+                using var stream = file.OpenReadStream();
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(file.FileName, stream),
+                    Transformation = new Transformation().Height(450).Width(1187).Crop("fill")
+                };
+                uploadResult = await cloudinary.UploadAsync(uploadParams);
+            }
+            return uploadResult;
+        }
+
         public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {
             var deleteParams = new DeletionParams(publicId);

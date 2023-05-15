@@ -22,7 +22,7 @@ export class LoginComponent {
   login() {
     this.accountService.login(this.model).subscribe(
       (response) => {
-        this.router.navigateByUrl('/members');
+        this.router.navigateByUrl('/feed');
         console.log(response);
       },
       (error) => {
