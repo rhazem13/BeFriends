@@ -1,7 +1,8 @@
-# BeFriends
+# BeFriends 
 
 BeFriends is a social networking application that allows users to make new friends, connect with others, and engage in various activities. It provides features similar to Facebook, such as the ability to follow people, send messages, and view user profiles.
 
+Check it here: [LiveDemo](https://befriends-it7g.onrender.com/)
 ## Features
 
 - User Registration: Users can create a new account by providing their information.
