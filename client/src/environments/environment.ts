@@ -1,5 +1,5 @@
 export const environment = {
   development: true,
-  apiUrl: 'api/',
-  hubUrl: 'hubs/'
+  apiUrl: 'https://befriendsapi-ub24.onrender.com/api/',
+  hubUrl: 'https://befriendsapi-ub24.onrender.com/hubs/',
 };
