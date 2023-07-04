@@ -22,7 +22,7 @@ export class ChatsComponent implements OnInit {
   ngOnInit(): void {
     this.loadChats();
     this.route.queryParams.subscribe((params) => {
-      console.log(params['openchatusername']);
+      // console.log(params['openchatusername']);
       if (params['openchatusername']) {
         this.openchatusername = params['openchatusername'];
       }
@@ -43,7 +43,7 @@ export class ChatsComponent implements OnInit {
   }
 
   filterContacts(searchContact) {
-    console.log(searchContact);
+    // console.log(searchContact);
     // write the logic to filter this.chats based on searchContact
     this.filteredchats = this.chats.filter((chat) => {
       return chat.contactUsername

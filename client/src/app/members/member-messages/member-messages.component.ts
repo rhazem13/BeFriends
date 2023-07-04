@@ -67,24 +67,24 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges() {
-    this.contact = null;
-    this.messageService.stopHubConnection();
-    this.messageService.createHubConnection(this.user, this.username);
-    this.memberService
-      .getMember(this.username)
-      .subscribe((member) => (this.contact = member));
+    if (this.username) {
+      this.contact = null;
+      this.messageService.stopHubConnection();
+      this.messageService.createHubConnection(this.user, this.username);
+      this.memberService
+        .getMember(this.username)
+        .subscribe((member) => (this.contact = member));
+    }
   }
 
   sendMessage() {
     if (this.messageContent != '') {
       this.messageForm.form.disable();
-
       this.messageService
         .sendMessage(this.username, this.messageContent)
         .then(() => {
           this.messageForm.resetForm();
           this.scrollToBottom();
-
           this.messageForm.form.enable();
         })
         .catch((error) => {
@@ -101,7 +101,6 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((messages) => {
         this.messages = messages;
         this.scrollToBottom();
-
       });
   }
 
@@ -114,7 +113,6 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
       let diff = Math.floor(
         (curDate.getTime() - this.latestDate.getTime()) / 1000 / 60 / 60
       );
-      console.log(diff);
       if (diff != 0) {
         this.latestDate = curDate;
         return true;
@@ -124,9 +122,10 @@ export class MemberMessagesComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   scrollToBottom() {
-  setTimeout(() => {
-    const scrollContainer = this.elementRef.nativeElement.querySelector('.chat');
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
-  }, 0);
+    setTimeout(() => {
+      const scrollContainer =
+        this.elementRef.nativeElement.querySelector('.chat');
+      scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    }, 0);
   }
 }

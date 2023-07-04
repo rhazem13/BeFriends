@@ -14,7 +14,7 @@ import { Chat } from '../models/chat';
 export class MessageService {
   baseUrl = environment.apiUrl;
   hubUrl = environment.hubUrl;
-  private hubConnection : HubConnection;
+  private hubConnection: HubConnection;
   private messageThreadSource = new BehaviorSubject<Message[]>([]);
   messageThread$ = this.messageThreadSource.asObservable();
 
@@ -24,8 +24,8 @@ export class MessageService {
 
   constructor(private http: HttpClient) {}
 
-  createHubConnection(user: User, otherUsername: string){
-    console.log("creating new connection");
+  createHubConnection(user: User, otherUsername: string) {
+    console.log('creating new connection');
 
     this.hubConnection = new HubConnectionBuilder()
       .withUrl(this.hubUrl + 'message?user=' + otherUsername, {
@@ -33,34 +33,49 @@ export class MessageService {
       })
       .withAutomaticReconnect()
       .build();
-    this.hubConnection.start().catch(error=> console.log(error));
+    this.hubConnection.start().catch((error) => console.log(error));
 
-    this.hubConnection.on('ReceiveMessageThread', messages=>{
+    this.hubConnection.on('ReceiveMessageThread', (messages) => {
+      // console.log("received message thread");
+      // console.log(messages);
       this.messageThreadSource.next(messages);
     });
 
-    this.hubConnection.on('NewMessage', message => {
-      this.messageThread$.pipe(take(1)).subscribe(messages => {
-        this.messageThreadSource.next([...messages,message])
-      })
-    })
+    this.hubConnection.on('NewMessage', (message) => {
+      console.log('received new message');
+      console.log(message);
+
+      this.messageThread$.pipe(take(1)).subscribe((messages) => {
+        // Check if the message is already present in the array
+        const isDuplicateMessage = messages.some(
+          (m) => m.id === message.id && m.messageSent === message.messageSent
+        );
+
+        if (!isDuplicateMessage) {
+          const updatedMessages = [...messages, message]; // Add the new message to the existing messages
+          this.messageThreadSource.next(updatedMessages); // Update the message thread
+        }
+      });
+    });
 
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
-      if(group.connections.some(x=>x.username === otherUsername)){
-        this.messageThread$.pipe(take(1)).subscribe(messages=>{
-          messages.forEach(message=>{
-            if(!message.dateRead){
-              message.dateRead=new Date(Date.now())
+      if (group.connections.some((x) => x.username === otherUsername)) {
+        this.messageThread$.pipe(take(1)).subscribe((messages) => {
+          messages.forEach((message) => {
+            if (!message.dateRead) {
+              message.dateRead = new Date(Date.now());
             }
-          })
+          });
           this.messageThreadSource.next([...messages]);
-        })
+        });
       }
     });
+    // console.log('crated new hub connection');
   }
-  stopHubConnection(){
-    if ( this.hubConnection)
-      this.hubConnection.stop();
+  stopHubConnection() {
+    // console.log('stopping hub connection');
+    if (this.hubConnection) this.hubConnection.stop();
+    // console.log('stopped hub connection');
   }
 
   getMessages(pageNumber, pageSize, container) {
@@ -89,16 +104,19 @@ export class MessageService {
   }
 
   getMessageThread(username: string) {
-    return this.http.get<Message[]>(this.baseUrl + 'messages/thread/' + username);
+    return this.http.get<Message[]>(
+      this.baseUrl + 'messages/thread/' + username
+    );
   }
 
-  async sendMessage(username: string, content: string){
-    return this.hubConnection.invoke('SendMessage',{recipientUsername: username, content})
-    .catch(error=> console.log(error));
+  async sendMessage(username: string, content: string) {
+    return this.hubConnection
+      .invoke('SendMessage', { recipientUsername: username, content })
+      .catch((error) => console.log(error));
   }
 
-  deleteMessage(id: number){
-    return this.http.delete(this.baseUrl + 'messages/'+id);
+  deleteMessage(id: number) {
+    return this.http.delete(this.baseUrl + 'messages/' + id);
   }
 
   getChats() {
