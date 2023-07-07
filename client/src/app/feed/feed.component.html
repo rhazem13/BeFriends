@@ -157,7 +157,7 @@
             <mat-card>
               <mat-card-header>
                 <div mat-card-avatar routerLink="/members/{{ post.posterUserName }}" style="cursor:pointer">
-                  <img src="{{ post.posterPhotoUrl }}" class="posterphotourl" />
+                  <img src="{{ post.posterPhotoUrl || './assets/user.png'}}" class="posterphotourl" />
                 </div>
                 <mat-card-title class="postusername" routerLink="/members/{{ post.posterUserName }}" style="cursor:pointer">{{
                   post.posterUserName

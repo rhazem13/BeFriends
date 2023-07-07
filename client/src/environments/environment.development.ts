@@ -1,4 +1,4 @@
 export const environment = {
-  apiUrl: 'https://befriendsapi-ub24.onrender.com/api/',
-  hubUrl: 'https://befriendsapi-ub24.onrender.com/hubs/',
+  apiUrl: 'http://localhost:5221/api/',
+  hubUrl: 'http://localhost:5221/hubs/',
 };

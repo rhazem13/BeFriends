@@ -117,7 +117,7 @@
             <mat-card>
               <mat-card-header>
                 <div mat-card-avatar>
-                  <img src="{{ post.posterPhotoUrl }}" class="posterphotourl" />
+                  <img src="{{ post.posterPhotoUrl || './assets/user.png'}}" class="posterphotourl" />
                 </div>
                 <mat-card-title class="postusername">{{
                   post.posterUserName
