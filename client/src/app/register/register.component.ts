@@ -10,6 +10,9 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountService } from '../services/account.service';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -21,30 +24,55 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
+  countries: string[] = [];
+  cities: string[] = [];
+  loading: boolean = false;
 
   constructor(
     private accountService: AccountService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
     this.initializeForm();
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
+    this.loadCountries();
   }
 
   initializeForm() {
     this.registerForm = this.fb.group({
       gender: ['male'],
-      username: ['', Validators.required],
-      knownAs: ['', Validators.required],
+      username: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+          this.alphanumericValidator,
+        ],
+      ],
+      knownAs: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
       dateOfBirth: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
       password: [
         '',
-        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(64),
+          this.passwordValidator,
+        ],
       ],
       confirmPassword: [
         '',
@@ -53,6 +81,7 @@ export class RegisterComponent implements OnInit {
     });
     this.registerForm.controls.password.valueChanges.subscribe(() => {
       this.registerForm.controls.confirmPassword.updateValueAndValidity();
+      console.log(this.registerForm.controls.username.value);
     });
   }
 
@@ -69,7 +98,7 @@ export class RegisterComponent implements OnInit {
   };
 
   register() {
-    console.log(this.registerForm.value);
+    this.loading = true; // Set loading to true when signup is initiated
     this.registerForm
       .get('dateOfBirth')
       .setValue(
@@ -85,11 +114,61 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         this.validationErrors = error;
+      },
+      () => {
+        this.loading = false;
       }
     );
+
+
   }
 
   cancel() {
     this.cancelRegister.emit(false);
+  }
+
+  alphanumericValidator(control: FormControl) {
+    const pattern = /^[a-zA-Z0-9]+$/; // Regular expression pattern for alphanumeric characters
+    return pattern.test(control.value) ? null : { invalidUsername: true };
+  }
+
+  passwordValidator(control: FormControl) {
+    const value = control.value;
+    const hasUppercase = /[A-Z]/.test(value);
+    const hasLowercase = /[a-z]/.test(value);
+    const hasNumber = /[0-9]/.test(value);
+
+    const valid = hasUppercase && hasLowercase && hasNumber;
+    return valid ? null : { invalidPassword: true };
+  }
+
+  loadCountries() {
+    this.http
+      .get<any[]>('https://restcountries.com/v3.1/all')
+      .pipe(map((response) => response.map((country) => country.name.common)))
+      .subscribe((countries) => {
+        this.countries = countries;
+      });
+  }
+
+  onCountryChange() {
+    const selectedCountry = this.registerForm.get('country').value;
+
+    this.getCities(selectedCountry).subscribe((cities) => {
+      this.cities = cities;
+      console.log(this.cities);
+    });
+  }
+
+  getCities(country: string): Observable<string[]> {
+    const endpoint = `https://secure.geonames.org/searchJSON?q=${country}&maxRows=10&username=rhazem13`;
+
+    return this.http.get<any>(endpoint).pipe(
+      map((response) => {
+        const cities = response.geonames.map((city: any) => city.name);
+        console.log(cities);
+        return cities;
+      })
+    );
   }
 }

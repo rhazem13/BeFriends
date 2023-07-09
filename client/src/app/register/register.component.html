@@ -61,17 +61,41 @@
       </div>
 
       <div class="row">
+        <!-- <div class="col-xs-6">
+          <app-text-input
+            [formControl]="registerForm.controls['country']"
+            [label]="'Country'"
+          ></app-text-input>
+        </div>
         <div class="col-xs-6">
           <app-text-input
             [formControl]="registerForm.controls['city']"
             [label]="'City'"
           ></app-text-input>
+        </div> -->
+        <div class="col-xs-12 col-md-6" >
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Country</mat-label>
+            <select
+              matNativeControl
+              formControlName="country"
+              (change)="onCountryChange()"
+            >
+              <option *ngFor="let country of countries" [value]="country">
+                {{ country }}
+              </option>
+            </select>
+          </mat-form-field>
         </div>
-        <div class="col-xs-6">
-          <app-text-input
-            [formControl]="registerForm.controls['country']"
-            [label]="'Country'"
-          ></app-text-input>
+        <div class="col-xs-12 col-md-6">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>City</mat-label>
+            <mat-select formControlName="city">
+              <mat-option *ngFor="let city of cities" [value]="city">{{
+                city
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
 
@@ -101,19 +125,25 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <div class="row between-xs">
-            <button
-              style="
-                border-radius: 8px;
-                background-color: #0084ff;
-                color: white;
-              "
-              [disabled]="!registerForm.valid"
-              mat-raised-button
-              type="submit"
-            >
-              Register
-            </button>
+          <div class="row center-xs">
+            <div class="col-xs-3" *ngIf="loading">
+              <mat-spinner></mat-spinner>
+            </div>
+
+            <div class="col-xs-6" *ngIf="!loading">
+              <button
+                style="
+                  border-radius: 8px;
+                  background-color: #0084ff;
+                  color: white;
+                  cursor: pointer !important;
+                "
+                mat-raised-button
+                type="submit"
+              >
+                Register
+              </button>
+            </div>
           </div>
         </div>
       </div>

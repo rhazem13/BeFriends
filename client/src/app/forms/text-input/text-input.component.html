@@ -20,4 +20,10 @@
   <mat-error *ngIf="ngControl.control.errors?.isMatching"
     >Passwords do not match.</mat-error
   >
+  <mat-error *ngIf="ngControl.control.errors?.invalidUsername"
+    >only characters and numbers allowed.</mat-error
+  >
+  <mat-error *ngIf="ngControl.control.errors?.invalidPassword"
+    >password must contain uppercase, lowercase and number.</mat-error
+  >
 </mat-form-field>

@@ -100,7 +100,7 @@
           <p class="Intro">Intro</p>
           <p class="bio">{{member.bio}}</p>
           <p class="introdetails">
-            <i class="fa fa-home introdetailsicon"></i>Lives in <span class="customdetails">{{member.city}}</span>
+            <i class="fa fa-home introdetailsicon"></i>Lives in <span class="customdetails">{{member.city}}, {{member.country}}</span>
           </p>
           <p class="introdetails">
             <i class="fa fa-user introdetailsicon" style="margin-left: 5px"></i
@@ -120,7 +120,7 @@
                   <img src="{{ post.posterPhotoUrl || './assets/user.png'}}" class="posterphotourl" />
                 </div>
                 <mat-card-title class="postusername">{{
-                  post.posterUserName
+                  post.posterKnownAs
                 }}</mat-card-title>
                 <mat-card-subtitle class="posttime"
                   >{{ post.posted | timeago }} · <i class="fa fa-user"></i
